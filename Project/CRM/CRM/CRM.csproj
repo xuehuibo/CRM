@@ -7,7 +7,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F1C689BE-DFA6-4144-A5BA-336C393263B1}</ProjectGuid>
+    <ProjectGuid>{DC3C6980-B401-4172-944A-BCA9526FDCD9}</ProjectGuid>
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\DAL.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -130,98 +134,103 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Attribute\AuthorizationAttribute.cs" />
+    <Compile Include="Bll\AuthorizationBll.cs" />
+    <Compile Include="Bll\FunctionBll.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CMenu.cs" />
+    <Compile Include="Models\CMenuCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\bootstrap-datetimepicker.css" />
-    <Content Include="Content\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="build.js" />
     <Content Include="Content\css\bootstrap-theme.css" />
-    <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\bootstrap.min.css" />
-    <Content Include="Content\css\dashboard.css" />
+    <Content Include="Content\css\sign.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\image\add-60-styled.png" />
-    <Content Include="Content\image\attention-60-styled.png" />
-    <Content Include="Content\image\bar-chart-60-styled.png" />
-    <Content Include="Content\image\book-60-styled.png" />
-    <Content Include="Content\image\breafcase-60-styled.png" />
-    <Content Include="Content\image\bulb-off-60-styled.png" />
-    <Content Include="Content\image\bulb-on-60-styled.png" />
-    <Content Include="Content\image\check-60-styled.png" />
-    <Content Include="Content\image\clipboard-60-styled.png" />
-    <Content Include="Content\image\cloud-60-styled.png" />
-    <Content Include="Content\image\comment-60-styled.png" />
-    <Content Include="Content\image\comment-add-60-styled.png" />
-    <Content Include="Content\image\comment-remove-60-styled.png" />
-    <Content Include="Content\image\comments-60-styled.png" />
-    <Content Include="Content\image\cut-60-styled.png" />
-    <Content Include="Content\image\database-60-styled.png" />
-    <Content Include="Content\image\document-60-styled.png" />
-    <Content Include="Content\image\documents-60-styled.png" />
-    <Content Include="Content\image\error-60-styled.png" />
-    <Content Include="Content\image\favorite-60-styled.png" />
-    <Content Include="Content\image\favorite-add-60-styled.png" />
-    <Content Include="Content\image\favorite-remove--60-styled.png" />
-    <Content Include="Content\image\flag-60-styled.png" />
-    <Content Include="Content\image\folder-60-styled.png" />
-    <Content Include="Content\image\folder-add-60-styled.png" />
-    <Content Include="Content\image\folder-remove-60-styled.png" />
-    <Content Include="Content\image\forward-60-styled.png" />
-    <Content Include="Content\image\half-rating-60-styled.png" />
-    <Content Include="Content\image\home-60-styled.png" />
-    <Content Include="Content\image\image-60-styled.png" />
-    <Content Include="Content\image\info-60-styled.png" />
-    <Content Include="Content\image\key-60-styled.png" />
-    <Content Include="Content\image\lock-60-styled.png" />
-    <Content Include="Content\image\move-60-styled.png" />
-    <Content Include="Content\image\music-60-styled.png" />
-    <Content Include="Content\image\next-60-styled.png" />
-    <Content Include="Content\image\no-rating-60-styled.png" />
-    <Content Include="Content\image\pause-60-styled.png" />
-    <Content Include="Content\image\pencil-60-styled.png" />
-    <Content Include="Content\image\pie-chart-60-styled.png" />
-    <Content Include="Content\image\play-60-styled.png" />
-    <Content Include="Content\image\preferences-60-styled.png" />
-    <Content Include="Content\image\presentation-60-styled.png" />
-    <Content Include="Content\image\previous-60-styled.png" />
-    <Content Include="Content\image\print-60-styled.png" />
-    <Content Include="Content\image\rating-60-styled.png" />
-    <Content Include="Content\image\rec-60-styled.png" />
-    <Content Include="Content\image\remove-60-styled.png" />
-    <Content Include="Content\image\rewind-60-styled.png" />
-    <Content Include="Content\image\search-60-styled.png" />
-    <Content Include="Content\image\search-icon.png" />
-    <Content Include="Content\image\settings-60-styled.png" />
-    <Content Include="Content\image\shopping-cart-60-styled.png" />
-    <Content Include="Content\image\shopping-cart-add-60-styled.png" />
-    <Content Include="Content\image\shopping-cart-remove-60-styled.png" />
-    <Content Include="Content\image\sidebar-search-close.png" />
-    <Content Include="Content\image\sidebar-toggler.jpg" />
-    <Content Include="Content\image\stop-60-styled.png" />
-    <Content Include="Content\image\uncheck-60-styled.png" />
-    <Content Include="Content\image\unlock-60-styled.png" />
-    <Content Include="Content\image\update-60-styled.png" />
-    <Content Include="Content\image\user-60-styled.png" />
-    <Content Include="Content\image\user-add-60-styled.png" />
-    <Content Include="Content\image\user-remove-60-styled.png" />
-    <Content Include="Content\image\video-60-styled.png" />
-    <Content Include="Content\image\wallet-60-styled.png" />
-    <Content Include="Content\image\watch-60-styled.png" />
+    <Content Include="Content\img\add-60-styled.png" />
+    <Content Include="Content\img\attention-60-styled.png" />
+    <Content Include="Content\img\bar-chart-60-styled.png" />
+    <Content Include="Content\img\book-60-styled.png" />
+    <Content Include="Content\img\breafcase-60-styled.png" />
+    <Content Include="Content\img\bulb-off-60-styled.png" />
+    <Content Include="Content\img\bulb-on-60-styled.png" />
+    <Content Include="Content\img\check-60-styled.png" />
+    <Content Include="Content\img\clipboard-60-styled.png" />
+    <Content Include="Content\img\cloud-60-styled.png" />
+    <Content Include="Content\img\comment-60-styled.png" />
+    <Content Include="Content\img\comment-add-60-styled.png" />
+    <Content Include="Content\img\comment-remove-60-styled.png" />
+    <Content Include="Content\img\comments-60-styled.png" />
+    <Content Include="Content\img\cut-60-styled.png" />
+    <Content Include="Content\img\database-60-styled.png" />
+    <Content Include="Content\img\document-60-styled.png" />
+    <Content Include="Content\img\documents-60-styled.png" />
+    <Content Include="Content\img\error-60-styled.png" />
+    <Content Include="Content\img\favorite-60-styled.png" />
+    <Content Include="Content\img\favorite-add-60-styled.png" />
+    <Content Include="Content\img\favorite-remove--60-styled.png" />
+    <Content Include="Content\img\flag-60-styled.png" />
+    <Content Include="Content\img\folder-60-styled.png" />
+    <Content Include="Content\img\folder-add-60-styled.png" />
+    <Content Include="Content\img\folder-remove-60-styled.png" />
+    <Content Include="Content\img\forward-60-styled.png" />
+    <Content Include="Content\img\half-rating-60-styled.png" />
+    <Content Include="Content\img\home-60-styled.png" />
+    <Content Include="Content\img\image-60-styled.png" />
+    <Content Include="Content\img\info-60-styled.png" />
+    <Content Include="Content\img\key-60-styled.png" />
+    <Content Include="Content\img\lock-60-styled.png" />
+    <Content Include="Content\img\move-60-styled.png" />
+    <Content Include="Content\img\music-60-styled.png" />
+    <Content Include="Content\img\next-60-styled.png" />
+    <Content Include="Content\img\no-rating-60-styled.png" />
+    <Content Include="Content\img\pause-60-styled.png" />
+    <Content Include="Content\img\pencil-60-styled.png" />
+    <Content Include="Content\img\pie-chart-60-styled.png" />
+    <Content Include="Content\img\play-60-styled.png" />
+    <Content Include="Content\img\preferences-60-styled.png" />
+    <Content Include="Content\img\presentation-60-styled.png" />
+    <Content Include="Content\img\previous-60-styled.png" />
+    <Content Include="Content\img\print-60-styled.png" />
+    <Content Include="Content\img\rating-60-styled.png" />
+    <Content Include="Content\img\rec-60-styled.png" />
+    <Content Include="Content\img\remove-60-styled.png" />
+    <Content Include="Content\img\rewind-60-styled.png" />
+    <Content Include="Content\img\search-60-styled.png" />
+    <Content Include="Content\img\search-icon.png" />
+    <Content Include="Content\img\settings-60-styled.png" />
+    <Content Include="Content\img\shopping-cart-60-styled.png" />
+    <Content Include="Content\img\shopping-cart-add-60-styled.png" />
+    <Content Include="Content\img\shopping-cart-remove-60-styled.png" />
+    <Content Include="Content\img\sidebar-search-close.png" />
+    <Content Include="Content\img\sidebar-toggler.jpg" />
+    <Content Include="Content\img\stop-60-styled.png" />
+    <Content Include="Content\img\uncheck-60-styled.png" />
+    <Content Include="Content\img\unlock-60-styled.png" />
+    <Content Include="Content\img\update-60-styled.png" />
+    <Content Include="Content\img\user-60-styled.png" />
+    <Content Include="Content\img\user-add-60-styled.png" />
+    <Content Include="Content\img\user-remove-60-styled.png" />
+    <Content Include="Content\img\video-60-styled.png" />
+    <Content Include="Content\img\wallet-60-styled.png" />
+    <Content Include="Content\img\watch-60-styled.png" />
+    <Content Include="DAL.dll" />
     <Content Include="Global.asax" />
+    <Content Include="r.js" />
     <Content Include="Scripts\backbone.js" />
+    <Content Include="Content\css\bootstrap-datetimepicker.css" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
-    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\css\bootstrap-datetimepicker.min.css" />
     <Content Include="Scripts\bootstrap-datetimepicker.zh-CN.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\css.js" />
-    <Content Include="Scripts\domReady.js" />
+    <Content Include="Scripts\domReady.js.txt" />
     <Content Include="Scripts\HttpStatusHandle.js" />
-    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery-1.11.2.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\text.js" />
@@ -240,7 +249,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Scripts\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -252,6 +261,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Signin.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -269,7 +281,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>9357</DevelopmentServerPort>
+          <DevelopmentServerPort>26875</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:9357/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
