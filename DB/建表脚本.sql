@@ -264,7 +264,7 @@ create table tUser (
    Id                   numeric              identity,
    UserCode             varchar(20)          not null,
    UserName             nvarchar(20)         not null,
-   UPassword            varchar(20)          not null,
+   UPassword            binary(16)           not null,
    DeptCode             varchar(20)          not null,
    GroupCode            varchar(20)          not null,
    Enabled              bit                  not null default 1,
@@ -272,7 +272,7 @@ create table tUser (
    BuildUser            nvarchar(50)         not null,
    EditDate             datetime             not null default getdate(),
    EditUser             nvarchar(50)         not null,
-   Token                varchar(36)          null,
+   Token                binary(16)           null,
    constraint PK_TUSER primary key (Id),
    constraint AK_KEY_2_TUSER unique (UserCode)
 )

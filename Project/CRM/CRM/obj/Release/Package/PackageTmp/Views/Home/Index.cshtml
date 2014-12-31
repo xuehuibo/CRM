@@ -1,0 +1,180 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-toggle collapsed btn" aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="navbar-brand">@ViewBag.Title</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">欢迎您：张三</a></li>
+                <li><a href="#">退出登录</a></li>
+                <li class="divider"></li>
+                <li class="dropdown hidden-lg hidden-md hidden-sm">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="False">
+                        信息面板
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#">公告<span class="pull-right badge">1</span></a>
+                        </li>
+                        <li>
+                            <a href="#">信箱<span class="pull-right badge">3</span></a>
+                        </li>
+                        <li>
+                            <a href="#">日程<span class="pull-right badge">9</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown hidden-lg hidden-md hidden-sm">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="False">
+                        客户管理
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" data-url="/Tooltip">客户登记</a></li>
+                        <li><a href="#" data-url="/Page">公共客户</a></li>
+                        <li><a href="#" data-url="/InputGroup">专有客户</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown hidden-lg hidden-md hidden-sm">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="False">
+                        项目管理
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" data-url="/Tooltip">建立项目</a></li>
+                        <li><a href="#" data-url="/Page">项目进度</a></li>
+                        <li><a href="#" data-url="/InputGroup">客户拜访</a></li>
+                        <li><a href="#" data-url="/InputGroup">项目签约</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown hidden-lg hidden-md hidden-sm">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="False">
+                        运维管理
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" data-url="/Tooltip">客户回访</a></li>
+                        <li><a href="#" data-url="/Page">客户投诉</a></li>
+                        <li><a href="#" data-url="/InputGroup">维护登记</a></li>
+                        <li><a href="#" data-url="/InputGroup">项目续约</a></li>
+                        <li><a href="#" data-url="/InputGroup">结束撤机</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input class="form-control" type="text" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid" style="padding-top: 55px">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 affix">
+            <div class="panel-group hidden-xs" id="menuPanel">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            信息面板
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="nav">
+                            <li>
+                                <a href="#">公告<span class="pull-right badge">1</span></a>
+                            </li>
+                            <li>
+                                <a href="#">信箱<span class="pull-right badge">3</span></a>
+                            </li>
+                            <li>
+                                <a href="#">日程<span class="pull-right badge">9</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="nav " data-toggle="collapse" data-parent="#menuPanel" data-target="#myPanel1" href="#">客户管理</a>
+                        </h4>
+                    </div>
+                    <div id="myPanel1" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul class="nav">
+                                <li><a href="#" data-url="/Tooltip">客户登记</a></li>
+                                <li><a href="#" data-url="/Page">公共客户</a></li>
+                                <li><a href="#" data-url="/InputGroup">专有客户</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#menuPanel" href="#myPanel2">项目管理</a>
+                        </h4>
+                    </div>
+                    <div id="myPanel2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul class="nav">
+                                <li><a href="#" data-url="/Tooltip">建立项目</a></li>
+                                <li><a href="#" data-url="/Page">项目进度</a></li>
+                                <li><a href="#" data-url="/InputGroup">客户拜访</a></li>
+                                <li><a href="#" data-url="/InputGroup">项目签约</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#menuPanel" href="#myPanel3">运维管理</a>
+                        </h4>
+                    </div>
+                    <div id="myPanel3" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul class="nav">
+                                <li><a href="#" data-url="/Tooltip">客户回访</a></li>
+                                <li><a href="#" data-url="/Page">客户投诉</a></li>
+                                <li><a href="#" data-url="/InputGroup">维护登记</a></li>
+                                <li><a href="#" data-url="/InputGroup">项目续约</a></li>
+                                <li><a href="#" data-url="/InputGroup">结束撤机</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#menuPanel" href="#myPanel4">系统设置</a>
+                        </h4>
+                    </div>
+                    <div id="myPanel4" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul class="nav">
+                                <li><a href="#" data-url="/Tooltip">人事管理</a></li>
+                                <li><a href="#" data-url="/Page">部门设置</a></li>
+                                <li><a href="#" data-url="/InputGroup">权限管理</a></li>
+                                <li><a href="#" data-url="/InputGroup">参数设置</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+            <h1 class="page-header text-primary">标题</h1>
+        </div>
+    </div>
+</div>

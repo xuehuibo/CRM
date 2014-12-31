@@ -135,12 +135,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Attribute\AuthorizationAttribute.cs" />
-    <Compile Include="Bll\AuthorizationBll.cs" />
+    <Compile Include="Bll\AuthorityBll.cs" />
     <Compile Include="Bll\FunctionBll.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\AuthorityApiController.cs" />
+    <Compile Include="Extend\BaseApiController.cs" />
+    <Compile Include="Extend\HttpResponseMessages\DataNotFoundMessage.cs" />
+    <Compile Include="Extend\HttpResponseMessages\NoAuthorityMessage.cs" />
+    <Compile Include="Extend\HttpResponseMessages\SiginFailureMessage.cs" />
+    <Compile Include="Extend\HttpResponseMessages\SystemExceptionMessage.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CAuthorityModel.cs" />
     <Compile Include="Models\CMenu.cs" />
     <Compile Include="Models\CMenuCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -228,7 +235,9 @@
     <Content Include="Scripts\bootstrap-datetimepicker.zh-CN.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\css.js" />
-    <Content Include="Scripts\domReady.js.txt" />
+    <Content Include="Scripts\domReady.js" />
+    <Content Include="Scripts\Home\AuthModel.js" />
+    <Content Include="Scripts\Home\SigninView.js" />
     <Content Include="Scripts\HttpStatusHandle.js" />
     <Content Include="Scripts\jquery-1.11.2.js" />
     <Content Include="Scripts\main.js" />
@@ -249,7 +258,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -264,6 +272,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Signin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\NoAuthority.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\CRM.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

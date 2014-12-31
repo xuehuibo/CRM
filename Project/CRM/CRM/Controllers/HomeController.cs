@@ -21,5 +21,10 @@ namespace CRM.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public PartialViewResult NoAuthority()
+        {
+            return PartialView();
+        }
     }
 }
