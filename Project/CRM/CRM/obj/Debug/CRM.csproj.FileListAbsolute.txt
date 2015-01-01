@@ -2,6 +2,7 @@ E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\CRM.dll.config
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\CRM.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\CRM.pdb
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\Antlr3.Runtime.dll
+E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\DAL.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\EntityFramework.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\Microsoft.Web.Infrastructure.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
@@ -38,4 +39,3 @@ E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\zh-Hans\System.Web.WebPages.Ra
 E:\Documents\我的项目\CRM\Project\CRM\CRM\obj\Debug\CRM.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\obj\Debug\CRM.pdb
 E:\Documents\我的项目\CRM\Project\CRM\CRM\obj\Debug\CRM.csprojResolveAssemblyReference.cache
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\DAL.dll

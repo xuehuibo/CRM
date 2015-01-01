@@ -37,7 +37,7 @@
         RemainCheck:function() {
             if (!document.getElementById("remain").checked) {
                 //取消保持登录，清除Token
-                console.info(document.cookie);
+                if(document.cookie!='')
                 document.cookie = document.cookie + ';path=/;expire=' + new Date(0).toGMTString();
             }
         }

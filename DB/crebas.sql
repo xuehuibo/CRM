@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2008                    */
-/* Created on:     2014/12/31 23:58:12                          */
+/* Created on:     2015/1/1 9:42:09                             */
 /*==============================================================*/
 
 
@@ -23,20 +23,6 @@ if exists (select 1
    where r.fkeyid = object_id('dbo.tProjectEvent') and o.name = 'FK_TPROJECT_REFERENCE_TPROJECT')
 alter table dbo.tProjectEvent
    drop constraint FK_TPROJECT_REFERENCE_TPROJECT
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('dbo.tUser') and o.name = 'FK_TUSER_REFERENCE_TDEPT')
-alter table dbo.tUser
-   drop constraint FK_TUSER_REFERENCE_TDEPT
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('dbo.tUser') and o.name = 'FK_TUSER_REFERENCE_TUSERGRO')
-alter table dbo.tUser
-   drop constraint FK_TUSER_REFERENCE_TUSERGRO
 go
 
 if exists (select 1
@@ -152,21 +138,6 @@ if exists (select 1
            where  id = object_id('dbo.tProjectEvent')
             and   type = 'U')
    drop table dbo.tProjectEvent
-go
-
-alter table dbo.tUser
-   drop constraint AK_KEY_2_TUSER
-go
-
-alter table dbo.tUser
-   drop constraint PK_TUSER
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('dbo.tUser')
-            and   type = 'U')
-   drop table dbo.tUser
 go
 
 alter table dbo.tUserGroup

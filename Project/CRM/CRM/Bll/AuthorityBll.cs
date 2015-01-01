@@ -51,6 +51,7 @@ namespace CRM.Bll
             }
             authorityModel.Id = Convert.ToInt16(dt.Rows[0]["Id"]);
             authorityModel.UserName = Convert.ToString(dt.Rows[0]["UserName"]);
+            authorityModel.UserCode = Convert.ToString(dt.Rows[0]["UserCode"]);
             return true;
         }
 
@@ -67,6 +68,18 @@ namespace CRM.Bll
             dal.Execute(" update tUser set Token=@Token where UserCode=@UserCode ", out i,
                 dal.CreateParameter("@Token",vlu),
                 dal.CreateParameter("@UserCode",userCode));
+        }
+
+        /// <summary>
+        /// 取消Token
+        /// </summary>
+        /// <param name="dal"></param>
+        /// <param name="userCode"></param>
+        public static void DropToken(IDal dal, string userCode)
+        {
+            int i;
+            dal.Execute(" update tUser set Token=null where UserCode=@UserCode ", out i,
+                dal.CreateParameter("@UserCode", userCode));
         }
     }
 }

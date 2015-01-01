@@ -17,7 +17,7 @@ namespace CRM.Controllers
                 bool ok;
                 dal.Open();
                 var httpCookie = HttpContext.Current.Request.Cookies["Token"];
-                if (httpCookie != null && string.IsNullOrEmpty(value.UserCode) && string.IsNullOrEmpty(value.UPwd))
+                if (value.Remain && httpCookie != null && string.IsNullOrEmpty(value.UserCode) && string.IsNullOrEmpty(value.UPwd))
                 {
                     //Token不为空 用户名和密码为空，则使用token登录
                     ok=AuthorityBll.Signin(dal, httpCookie.Value, value);
@@ -30,12 +30,14 @@ namespace CRM.Controllers
                 if (ok)
                 {
                     HttpContext.Current.Session["SignUser"] = value;
-                    if (!value.Remain) return value;
                     //生成Token
                     var token = Guid.NewGuid().ToString();
                     AuthorityBll.UpdateToken(dal,token,value.UserCode);
                     HttpContext.Current.Response.Cookies["Token"].Value =token;
                     HttpContext.Current.Response.Cookies["Token"].Expires = DateTime.Now.AddDays(30);
+                    if (value.Remain) return value;
+                    HttpContext.Current.Response.Cookies["Token"].Expires = DateTime.Now.AddDays(-1);
+                    AuthorityBll.DropToken(dal, value.UserCode);
                     return value;
                 }
                 ReturnDataNotFound();
