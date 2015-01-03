@@ -103,9 +103,9 @@ namespace CRM.Attribute
                 var httpCookie = filterContext.HttpContext.Request.Cookies["Token"];
                 if (filterContext.HttpContext.Session[_authSaveKey] != null)
                 {
-                    if (httpCookie != null) 
+/*                    if (httpCookie != null) 
                     //更新Token
-                    UpdateToken(filterContext, dal, (CAuthorityModel)filterContext.HttpContext.Session[_authSaveKey]);
+                    UpdateToken(filterContext, dal, (CAuthorityModel)filterContext.HttpContext.Session[_authSaveKey]);*/
                     return;
                 }
                 if (httpCookie != null)

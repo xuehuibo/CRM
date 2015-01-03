@@ -1,21 +1,29 @@
 ﻿using System;
 using System.Configuration;
 using System.Web;
+using System.Web.Http;
 using CRM.Bll;
-using CRM.Extend;
+using CRM.Extend.HttpResponseMessages;
 using CRM.Models;
 using DAL;
 
 namespace CRM.Controllers
 {
-    public class AuthorityApiController : BaseApiController
+    public class AuthorityApiController : ApiController
     {
         public CAuthorityModel Post(CAuthorityModel value)
         {
             using (var dal =DalBuilder.CreateDal(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, 0))
             {
                 bool ok;
-                dal.Open();
+                try
+                {
+                    dal.Open();
+                }
+                catch
+                {
+                    throw new HttpResponseException(new SystemExceptionMessage());
+                }
                 var httpCookie = HttpContext.Current.Request.Cookies["Token"];
                 if (value.Remain && httpCookie != null && string.IsNullOrEmpty(value.UserCode) && string.IsNullOrEmpty(value.UPwd))
                 {
@@ -27,22 +35,21 @@ namespace CRM.Controllers
                     //使用用户名密码登录
                     ok=AuthorityBll.Signin(dal, value);
                 }
-                if (ok)
+                if (!ok)
                 {
-                    HttpContext.Current.Session["SignUser"] = value;
-                    //生成Token
-                    var token = Guid.NewGuid().ToString();
-                    AuthorityBll.UpdateToken(dal,token,value.UserCode);
-                    HttpContext.Current.Response.Cookies["Token"].Value =token;
-                    HttpContext.Current.Response.Cookies["Token"].Expires = DateTime.Now.AddDays(30);
-                    if (value.Remain) return value;
-                    HttpContext.Current.Response.Cookies["Token"].Expires = DateTime.Now.AddDays(-1);
-                    AuthorityBll.DropToken(dal, value.UserCode);
-                    return value;
+                    throw new HttpResponseException(new DataNotFoundMessage());
                 }
-                ReturnDataNotFound();
+                HttpContext.Current.Session["SignUser"] = value;
+                //生成Token
+                var token = Guid.NewGuid().ToString();
+                AuthorityBll.UpdateToken(dal,token,value.UserCode);
+                HttpContext.Current.Response.Cookies["Token"].Value =token;
+                HttpContext.Current.Response.Cookies["Token"].Expires = DateTime.Now.AddDays(30);
+                if (value.Remain) return value;
+                HttpContext.Current.Response.Cookies["Token"].Expires = DateTime.Now.AddDays(-1);
+                AuthorityBll.DropToken(dal, value.UserCode);
+                return value;
             }
-            return value;
         }
     }
 }

@@ -11,7 +11,9 @@ namespace CRM
                 "~/Scripts/jquery-{version}.js",
                 "~/Scripts/underscore.js",
                 "~/Scripts/backbone.js",
-                "~/Scripts/bootstrap.js"
+                "~/Scripts/bootstrap.js",
+                "~/Scripts/require.js",
+                "~/Scripts/main.js"
                 ));
             bundles.Add(new StyleBundle("~/bundles/css").Include(
                 "~/Content/css/bootstrap-theme.css",

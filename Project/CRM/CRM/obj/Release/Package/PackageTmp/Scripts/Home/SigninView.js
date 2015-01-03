@@ -1,4 +1,4 @@
-﻿define(['Home/AuthModel'], function (AuthModel) {
+﻿define(['Home/AuthModel','md5'], function (AuthModel,md5) {
     return Backbone.View.extend({
         initialize: function () {
             this.model = new AuthModel();
@@ -17,10 +17,10 @@
             //登录
             this.model.save({
                 'UserCode': $('#userCode').val(),
-                'UPwd': $('#uPwd').val(),
+                'UPwd': md5.hexMd5($('#uPwd').val()),
                 'Remain': document.getElementById("remain").checked
             }, {
-                success: function (model) {
+                success: function () {
                     location.href = "/Home";
                 },
                 error: function (model, rst) {
@@ -37,7 +37,7 @@
         RemainCheck:function() {
             if (!document.getElementById("remain").checked) {
                 //取消保持登录，清除Token
-                console.info(document.cookie);
+                if(document.cookie!='')
                 document.cookie = document.cookie + ';path=/;expire=' + new Date(0).toGMTString();
             }
         }

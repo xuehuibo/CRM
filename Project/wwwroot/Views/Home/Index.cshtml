@@ -15,8 +15,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">欢迎您：张三</a></li>
-                <li><a href="#">退出登录</a></li>
+                <li><a href="#">欢迎您：@ViewBag.SignUser.UserName</a></li>
+                <li><a href="/Home/Signout">退出登录</a></li>
                 <li class="divider"></li>
                 <li class="dropdown hidden-lg hidden-md hidden-sm">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="False">
@@ -81,8 +81,8 @@
 
 <div class="container-fluid" style="padding-top: 55px">
     <div class="row">
-        <div class="col-sm-3 col-md-2 affix">
-            <div class="panel-group hidden-xs" id="menuPanel">
+        <div class="col-sm-3 col-md-2 affix" style="overflow-y: auto ;height: 600px">
+            <div class="panel-group hidden-xs"id="menuPanel">
                 <div class="panel panel-warning">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -103,74 +103,6 @@
                         </ul>
                     </div>
                 </div>
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a class="nav " data-toggle="collapse" data-parent="#menuPanel" data-target="#myPanel1" href="#">客户管理</a>
-                        </h4>
-                    </div>
-                    <div id="myPanel1" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <ul class="nav">
-                                <li><a href="#" data-url="/Tooltip">客户登记</a></li>
-                                <li><a href="#" data-url="/Page">公共客户</a></li>
-                                <li><a href="#" data-url="/InputGroup">专有客户</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#menuPanel" href="#myPanel2">项目管理</a>
-                        </h4>
-                    </div>
-                    <div id="myPanel2" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <ul class="nav">
-                                <li><a href="#" data-url="/Tooltip">建立项目</a></li>
-                                <li><a href="#" data-url="/Page">项目进度</a></li>
-                                <li><a href="#" data-url="/InputGroup">客户拜访</a></li>
-                                <li><a href="#" data-url="/InputGroup">项目签约</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#menuPanel" href="#myPanel3">运维管理</a>
-                        </h4>
-                    </div>
-                    <div id="myPanel3" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <ul class="nav">
-                                <li><a href="#" data-url="/Tooltip">客户回访</a></li>
-                                <li><a href="#" data-url="/Page">客户投诉</a></li>
-                                <li><a href="#" data-url="/InputGroup">维护登记</a></li>
-                                <li><a href="#" data-url="/InputGroup">项目续约</a></li>
-                                <li><a href="#" data-url="/InputGroup">结束撤机</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#menuPanel" href="#myPanel4">系统设置</a>
-                        </h4>
-                    </div>
-                    <div id="myPanel4" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <ul class="nav">
-                                <li><a href="#" data-url="/Tooltip">人事管理</a></li>
-                                <li><a href="#" data-url="/Page">部门设置</a></li>
-                                <li><a href="#" data-url="/InputGroup">权限管理</a></li>
-                                <li><a href="#" data-url="/InputGroup">参数设置</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
@@ -178,3 +110,10 @@
         </div>
     </div>
 </div>
+<script>
+    require(['Home/MenuPanelView'], function (MenuPanelView, MenuCategoryCollection) {
+        var menuPanel = new MenuPanelView({
+            el: '#menuPanel'
+        });
+    })
+</script>

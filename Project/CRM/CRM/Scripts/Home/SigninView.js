@@ -1,4 +1,4 @@
-﻿define(['Home/AuthModel'], function (AuthModel) {
+﻿define(['Home/AuthModel','md5'], function (AuthModel,md5) {
     return Backbone.View.extend({
         initialize: function () {
             this.model = new AuthModel();
@@ -17,10 +17,10 @@
             //登录
             this.model.save({
                 'UserCode': $('#userCode').val(),
-                'UPwd': $('#uPwd').val(),
+                'UPwd': md5.hexMd5($('#uPwd').val()),
                 'Remain': document.getElementById("remain").checked
             }, {
-                success: function (model) {
+                success: function () {
                     location.href = "/Home";
                 },
                 error: function (model, rst) {

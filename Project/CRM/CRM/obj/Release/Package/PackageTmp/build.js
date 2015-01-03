@@ -8,13 +8,16 @@
     ,baseUrl: './Scripts'
 
     // 指定输出目录，若值未指定，则相对 build 文件所在目录
-    , dir: 'E:/Documents/My Web Sites/CRM'
+    , dir: 'x:\CRM'
     ,paths:{
-        'Tpls': '../Tpls'
+        'tpl': '../Tpls'
     }
     ,modules: [
         {
-            name:'Home/SigninView'
+            name: 'Home/SigninView',
+        },
+        {
+            name: 'Home/MenuPanelView'
         }
     ]
 

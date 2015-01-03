@@ -10,6 +10,10 @@
 
         public string UPwd { get; set; }
 
+        public string DeptCode { get; set; }
+
+        public string GroupCode { get; set; }
+
         public bool Remain { get; set; }
     }
 }

@@ -12,5 +12,7 @@
         public string CategoryName { get; set; }
 
         public short SerialNo { get; set; }
+
+        public CMenu[] Menus { get; set; }
     }
 }

@@ -139,7 +139,7 @@
     <Compile Include="Bll\FunctionBll.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AuthorityApiController.cs" />
-    <Compile Include="Extend\BaseApiController.cs" />
+    <Compile Include="Controllers\MenuApiController.cs" />
     <Compile Include="Extend\HttpResponseMessages\DataNotFoundMessage.cs" />
     <Compile Include="Extend\HttpResponseMessages\NoAuthorityMessage.cs" />
     <Compile Include="Extend\HttpResponseMessages\SiginFailureMessage.cs" />
@@ -237,13 +237,19 @@
     <Content Include="Scripts\css.js" />
     <Content Include="Scripts\domReady.js" />
     <Content Include="Scripts\Home\AuthModel.js" />
+    <Content Include="Scripts\Home\MenuCategoryCollection.js" />
+    <Content Include="Scripts\Home\MenuCategoryModel.js" />
+    <Content Include="Scripts\Home\MenuCategoryView.js" />
+    <Content Include="Scripts\Home\MenuPanelView.js" />
     <Content Include="Scripts\Home\SigninView.js" />
     <Content Include="Scripts\HttpStatusHandle.js" />
     <Content Include="Scripts\jquery-1.11.2.js" />
     <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\md5.js" />
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\text.js" />
     <Content Include="Scripts\underscore.js" />
+    <Content Include="Tpls\Home\MenuViewTpl.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -307,6 +313,10 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
