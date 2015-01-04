@@ -68,7 +68,7 @@ GO
 
  /****建立用户*****/
 INSERT INTO [dbo].[tUser]([UserCode],[UserName],[UPassword],[Token],[DeptCode],[GroupCode],[Enabled],[BuildUser],[EditUser])
-select 'admin','管理员',0xF6FDFFE48C908DEB0F4C3BD36C032E72,null,'','admin',1,'脚本建立',''
+select 'admin','管理员',0xC0E024D9200B5705BC4804722636378A,null,'','admin',1,'脚本建立',''
 GO
 
  /****建立用户菜单*****/

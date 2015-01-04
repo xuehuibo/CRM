@@ -27,7 +27,7 @@ namespace CRM.Bll
             else
             {
                 //用户组编码不为*，从tUserGroupFun取该用户菜单
-                dt = dal.Select("select a.Id,a.FunCode,a.FunName,a.FunCmd,a.ParentCode,a.SerialNo from tFunction a,tUserGroupFun b where a.FunCode=b.FunCode and GroupCode=@GroupCode",
+                dt = dal.Select("select a.Id,a.FunCode,a.FunName,a.FunCmd,a.ParentCode,a.FunType,a.SerialNo from tFunction a,tUserGroupFun b where a.FunCode=b.FunCode and GroupCode=@GroupCode",
                     out i,
                     dal.CreateParameter("@GroupCode", groupCode));
             }

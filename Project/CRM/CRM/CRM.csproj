@@ -137,6 +137,7 @@
     <Compile Include="Attribute\AuthorizationAttribute.cs" />
     <Compile Include="Bll\AuthorityBll.cs" />
     <Compile Include="Bll\FunctionBll.cs" />
+    <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AuthorityApiController.cs" />
     <Compile Include="Controllers\MenuApiController.cs" />
@@ -237,10 +238,12 @@
     <Content Include="Scripts\css.js" />
     <Content Include="Scripts\domReady.js" />
     <Content Include="Scripts\Home\AuthModel.js" />
+    <Content Include="Scripts\Home\MainAppView.js" />
     <Content Include="Scripts\Home\MenuCategoryCollection.js" />
     <Content Include="Scripts\Home\MenuCategoryModel.js" />
     <Content Include="Scripts\Home\MenuCategoryView.js" />
-    <Content Include="Scripts\Home\MenuPanelView.js" />
+    <Content Include="Scripts\Home\NavMenuCategoryView.js" />
+    <Content Include="Scripts\Home\Router.js" />
     <Content Include="Scripts\Home\SigninView.js" />
     <Content Include="Scripts\HttpStatusHandle.js" />
     <Content Include="Scripts\jquery-1.11.2.js" />
@@ -249,7 +252,8 @@
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\text.js" />
     <Content Include="Scripts\underscore.js" />
-    <Content Include="Tpls\Home\MenuViewTpl.html" />
+    <Content Include="Tpls\Home\MenuCategoryTpl.html" />
+    <Content Include="Tpls\Home\NavMenuCategoryTpl.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -264,6 +268,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Config\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -284,6 +289,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
+    <Content Include="Views\Shared\_Item_Layout.cshtml" />
+    <Content Include="Views\Config\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
