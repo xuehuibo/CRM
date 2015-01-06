@@ -138,6 +138,7 @@
     <Compile Include="Bll\AuthorityBll.cs" />
     <Compile Include="Bll\FunctionBll.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
+    <Compile Include="Controllers\Default1Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AuthorityApiController.cs" />
     <Compile Include="Controllers\MenuApiController.cs" />

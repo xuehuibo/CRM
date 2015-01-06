@@ -13,7 +13,7 @@
       <publishTime>12/29/2014 22:41:44</publishTime>
     </File>
     <File Include="bin/CRM.dll">
-      <publishTime>01/03/2015 23:57:50</publishTime>
+      <publishTime>01/05/2015 21:01:55</publishTime>
     </File>
     <File Include="bin/DAL.dll">
       <publishTime>12/31/2014 22:16:17</publishTime>
@@ -109,7 +109,7 @@
       <publishTime>12/29/2014 22:41:45</publishTime>
     </File>
     <File Include="build.js">
-      <publishTime>01/03/2015 23:24:15</publishTime>
+      <publishTime>01/05/2015 21:01:40</publishTime>
     </File>
     <File Include="Content/css/bootstrap-datetimepicker.css">
       <publishTime>12/30/2014 00:05:05</publishTime>
@@ -121,7 +121,7 @@
       <publishTime>12/29/2014 22:44:19</publishTime>
     </File>
     <File Include="Content/css/bootstrap.css">
-      <publishTime>12/29/2014 23:50:16</publishTime>
+      <publishTime>01/04/2015 19:08:24</publishTime>
     </File>
     <File Include="Content/css/sign.css">
       <publishTime>12/30/2014 23:38:31</publishTime>
@@ -375,6 +375,9 @@
     <File Include="Scripts/Home/AuthModel.js">
       <publishTime>12/31/2014 22:48:29</publishTime>
     </File>
+    <File Include="Scripts/Home/MainAppView.js">
+      <publishTime>01/04/2015 19:08:24</publishTime>
+    </File>
     <File Include="Scripts/Home/MenuCategoryCollection.js">
       <publishTime>01/03/2015 22:29:24</publishTime>
     </File>
@@ -382,16 +385,22 @@
       <publishTime>01/03/2015 22:13:19</publishTime>
     </File>
     <File Include="Scripts/Home/MenuCategoryView.js">
-      <publishTime>01/03/2015 23:42:47</publishTime>
+      <publishTime>01/04/2015 19:08:24</publishTime>
     </File>
     <File Include="Scripts/Home/MenuPanelView.js">
       <publishTime>01/03/2015 23:29:37</publishTime>
+    </File>
+    <File Include="Scripts/Home/NavMenuCategoryView.js">
+      <publishTime>01/04/2015 19:08:24</publishTime>
+    </File>
+    <File Include="Scripts/Home/Router.js">
+      <publishTime>01/04/2015 19:08:24</publishTime>
     </File>
     <File Include="Scripts/Home/SigninView.js">
       <publishTime>01/03/2015 22:05:14</publishTime>
     </File>
     <File Include="Scripts/HttpStatusHandle.js">
-      <publishTime>12/31/2014 23:14:27</publishTime>
+      <publishTime>01/04/2015 19:08:24</publishTime>
     </File>
     <File Include="Scripts/jquery-1.11.2.js">
       <publishTime>12/29/2014 22:42:51</publishTime>
@@ -411,11 +420,20 @@
     <File Include="Scripts/underscore.js">
       <publishTime>12/29/2014 22:43:11</publishTime>
     </File>
+    <File Include="Tpls/Home/MenuCategoryTpl.html">
+      <publishTime>01/04/2015 19:08:24</publishTime>
+    </File>
     <File Include="Tpls/Home/MenuViewTpl.html">
       <publishTime>01/03/2015 23:39:19</publishTime>
     </File>
+    <File Include="Tpls/Home/NavMenuCategoryTpl.html">
+      <publishTime>01/04/2015 19:08:24</publishTime>
+    </File>
+    <File Include="Views/Config/Index.cshtml">
+      <publishTime>01/04/2015 19:08:24</publishTime>
+    </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>01/03/2015 23:51:59</publishTime>
+      <publishTime>01/04/2015 19:08:24</publishTime>
     </File>
     <File Include="Views/Home/NoAuthority.cshtml">
       <publishTime>12/31/2014 22:44:42</publishTime>
@@ -426,8 +444,11 @@
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>12/29/2014 22:41:09</publishTime>
     </File>
+    <File Include="Views/Shared/_Item_Layout.cshtml">
+      <publishTime>01/04/2015 19:08:24</publishTime>
+    </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>12/31/2014 21:39:04</publishTime>
+      <publishTime>01/04/2015 19:08:24</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>12/29/2014 22:41:09</publishTime>

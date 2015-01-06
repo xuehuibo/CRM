@@ -1,5 +1,5 @@
 ﻿define([], function() {
-    return function (rst) {
+    return function (rst,content) {
         if (rst.status == 200) {
             return true;
         }
@@ -15,10 +15,10 @@
                 location.href = "/Home/NoAuth";
                 return false;
             case 'Data Not Found':
-                alert("未查询到相关数据！");
+                alert("未查询到" + content + "数据！");
                 return false;
             case 'No Authority':
-                alert("您没有权限访问该数据！");
+                alert("您没有权限访问" + content + "数据！");
                 return false;
             default:
                 alert("系统发生未知错误，请联系管理员！");

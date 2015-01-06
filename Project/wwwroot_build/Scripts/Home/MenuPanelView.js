@@ -1,0 +1,1 @@
+define(["Home/MenuCategoryView","Home/MenuCategoryCollection"],function(e,t){return Backbone.View.extend({initialize:function(){var e=this;menuCategorys=new t,menuCategorys.fetch({data:{allMenu:!0},success:function(t,n){for(var r=0;r<t.length;r++)e.AddMenuCategory(t.at(r))}})},AddMenuCategory:function(t){this.$el.append((new e(t)).render())}})});
