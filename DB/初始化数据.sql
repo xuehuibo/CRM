@@ -12,13 +12,13 @@ select '03','运维管理',1 ,'',3,null,0
 go
 
 INSERT INTO [tFunction]([FunCode],[FunName],[Enabled],[FunCmd],[SerialNo],[ParentCode],[FunType])
-select '0001','部门设置',1 ,'',0,'00',1
+select '0001','部门设置',1 ,'/Config/DeptManage',0,'00',1
 union all 
 select '0002','人事管理',1 ,'',1,'00',1
 union all 
 select '0003','权限管理',1 ,'',2,'00',1
 union all 
-select '0004','参数设置',1 ,'',3,'00',1
+select '0004','系统日志',1 ,'',3,'00',1
 go
 
 INSERT INTO [tFunction]([FunCode],[FunName],[Enabled],[FunCmd],[SerialNo],[ParentCode],[FunType])
@@ -54,11 +54,22 @@ go
 /****建立部门*****/
 
 INSERT INTO [tDept]([DeptCode],[DeptName],[ParentCode],[BuildUser],[EditUser])
- select '' ,'公司',null,'',''
- GO
+ select 'root' ,'公司',null,'',''
+ GO    
+ 
+ insert into tDept(DeptCode,DeptName,ParentCode,BuildUser,EditUser)
+select '0101','0101','01','',''
+union all
+select '0102','0102','01','',''
+union all
+select '0201','0201','02','',''
+union all
+select '020101','020101','0201','',''
+
+go
 
  INSERT INTO [tDept]([DeptCode],[DeptName],[ParentCode],[BuildUser],[EditUser])
- select '01' ,'测试部门','','脚本建立',''
+ select '01' ,'测试部门','root','',''
  GO
 
  /****建立用户组*****/
@@ -68,7 +79,7 @@ GO
 
  /****建立用户*****/
 INSERT INTO [dbo].[tUser]([UserCode],[UserName],[UPassword],[Token],[DeptCode],[GroupCode],[Enabled],[BuildUser],[EditUser])
-select 'admin','管理员',0xC0E024D9200B5705BC4804722636378A,null,'','admin',1,'脚本建立',''
+select 'admin','管理员',0xC0E024D9200B5705BC4804722636378A,null,'root','admin',1,'脚本建立',''
 GO
 
  /****建立用户菜单*****/

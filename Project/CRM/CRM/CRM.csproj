@@ -135,23 +135,37 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Attribute\AuthorizationAttribute.cs" />
-    <Compile Include="Bll\AuthorityBll.cs" />
+    <Compile Include="Bll\DeptBll.cs" />
+    <Compile Include="Bll\LogBll.cs" />
+    <Compile Include="Bll\SignBll.cs" />
     <Compile Include="Bll\FunctionBll.cs" />
+    <Compile Include="Bll\UserBll.cs" />
+    <Compile Include="Bll\UserGroupBll.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
-    <Compile Include="Controllers\Default1Controller.cs" />
+    <Compile Include="Controllers\DeptApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\AuthorityApiController.cs" />
+    <Compile Include="Controllers\LogApiController.cs" />
+    <Compile Include="Controllers\SignApiController.cs" />
     <Compile Include="Controllers\MenuApiController.cs" />
+    <Compile Include="Controllers\SignController.cs" />
+    <Compile Include="Controllers\UserApiController.cs" />
+    <Compile Include="Controllers\UserGroupApiController.cs" />
     <Compile Include="Extend\HttpResponseMessages\DataNotFoundMessage.cs" />
+    <Compile Include="Extend\HttpResponseMessages\DealFailureMessage.cs" />
     <Compile Include="Extend\HttpResponseMessages\NoAuthorityMessage.cs" />
     <Compile Include="Extend\HttpResponseMessages\SiginFailureMessage.cs" />
     <Compile Include="Extend\HttpResponseMessages\SystemExceptionMessage.cs" />
+    <Compile Include="Filter\ActionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CAuthorityModel.cs" />
+    <Compile Include="Models\CDept.cs" />
+    <Compile Include="Models\CLog.cs" />
+    <Compile Include="Models\CSign.cs" />
     <Compile Include="Models\CMenu.cs" />
     <Compile Include="Models\CMenuCategory.cs" />
+    <Compile Include="Models\CUser.cs" />
+    <Compile Include="Models\CUserGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -159,74 +173,8 @@
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\sign.css" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\img\add-60-styled.png" />
-    <Content Include="Content\img\attention-60-styled.png" />
-    <Content Include="Content\img\bar-chart-60-styled.png" />
-    <Content Include="Content\img\book-60-styled.png" />
-    <Content Include="Content\img\breafcase-60-styled.png" />
-    <Content Include="Content\img\bulb-off-60-styled.png" />
-    <Content Include="Content\img\bulb-on-60-styled.png" />
-    <Content Include="Content\img\check-60-styled.png" />
-    <Content Include="Content\img\clipboard-60-styled.png" />
-    <Content Include="Content\img\cloud-60-styled.png" />
-    <Content Include="Content\img\comment-60-styled.png" />
-    <Content Include="Content\img\comment-add-60-styled.png" />
-    <Content Include="Content\img\comment-remove-60-styled.png" />
-    <Content Include="Content\img\comments-60-styled.png" />
-    <Content Include="Content\img\cut-60-styled.png" />
-    <Content Include="Content\img\database-60-styled.png" />
-    <Content Include="Content\img\document-60-styled.png" />
-    <Content Include="Content\img\documents-60-styled.png" />
-    <Content Include="Content\img\error-60-styled.png" />
-    <Content Include="Content\img\favorite-60-styled.png" />
-    <Content Include="Content\img\favorite-add-60-styled.png" />
-    <Content Include="Content\img\favorite-remove--60-styled.png" />
-    <Content Include="Content\img\flag-60-styled.png" />
-    <Content Include="Content\img\folder-60-styled.png" />
-    <Content Include="Content\img\folder-add-60-styled.png" />
-    <Content Include="Content\img\folder-remove-60-styled.png" />
-    <Content Include="Content\img\forward-60-styled.png" />
-    <Content Include="Content\img\half-rating-60-styled.png" />
-    <Content Include="Content\img\home-60-styled.png" />
-    <Content Include="Content\img\image-60-styled.png" />
-    <Content Include="Content\img\info-60-styled.png" />
-    <Content Include="Content\img\key-60-styled.png" />
-    <Content Include="Content\img\lock-60-styled.png" />
-    <Content Include="Content\img\move-60-styled.png" />
-    <Content Include="Content\img\music-60-styled.png" />
-    <Content Include="Content\img\next-60-styled.png" />
-    <Content Include="Content\img\no-rating-60-styled.png" />
-    <Content Include="Content\img\pause-60-styled.png" />
-    <Content Include="Content\img\pencil-60-styled.png" />
-    <Content Include="Content\img\pie-chart-60-styled.png" />
-    <Content Include="Content\img\play-60-styled.png" />
-    <Content Include="Content\img\preferences-60-styled.png" />
-    <Content Include="Content\img\presentation-60-styled.png" />
-    <Content Include="Content\img\previous-60-styled.png" />
-    <Content Include="Content\img\print-60-styled.png" />
-    <Content Include="Content\img\rating-60-styled.png" />
-    <Content Include="Content\img\rec-60-styled.png" />
-    <Content Include="Content\img\remove-60-styled.png" />
-    <Content Include="Content\img\rewind-60-styled.png" />
-    <Content Include="Content\img\search-60-styled.png" />
-    <Content Include="Content\img\search-icon.png" />
-    <Content Include="Content\img\settings-60-styled.png" />
-    <Content Include="Content\img\shopping-cart-60-styled.png" />
-    <Content Include="Content\img\shopping-cart-add-60-styled.png" />
-    <Content Include="Content\img\shopping-cart-remove-60-styled.png" />
-    <Content Include="Content\img\sidebar-search-close.png" />
-    <Content Include="Content\img\sidebar-toggler.jpg" />
-    <Content Include="Content\img\stop-60-styled.png" />
-    <Content Include="Content\img\uncheck-60-styled.png" />
-    <Content Include="Content\img\unlock-60-styled.png" />
-    <Content Include="Content\img\update-60-styled.png" />
-    <Content Include="Content\img\user-60-styled.png" />
-    <Content Include="Content\img\user-add-60-styled.png" />
-    <Content Include="Content\img\user-remove-60-styled.png" />
-    <Content Include="Content\img\video-60-styled.png" />
-    <Content Include="Content\img\wallet-60-styled.png" />
-    <Content Include="Content\img\watch-60-styled.png" />
+    <Content Include="Content\css\tree.css" />
+    <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="DAL.dll" />
     <Content Include="Global.asax" />
     <Content Include="r.js" />
@@ -236,16 +184,20 @@
     <Content Include="Content\css\bootstrap-datetimepicker.min.css" />
     <Content Include="Scripts\bootstrap-datetimepicker.zh-CN.js" />
     <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\Config\DeptManage\DeptCollection.js" />
+    <Content Include="Scripts\Config\DeptManage\DeptTreeView.js" />
+    <Content Include="Scripts\Config\DeptManage\DeptModel.js" />
+    <Content Include="Scripts\Config\DeptManage\DeptView.js" />
     <Content Include="Scripts\css.js" />
     <Content Include="Scripts\domReady.js" />
-    <Content Include="Scripts\Home\AuthModel.js" />
+    <Content Include="Scripts\Sign\AuthModel.js" />
     <Content Include="Scripts\Home\MainAppView.js" />
     <Content Include="Scripts\Home\MenuCategoryCollection.js" />
     <Content Include="Scripts\Home\MenuCategoryModel.js" />
     <Content Include="Scripts\Home\MenuCategoryView.js" />
     <Content Include="Scripts\Home\NavMenuCategoryView.js" />
     <Content Include="Scripts\Home\Router.js" />
-    <Content Include="Scripts\Home\SigninView.js" />
+    <Content Include="Scripts\Sign\SigninView.js" />
     <Content Include="Scripts\HttpStatusHandle.js" />
     <Content Include="Scripts\jquery-1.11.2.js" />
     <Content Include="Scripts\main.js" />
@@ -253,6 +205,7 @@
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\text.js" />
     <Content Include="Scripts\underscore.js" />
+    <Content Include="Tpls\Config\DeptManage\DeptTpl.html" />
     <Content Include="Tpls\Home\MenuCategoryTpl.html" />
     <Content Include="Tpls\Home\NavMenuCategoryTpl.html" />
     <Content Include="Web.config" />
@@ -269,29 +222,35 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\Config\" />
+    <Folder Include="Content\img\" />
+    <Folder Include="Scripts\Config\UserGroupManage\" />
+    <Folder Include="Scripts\Config\UserManage\" />
+    <Folder Include="Tpls\Config\UserGroupManage\" />
+    <Folder Include="Tpls\Config\UserManage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Signin.cshtml" />
+    <Content Include="Views\Sign\Signin.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\NoAuthority.cshtml" />
+    <Content Include="Views\Sign\NoAuthority.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <Content Include="Views\Shared\_Item_Layout.cshtml" />
-    <Content Include="Views\Config\Index.cshtml" />
+    <Content Include="Views\Config\DeptManage.cshtml" />
+    <Content Include="Views\Config\UserGroupManage.cshtml" />
+    <Content Include="Views\Config\UserManage.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

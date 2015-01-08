@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Web;
 using System.Web.Http;
@@ -14,31 +15,37 @@ namespace CRM.Controllers
         // GET api/menuapi
         public IEnumerable<CMenuCategory> Get(bool allMenu)
         {
-            var authorityModel =
-                (CAuthorityModel) HttpContext.Current.Session[ConfigurationManager.AppSettings["AuthSaveKey"]];
+            var user =
+                (CSign) HttpContext.Current.Session[ConfigurationManager.AppSettings["AuthSaveKey"]];
+            if (user == null)
+            {
+                throw new HttpResponseException(new SiginFailureMessage());
+            }
             using (var dal = DalBuilder.CreateDal(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString,0))
             {
                 try
                 {
                     dal.Open();
                 }
-                catch
+                catch(Exception ex)
                 {
+                    LogBll.Write(new CLog
+                    {
+                        LogDate = DateTime.Now,
+                        LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
+                        LogContent = ex.Message,
+                        LogType = LogType.系统异常
+                    });
                     throw new HttpResponseException(new SystemExceptionMessage());
                 }
-                var a= FunctionBll.LoadMenu(dal, allMenu ? "*" : authorityModel.GroupCode);
-                return a;
+                var menus = FunctionBll.LoadMenu(dal, allMenu ? "*" : user.GroupCode);
+                if (menus == null)
+                {
+                    throw new HttpResponseException(new DataNotFoundMessage());
+                }
+                return menus;
             }
         }
 
-        // POST api/menuapi
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/menuapi/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
     }
 }

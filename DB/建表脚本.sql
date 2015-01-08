@@ -84,6 +84,20 @@ go
 
 if exists (select 1
             from  sysobjects
+           where  id = object_id('tMessage')
+            and   type = 'U')
+   drop table tMessage
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('tNotice')
+            and   type = 'U')
+   drop table tNotice
+go
+
+if exists (select 1
+            from  sysobjects
            where  id = object_id('tProject')
             and   type = 'U')
    drop table tProject
@@ -217,6 +231,40 @@ create table tFunction (
 go
 
 /*==============================================================*/
+/* Table: tMessage                                              */
+/*==============================================================*/
+create table tMessage (
+   Id                   numeric              identity,
+   MessageTitle         nvarchar(100)        not null,
+   Content              nvarchar(1000)       not null,
+   Status               numeric(1)           not null default 0,
+   SendTo               nvarchar(200)        not null,
+   CreateUser           nvarchar(50)         not null,
+   CreateDate           datetime             not null default getdate(),
+   EditDate             datetime             not null default getdate(),
+   SendDate             datetime             null,
+   constraint PK_TMESSAGE primary key (Id)
+)
+go
+
+/*==============================================================*/
+/* Table: tNotice                                               */
+/*==============================================================*/
+create table tNotice (
+   Id                   numeric              identity,
+   Title                nvarchar(100)        not null,
+   Content              nvarchar(1000)       not null,
+   Enable               bit                  not null default 1,
+   CreateUser           nvarchar(50)         not null,
+   CreateDate           datetime             not null default getdate(),
+   EditUser             nvarchar(50)         not null,
+   EditDate             datetime             not null default getdate(),
+   SendDate             datetime             null,
+   constraint PK_TNOTICE primary key (Id)
+)
+go
+
+/*==============================================================*/
 /* Table: tProject                                              */
 /*==============================================================*/
 create table tProject (
@@ -265,8 +313,8 @@ create table tUser (
    UserCode             varchar(20)          not null,
    UserName             nvarchar(20)         not null,
    UPassword            binary(16)           not null,
-   DeptCode             varchar(20)          not null,
-   GroupCode            varchar(20)          not null,
+   DeptCode             varchar(20)          null,
+   GroupCode            varchar(20)          null,
    Enabled              bit                  not null default 1,
    BuildDate            datetime             not null default getdate(),
    BuildUser            nvarchar(50)         not null,
@@ -302,6 +350,11 @@ create table tUserGroupFun (
    Id                   numeric              identity,
    GroupCode            varchar(20)          not null,
    FunCode              varchar(20)          not null,
+   Queriable            bit                  not null default 0,
+   Creatable            bit                  not null default 0,
+   Changable            bit                  not null default 0,
+   Deletable            bit                  not null default 0,
+   Checkable            bit                  not null default 0,
    constraint PK_TUSERGROUPFUN primary key (Id),
    constraint AK_KEY_TUSERGROUPFUN unique (GroupCode, FunCode)
 )
@@ -311,11 +364,12 @@ go
 /* Table: tXtLog                                                */
 /*==============================================================*/
 create table tXtLog (
-   SerialNo             numeric              identity,
+   Id                   numeric              identity,
    LogDate              datetime             not null default getdate(),
    LogContent           nvarchar(1000)       not null,
    LogType              numeric(2)           not null,
-   constraint PK_TXTLOG primary key (SerialNo)
+   LogUser              nvarchar(50)         not null,
+   constraint PK_TXTLOG primary key (Id)
 )
 go
 

@@ -14,7 +14,7 @@
     }
     ,modules: [
         {
-            name: 'Home/SigninView',
+            name: 'Sign/SigninView',
         },
         {
             name: 'Home/MainAppView'

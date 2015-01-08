@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Configuration;
+using System.Web.Mvc;
 
 namespace CRM.Controllers
 {
@@ -7,11 +8,26 @@ namespace CRM.Controllers
         //
         // GET: /Config/
 
-        public ViewResult Index()
+        public PartialViewResult DeptManage()
         {
+            ViewBag.Title = ConfigurationManager.AppSettings["BrandName"];
             ViewBag.MenuCategory = "参数设置";
             ViewBag.Menu = "部门设置";
-            return View();
+            return PartialView();
+        }
+
+        public PartialViewResult UserGroupManage()
+        {
+            ViewBag.MenuCategory = "参数设置";
+            ViewBag.Menu = "用户组";
+            return PartialView();
+        }
+
+        public PartialViewResult UserManage()
+        {
+            ViewBag.MenuCategory = "参数设置";
+            ViewBag.Menu = "人员管理";
+            return PartialView();
         }
     }
 }
