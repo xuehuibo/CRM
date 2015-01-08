@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Configuration;
+using System.Web.Http;
 using System.Web.Mvc;
 using CRM.Bll;
+using CRM.Extend.HttpResponseMessages;
 using CRM.Models;
 using DAL;
 using DAL.Interface;
+using AllowAnonymousAttribute = System.Web.Mvc.AllowAnonymousAttribute;
 
 namespace CRM.Attribute
 {
@@ -99,7 +102,7 @@ namespace CRM.Attribute
                 return;
             using (var dal =DalBuilder.CreateDal(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, 0))
             {
-                dal.Open();
+
                 var httpCookie = filterContext.HttpContext.Request.Cookies["Token"];
                 if (filterContext.HttpContext.Session[_authSaveKey] != null)
                 {
@@ -110,10 +113,18 @@ namespace CRM.Attribute
                 }
                 if (httpCookie != null)
                 {
+                    try
+                    {
+                        dal.Open();
+                    }
+                    catch
+                    {
+                        throw new HttpResponseException(new SystemExceptionMessage());
+                    }
                     //存在Token，进行Token登录
-                    var authorityModel = new CAuthorityModel();
+                    var authorityModel = new CSign();
 
-                    if (AuthorityBll.Signin(dal, httpCookie.Value, authorityModel))
+                    if (SignBll.Signin(dal, httpCookie.Value, authorityModel))
                     {
                         filterContext.HttpContext.Session.Add("SignUser", authorityModel);
                         //更新Token
@@ -139,12 +150,12 @@ namespace CRM.Attribute
         /// <param name="filterContext"></param>
         /// <param name="dal"></param>
         /// <param name="authorityModel"></param>
-        public void UpdateToken(AuthorizationContext filterContext, IDal dal, CAuthorityModel authorityModel)
+        public void UpdateToken(AuthorizationContext filterContext, IDal dal, CSign authorityModel)
         {
             var token = Guid.NewGuid().ToString();
             filterContext.HttpContext.Response.Cookies["Token"].Value = token;
             filterContext.HttpContext.Response.Cookies["Token"].Expires = DateTime.Now.AddDays(30);
-            AuthorityBll.UpdateToken(dal, token, authorityModel.UserCode);
+            SignBll.UpdateToken(dal, token, authorityModel.UserCode);
         }
     }
 
