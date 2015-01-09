@@ -1,6 +1,7 @@
 ﻿require.config({
     baseUrl:'../Scripts',
     paths: {
-        'tpl':'../Tpls'
+        'tpl': '../Tpls',
+        'style':'../Content/css'
     }
 });

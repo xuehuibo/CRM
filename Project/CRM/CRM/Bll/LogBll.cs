@@ -17,12 +17,13 @@ namespace CRM.Bll
             {
                 int i;
                 dal.Execute(
-                    "INSERT INTO dbo.tXtLog( LogDate, LogContent, LogType )VALUES  ( GETDATE(),@LogContent,@LogType)",
+                    "INSERT INTO dbo.tXtLog( LogDate, LogContent, LogType,LogUser )VALUES  ( GETDATE(),@LogContent,@LogType,@LogUser)",
                     out i,
                     dal.CreateParameter("@LogContent", log.LogContent),
-                    dal.CreateParameter("@LogType", log.LogType));
+                    dal.CreateParameter("@LogType", log.LogType),
+                    dal.CreateParameter("@LogUser",log.LogUser));
             }
-            catch (Exception ex)
+            catch
             {
                 Write(log);
             }
@@ -67,10 +68,10 @@ namespace CRM.Bll
                 select new CLog
                 {
                     Id = Convert.ToInt32(row["Id"]),
-                    LogContent = Convert.ToString(row["LogContent"]),
+                    LogContent = Convert.ToString(row["LogContent"]).Trim(),
                     LogDate = Convert.ToDateTime(row["LogDate"]),
                     LogType = (LogType)Convert.ToInt16(row["LogType"]),
-                    LogUser = Convert.ToString(row["LogUser"])
+                    LogUser = Convert.ToString(row["LogUser"]).Trim()
                 }).ToArray();
         }
     }

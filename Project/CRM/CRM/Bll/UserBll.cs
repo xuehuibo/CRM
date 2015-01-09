@@ -17,17 +17,17 @@ namespace CRM.Bll
                 select new CUser
                 {
                     Id = Convert.ToInt16(row["Id"]),
-                    UserCode = Convert.ToString(row["UserCode"]),
-                    UserName = Convert.ToString(row["UserName"]),
+                    UserCode = Convert.ToString(row["UserCode"]).Trim(),
+                    UserName = Convert.ToString(row["UserName"]).Trim(),
                     BuildDate = Convert.ToDateTime(row["BuildDate"]),
-                    BuildUser = Convert.ToString(row["BuildUser"]),
+                    BuildUser = Convert.ToString(row["BuildUser"]).Trim(),
                     EditDate = Convert.ToDateTime(row["EditDate"]),
-                    EditUser = Convert.ToString(row["EditUser"]),
-                    DeptCode = Convert.ToString(row["DeptCode"]),
-                    DeptName = Convert.ToString(row["DeptName"]),
+                    EditUser = Convert.ToString(row["EditUser"]).Trim(),
+                    DeptCode = Convert.IsDBNull(row["DeptCode"]) ? null : Convert.ToString(row["DeptCode"]).Trim(),
+                    DeptName = Convert.IsDBNull(row["DeptName"]) ? null : Convert.ToString(row["DeptName"]).Trim(),
                     Enabled = Convert.ToBoolean(row["Enabled"]),
-                    GroupCode = Convert.ToString(row["GroupCode"]),
-                    GroupName = Convert.ToString(row["GroupName"])
+                    GroupCode = Convert.IsDBNull(row["GroupCode"]) ? null : Convert.ToString(row["GroupCode"]).Trim(),
+                    GroupName = Convert.IsDBNull(row["GroupName"]) ? null : Convert.ToString(row["GroupName"]).Trim()
                 }).ToArray();
         }
 
@@ -50,11 +50,11 @@ namespace CRM.Bll
                     BuildUser = Convert.ToString(row["BuildUser"]),
                     EditDate = Convert.ToDateTime(row["EditDate"]),
                     EditUser = Convert.ToString(row["EditUser"]),
-                    DeptCode = Convert.ToString(row["DeptCode"]),
-                    DeptName = Convert.ToString(row["DeptName"]),
+                    DeptCode = Convert.IsDBNull(row["DeptCode"]) ? null : Convert.ToString(row["DeptCode"]).Trim(),
+                    DeptName = Convert.IsDBNull(row["DeptName"]) ? null :Convert.ToString(row["DeptName"]).Trim(),
                     Enabled = Convert.ToBoolean(row["Enabled"]),
-                    GroupCode = Convert.ToString(row["GroupCode"]),
-                    GroupName = Convert.ToString(row["GroupName"])
+                    GroupCode = Convert.IsDBNull(row["GroupCode"]) ? null : Convert.ToString(row["GroupCode"]).Trim(),
+                    GroupName = Convert.IsDBNull(row["GroupName"]) ? null : Convert.ToString(row["GroupName"]).Trim()
                 }).First();
         }
 
@@ -72,15 +72,19 @@ namespace CRM.Bll
             if (i == 0) return false;
             var dt =
                 dal.Select(
-                    "SELECT a.Id,a.BuildDate,a.EditDate,b.DeptName,c.GroupName FROM tUser a Left JOIN tDept b ON a.DeptCode=b.DeptCode Left JOIN tUserGroup c ON a.GroupCode=c.GroupCode where a.UserCode=@UserCode",
+                    "SELECT a.Id,b.DeptName,c.GroupName FROM tUser a Left JOIN tDept b ON a.DeptCode=b.DeptCode Left JOIN tUserGroup c ON a.GroupCode=c.GroupCode where a.UserCode=@UserCode",
                     out i,
                     dal.CreateParameter("@UserCode", user.UserCode));
             if (i == 0) return false;
             user.Id = Convert.ToInt16(dt.Rows[0]["Id"]);
             user.BuildDate = Convert.ToDateTime(dt.Rows[0]["BuildDate"]);
             user.EditDate = Convert.ToDateTime(dt.Rows[0]["EditDate"]);
-            user.DeptName = Convert.ToString(dt.Rows[0]["DeptName"]);
-            user.GroupName = Convert.ToString(dt.Rows[0]["GroupName"]);
+            user.DeptName = Convert.IsDBNull(dt.Rows[0]["DeptName"])
+                ? null
+                : Convert.ToString(dt.Rows[0]["DeptName"]).Trim();
+            user.GroupName = Convert.IsDBNull(dt.Rows[0]["GroupName"])
+                ? null
+                : Convert.ToString(dt.Rows[0]["GroupName"]).Trim();
             return true;
         }
 

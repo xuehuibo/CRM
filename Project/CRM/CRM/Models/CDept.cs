@@ -12,14 +12,8 @@ namespace CRM.Models
 
         public string ParentCode { get; set; }
 
-        public DateTime BuildDate { get; set; }
-
-        public string BuildUser { get; set; }
-
-        public DateTime EditDate { get; set; }
-
-        public string EditUser { get; set; }
-
         public CDept[] Childs { get; set; }
+
+        public int People { get; set; }
     }
 }

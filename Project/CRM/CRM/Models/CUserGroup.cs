@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CRM.Models
+﻿namespace CRM.Models
 {
     public class CUserGroup
     {
@@ -10,15 +8,11 @@ namespace CRM.Models
 
         public string GroupName { get; set; }
 
+        public CUserGroupFun[] UserGroupFun { get; set; }
+
+        public int People { get; set; }
+
         public GroupType GroupType { get; set; }
-
-        public DateTime BuildDate { get; set; }
-
-        public string BuildUser { get; set; }
-
-        public DateTime EditDate { get; set; }
-
-        public string EditUser { get; set; }
     }
 
     public enum GroupType

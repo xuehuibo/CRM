@@ -15,7 +15,7 @@ namespace CRM.Controllers
         // GET api/usergroupapi
         public IEnumerable<CUserGroup> Get()
         {
-            var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["SignUser"]];
+            var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["AuthSaveKey"]];
             if (user == null)
             {
                 throw new HttpResponseException(new SiginFailureMessage());
@@ -101,9 +101,7 @@ namespace CRM.Controllers
                 try
                 {
                     dal.Open();
-                    value.BuildUser = string.Format("{0}-{1}", user.UserCode, user.UserName);
-                    value.EditUser = string.Format("{0}-{1}", user.UserCode, user.UserName);
-                    ok = UserGroupBll.Create(dal, value);
+                    ok = UserGroupBll.Create(dal, value, string.Format("{0}-{1}", user.UserCode, user.UserName));
                 }
                 catch(Exception ex)
                 {
@@ -153,8 +151,7 @@ namespace CRM.Controllers
                 try
                 {
                     dal.Open();
-                    value.EditUser = string.Format("{0}-{1}", user.UserCode, user.UserName);
-                    ok=UserGroupBll.Update(dal, value);
+                    ok=UserGroupBll.Update(dal, value,string.Format("{0}-{1}", user.UserCode, user.UserName));
                 }
                 catch(Exception ex)
                 {
@@ -193,7 +190,7 @@ namespace CRM.Controllers
         // DELETE api/usergroupapi/5
         public void Delete(int id)
         {
-            var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["SignUser"]];
+            var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["AuthSaveKey"]];
             if (user == null)
             {
                 throw new HttpResponseException(new SiginFailureMessage());

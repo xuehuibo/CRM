@@ -100,9 +100,7 @@ namespace CRM.Controllers
                 try
                 {
                     dal.Open();
-                    value.BuildUser = string.Format("{0}-{1}", user.UserCode, user.UserName);
-                    value.EditUser = string.Format("{0}-{1}", user.UserCode, user.UserName);
-                    ok = DeptBll.Create(dal, value);
+                    ok = DeptBll.Create(dal, value,string.Format("{0}-{1}", user.UserCode, user.UserName));
                 }
                 catch(Exception ex)
                 {
@@ -152,8 +150,7 @@ namespace CRM.Controllers
                 try
                 {
                     dal.Open();
-                    value.EditUser = string.Format("{0}-{1}", user.UserCode, user.UserName);
-                    ok = DeptBll.Update(dal, value);
+                    ok = DeptBll.Update(dal, value,string.Format("{0}-{1}", user.UserCode, user.UserName));
                 }
                 catch(Exception ex)
                 {

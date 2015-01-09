@@ -141,6 +141,7 @@
     <Compile Include="Bll\FunctionBll.cs" />
     <Compile Include="Bll\UserBll.cs" />
     <Compile Include="Bll\UserGroupBll.cs" />
+    <Compile Include="Bll\UserGroupFunBll.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\DeptApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Models\CMenuCategory.cs" />
     <Compile Include="Models\CUser.cs" />
     <Compile Include="Models\CUserGroup.cs" />
+    <Compile Include="Models\CUserGroupFun.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -188,6 +190,12 @@
     <Content Include="Scripts\Config\DeptManage\DeptTreeView.js" />
     <Content Include="Scripts\Config\DeptManage\DeptModel.js" />
     <Content Include="Scripts\Config\DeptManage\DeptView.js" />
+    <Content Include="Scripts\Config\UserGroupManage\UserGroupCollection.js" />
+    <Content Include="Scripts\Config\UserGroupManage\UserGroupFunModel.js" />
+    <Content Include="Scripts\Config\UserGroupManage\UserGroupFunView.js" />
+    <Content Include="Scripts\Config\UserGroupManage\UserGroupManageView.js" />
+    <Content Include="Scripts\Config\UserGroupManage\UserGroupModel.js" />
+    <Content Include="Scripts\Config\UserGroupManage\UserGroupView.js" />
     <Content Include="Scripts\css.js" />
     <Content Include="Scripts\domReady.js" />
     <Content Include="Scripts\Sign\AuthModel.js" />
@@ -206,6 +214,8 @@
     <Content Include="Scripts\text.js" />
     <Content Include="Scripts\underscore.js" />
     <Content Include="Tpls\Config\DeptManage\DeptTpl.html" />
+    <Content Include="Tpls\Config\UserGroupManage\UserGroupFunTpl.html" />
+    <Content Include="Tpls\Config\UserGroupManage\UserGroupTpl.html" />
     <Content Include="Tpls\Home\MenuCategoryTpl.html" />
     <Content Include="Tpls\Home\NavMenuCategoryTpl.html" />
     <Content Include="Web.config" />
@@ -223,9 +233,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
-    <Folder Include="Scripts\Config\UserGroupManage\" />
     <Folder Include="Scripts\Config\UserManage\" />
-    <Folder Include="Tpls\Config\UserGroupManage\" />
     <Folder Include="Tpls\Config\UserManage\" />
   </ItemGroup>
   <ItemGroup>

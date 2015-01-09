@@ -1,0 +1,24 @@
+﻿<div class="panel-heading">
+    <h4 class="text-center"><%=UserGroup.GroupCode%>-<%=UserGroup.GroupName%> &nbsp;<span class="label label-danger"><%=UserGroup.People%>人</span><span class="label label-primary"><%=Fun%>功能</span></h4>
+    <div class="form-group form-inline hide" >
+        <input name="groupCode" class="form-control" <%=UserGroup.Id==null?'':'disabled'%> placeholder="用户组编码" value="<%=UserGroup.GroupCode%>"/>
+        <input name="groupName" class="form-control" placeholder="用户组名称" value="<%=UserGroup.GroupName%>"/>
+    </div>
+</div>
+<div class="panel-body">
+    <div class="btn-group btn-group-justified" data-role="btnGrp">
+        <a class="btn btn-warning" data-action="edit">修改</a>
+        <a class="btn btn-warning <%=UserGroup.GroupCode!='admin'?'':'disabled'%>" data-action="remove">删除</a>
+    </div>
+    <div class="btn-group btn-group-justified hide" data-role="btnGrp">
+        <a class="btn btn-warning" data-action='save'>保存</a>
+        <a class="btn btn-warning" data-action="cancel">取消</a>
+    </div>
+</div>
+<ul class="list-group hide"></ul>
+<div class="panel-footer hide">
+    <div class="btn-group btn-group-justified hide" data-role="btnGrp">
+        <a class="btn btn-warning" data-action="save">保存</a>
+        <a class="btn btn-warning" data-action="cancel">取消</a>
+    </div>
+</div>

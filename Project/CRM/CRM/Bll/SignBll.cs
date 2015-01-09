@@ -28,9 +28,13 @@ namespace CRM.Bll
                 return false;
             }
             authorityModel.Id = Convert.ToInt16(dt.Rows[0]["Id"]);
-            authorityModel.UserName = Convert.ToString(dt.Rows[0]["UserName"]);
-            authorityModel.GroupCode = Convert.ToString(dt.Rows[0]["GroupCode"]);
-            authorityModel.DeptCode = Convert.ToString(dt.Rows[0]["DeptCode"]);
+            authorityModel.UserName = Convert.ToString(dt.Rows[0]["UserName"]).Trim();
+            authorityModel.GroupCode = Convert.IsDBNull(dt.Rows[0]["GroupCode"])
+                ? null
+                : Convert.ToString(dt.Rows[0]["GroupCode"]).Trim();
+            authorityModel.DeptCode = Convert.IsDBNull(dt.Rows[0]["DeptCode"])
+                ? null
+                : Convert.ToString(dt.Rows[0]["DeptCode"]).Trim();
             return true;
         }
 
@@ -52,10 +56,14 @@ namespace CRM.Bll
                 return false;
             }
             authorityModel.Id = Convert.ToInt16(dt.Rows[0]["Id"]);
-            authorityModel.UserName = Convert.ToString(dt.Rows[0]["UserName"]);
-            authorityModel.UserCode = Convert.ToString(dt.Rows[0]["UserCode"]);
-            authorityModel.GroupCode = Convert.ToString(dt.Rows[0]["GroupCode"]);
-            authorityModel.DeptCode = Convert.ToString(dt.Rows[0]["DeptCode"]);
+            authorityModel.UserName = Convert.ToString(dt.Rows[0]["UserName"]).Trim();
+            authorityModel.UserCode = Convert.ToString(dt.Rows[0]["UserCode"]).Trim();
+            authorityModel.GroupCode = Convert.IsDBNull(dt.Rows[0]["GroupCode"])
+                ? null
+                : Convert.ToString(dt.Rows[0]["GroupCode"]).Trim();
+            authorityModel.DeptCode = Convert.IsDBNull(dt.Rows[0]["DeptCode"])
+                ? null
+                : Convert.ToString(dt.Rows[0]["DeptCode"]).Trim();
             return true;
         }
 

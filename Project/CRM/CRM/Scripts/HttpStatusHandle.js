@@ -3,14 +3,11 @@
         if (rst.status == 200) {
             return true;
         }
-        console.info(rst.statusText);
         switch (rst.statusText) {
             case 'System Exception':
-                //BadRequest
                 alert("系统发生异常！请联系管理员！");
                 return false;
             case 'Sigin Failure':
-                //NonAuthoritativeInformation 
                 alert("登陆失效，请重新登陆！");
                 location.href = "/Sign/NoAuthority";
                 return false;

@@ -1,8 +1,10 @@
 ﻿define([
-        'text!tpl/Config/DeptManage/DeptTpl.html'
+        'text!tpl/Config/DeptManage/DeptTpl.html',
+        'HttpStatusHandle',
+        'Config/DeptManage/DeptModel'
     ],
-    function (tpl) {
-        return Backbone.View.extend({
+    function (tpl, HttpStatusHandle, DeptModel) {
+        var DeptView= Backbone.View.extend({
             tagName: "li",
             initialize: function(model) {
                 this.model = model;
@@ -10,36 +12,88 @@
                 this.listenTo(this.model, 'change', this.render);
             },
             template: _.template(tpl),
-            render: function() {
+            render: function () {
                 this.$el.html(this.template(this.model.toJSON()));
                 return this.el;
             },
-            AddChild: function(childView) {
+            AddChild: function (childView) {
                 this.$('ul:first').append(childView.render());
             },
             events: {
-                'click span:first': 'ShowBtn',
-                'click .deptAdd:first': 'ClickAdd',
-                'click .deptDel:first': 'ClickDel',
-                'click .deptEdit:first': 'ClickEdit',
-                'click .btn-group:first':'ClickBtn'
+                'click h4:first': 'ShowBtn',
+                'click .add:first': 'ClickAdd',
+                'click .del:first': 'ClickDel',
+                'click .edit:first': 'ClickEdit',
+                'click .editSave:first':'ClickEditSave',
+                'click .editCancel:first': 'ClickEditCancel',
+                'click .btn-group:first': 'ClickBtn'
             },
             ShowBtn: function() {
                 $('.btn-group').addClass('hide');
                 this.$('.btn-group:first').toggleClass('hide');
             },
-            ClickAdd:function() {
-                console.info(this.model.toJSON());
+            ClickAdd: function () {
+                //点击增加
+                var deptView =new DeptView(new DeptModel({'ParentCode':this.model.get('DeptCode')}));
+                this.AddChild(deptView);
+                deptView.ClickEdit();
             },
             ClickDel: function () {
-                console.info(this.model.toJSON());
-                this.model.destroy();
+                if (this.model.get('DeptCode') == 'root') {
+                    alert('根部门不允许删除！');
+                    return;
+                }
+                if (this.model.get('People') > 0) {
+                    if (!confirm("该部门下还有员工，删除该部门将使这些员工失去归属部门。确定删除？")) {
+                        return;
+                    }
+                }
+                //点击删除
+                if (!this.$('ul:first').html()) {
+                    this.model.destroy({
+                        success:function(model, rst) {
+                            
+                        },
+                        errot:function(model, rst) {
+                            HttpStatusHandle(rst, '删除部门');
+                        },
+                        wait: true
+                    });
+                } else {
+                    alert('该部门存在子部门，不允许删除！');
+                }
             },
-            ClickEdit:function() {
-                console.info(this.model.toJSON());
+            ClickEdit: function () {
+                //点击编辑
+                this.$('form:first').removeClass('hide');
+            },
+            ClickEditSave: function () {
+                var me = this;
+                this.model.save({
+                    'DeptCode': this.$('.deptCode:first').val(),
+                    'DeptName': this.$('.deptName:first').val()
+                }, {
+                    success: function (model, rst) {
+                        me.$('form:first').addClass('hide');
+                    },
+                    error: function(model,rst) {
+                        HttpStatusHandle(rst, "编辑部门");
+                    },
+                    wait: true
+                });
+            },
+            ClickEditCancel: function () {
+                if (this.model.get('Id') == null) {
+                    this.model.destroy();
+                    return;
+                }
+                this.$('.deptCode:first').val(this.model.get('DeptCode'));
+                this.$('.deptName:first').val(this.model.get('DeptName'));
+                this.$('form:first').addClass('hide');
             },
             ClickBtn: function () {
                 this.$('.btn-group:first').addClass('hide');
             }
         });
+        return DeptView;
     });

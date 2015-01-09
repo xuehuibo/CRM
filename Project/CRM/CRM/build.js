@@ -18,11 +18,17 @@
         },
         {
             name: 'Home/MainAppView'
+        },
+        {
+            name: 'Config/DeptManage/DeptTreeView'
+        },
+        {
+            name:'Config/UserGroupManage/UserGroupManageView'
         }
     ]
 
     // 不优化某些文件
-    ,fileExclusionRegExp: /^(r|build|Tool)\.js$/
+    ,fileExclusionRegExp: /^(r|build)\.js$/
 
     // CSS 优化方式，目前支持以下几种：
     // none: 不压缩，仅合并

@@ -1,8 +1,10 @@
 ﻿using System.Configuration;
 using System.Web.Mvc;
+using CRM.Attribute;
 
 namespace CRM.Controllers
 {
+    [Authorization]
     public class ConfigController : Controller
     {
         //
