@@ -11,11 +11,8 @@
                 this.menuCategorys = new MenuCategoryCollection();
                 var router = new Router();
                 this.listenTo(this.menuCategorys, 'add', this.AddMenu);
-                this.listenTo(this.menuCategorys, 'reset', this.AddAllMenu);
+                this.listenTo( this.menuCategorys, 'reset', this.AddAllMenu);
                 this.menuCategorys.fetch({
-                    data: {
-                        'allMenu': true
-                    },
                     success: function(model, rst) {
 
                     },

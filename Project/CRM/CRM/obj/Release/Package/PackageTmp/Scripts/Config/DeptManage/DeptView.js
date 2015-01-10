@@ -20,44 +20,13 @@
                 this.$('ul:first').append(childView.render());
             },
             events: {
-                'click h4:first': 'ShowBtn',
-                'click [data-action="add"]:first': 'ClickAdd',
-                'click [data-action="del"]:first': 'ClickDel',
-                'click [data-action="edit"]:first': 'ClickEdit',
-                'click .btn-group:first': 'ClickBtn',
-                'click [data-action="editOk"]:first': 'ClickEditOk',
-                'click [data-action="editCancel"]:first':'ClickEditCancel'
-            },
-            ClickEditOk: function () {
-                if (this.$('[name="deptCode"]:first').val() == '') {
-                    alert('部门编码不允许为空！');
-                    return;
-                }
-                if (this.$('[name="deptName"]:first').val() == '') {
-                    alert('部门名称不允许为空！');
-                    return;
-                }
-                this.model.save({
-                    'DeptCode': this.$('[name="deptCode"]:first').val(),
-                    'DeptName': this.$('[name="deptName"]:first').val()
-                }, {
-                    success: function() {
-                        this.$('form:first').addClass('hide');
-                    },
-                    error: function(model,rst) {
-                        HttpStatusHandle(rst, '编辑部门');
-                    },
-                    wait: true
-            });
-            },
-            ClickEditCancel: function () {
-                if (this.model.get('Id') == null) {
-                    this.model.destroy();
-                    return;
-                }
-                this.$('[name="deptCode"]:first').val(this.model.get('DeptCode'));
-                this.$('[name="deptName"]:first').val(this.model.get('DeptName'));
-                this.$('form:first').addClass('hide');
+                'click b:first': 'ShowBtn',
+                'click .add:first': 'ClickAdd',
+                'click .del:first': 'ClickDel',
+                'click .edit:first': 'ClickEdit',
+                'click .editSave:first':'ClickEditSave',
+                'click .editCancel:first': 'ClickEditCancel',
+                'click .btn-group:first': 'ClickBtn'
             },
             ShowBtn: function() {
                 $('.btn-group').addClass('hide');
@@ -74,18 +43,23 @@
                     alert('根部门不允许删除！');
                     return;
                 }
+                if (!confirm("确认删除该部门？")) {
+                    return;
+                }
                 if (this.model.get('People') > 0) {
                     if (!confirm("该部门下还有员工，删除该部门将使这些员工失去归属部门。确定删除？")) {
                         return;
                     }
                 }
                 //点击删除
+                this.$('.del:first').button('loading');
                 if (!this.$('ul:first').html()) {
                     this.model.destroy({
                         success:function(model, rst) {
-                            
+                            this.$('.del:first').button('reset');
                         },
-                        errot:function(model, rst) {
+                        errot: function (model, rst) {
+                            this.$('.del:first').button('reset');
                             HttpStatusHandle(rst, '删除部门');
                         },
                         wait: true
@@ -97,6 +71,36 @@
             ClickEdit: function () {
                 //点击编辑
                 this.$('form:first').removeClass('hide');
+            },
+            ClickEditSave: function () {
+                var me = this;
+                this.$('.editSave:first').button('loading');
+                this.$('.editCancel:first').button('loading');
+                this.model.save({
+                    'DeptCode': this.$('.deptCode:first').val(),
+                    'DeptName': this.$('.deptName:first').val()
+                }, {
+                    success: function (model, rst) {
+                        me.$('.editSave:first').button('reset');
+                        this.$('.editCancel:first').button('reset');
+                        me.$('form:first').addClass('hide');
+                    },
+                    error: function (model, rst) {
+                        me.$('.editSave:first').button('reset');
+                        this.$('.editCancel:first').button('reset');
+                        HttpStatusHandle(rst, "编辑部门");
+                    },
+                    wait: true
+                });
+            },
+            ClickEditCancel: function () {
+                if (this.model.get('Id') == null) {
+                    this.model.destroy();
+                    return;
+                }
+                this.$('.deptCode:first').val(this.model.get('DeptCode'));
+                this.$('.deptName:first').val(this.model.get('DeptName'));
+                this.$('form:first').addClass('hide');
             },
             ClickBtn: function () {
                 this.$('.btn-group:first').addClass('hide');

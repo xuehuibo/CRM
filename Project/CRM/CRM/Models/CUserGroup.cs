@@ -8,9 +8,11 @@
 
         public string GroupName { get; set; }
 
-        public CUserGroupFun[] UserGroupFun { get; set; }
-
         public int People { get; set; }
+
+        public CUserGroupFun[] GroupFun { get; set; }
+
+        public int Fun { get; set; }
 
         public GroupType GroupType { get; set; }
     }

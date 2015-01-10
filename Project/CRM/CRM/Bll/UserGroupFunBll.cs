@@ -12,42 +12,33 @@ namespace CRM.Bll
         /// 
         /// </summary>
         /// <param name="dal"></param>
-        /// <returns></returns>
-        public static CUserGroupFun[] List(IDal dal)
-        {
-            int i;
-            var dt = dal.Select("SELECT * FROM tUserGroupFun ", out i);
-            return (from DataRow row in dt.Rows
-                select new CUserGroupFun
-                {
-                    Id = Convert.ToInt16(row["Id"]),
-                    GroupCode = Convert.ToString(row["GroupCode"]).Trim(),
-                    FunCode = Convert.ToString(row["FunCode"]).Trim(),
-                    Queriable = Convert.ToBoolean(row["Queriable"]),
-                    Changable = Convert.ToBoolean(row["Changable"]),
-                    Deletable = Convert.ToBoolean(row["Deletable"]),
-                    Checkable = Convert.ToBoolean(row["Checkable"]),
-                    Creatable = Convert.ToBoolean(row["Creatable"])
-                }).ToArray();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dal"></param>
         /// <param name="groupCode"></param>
         /// <returns></returns>
         public static CUserGroupFun[] List(IDal dal, string groupCode)
         {
             int i;
-            var dt = dal.Select("SELECT * FROM tUserGroupFun WHERE GroupCode=@GroupCode ", out i,
-                dal.CreateParameter("@GroupCode",groupCode));
+            DataTable dt;
+            if (groupCode.Equals("*"))
+            {
+                dt = dal.Select("select 0 as Id ,'' as GroupCode,FunCode,FunName,GroupType,0 as Queriable,0 as Creatable,0 as Changable,0 as Deletable,0 as Checkable from tFunction Order By FunCode", out i);
+            }
+            else
+            {
+                dt =
+                    dal.Select(
+                        "select ISNULL(b.Id,0) as Id,ISNULL( b.GroupCode,@GroupCode) as GroupCode,a.FunCode,a.FunName,ISNULL( b.Queriable,0) as Queriable,ISNULL( b.Creatable,0) as Creatable,ISNULL( b.Changable,0) as Changable,ISNULL( b.Deletable,0) as Deletable,ISNULL( b.Checkable,0) as Checkable, a.GroupType from tFunction a left join tUserGroupFun b on a.FunCode=b.FunCode WHERE GroupCode=@GroupCode or GroupCode is null Order By a.FunCode",
+                        out i,
+                        dal.CreateParameter("@GroupCode", groupCode));
+            }
+
             return (from DataRow row in dt.Rows
                     select new CUserGroupFun
                     {
                         Id = Convert.ToInt16(row["Id"]),
                         GroupCode = Convert.ToString(row["GroupCode"]).Trim(),
                         FunCode = Convert.ToString(row["FunCode"]).Trim(),
+                        FunName = Convert.ToString(row["FunName"]).Trim(),
+                        GroupType = (GroupType)Convert.ToInt16(row["GroupType"]),
                         Queriable = Convert.ToBoolean(row["Queriable"]),
                         Changable = Convert.ToBoolean(row["Changable"]),
                         Deletable = Convert.ToBoolean(row["Deletable"]),
@@ -55,6 +46,21 @@ namespace CRM.Bll
                         Creatable = Convert.ToBoolean(row["Creatable"])
                     }).ToArray();
         }
+
+        /// <summary>
+        /// 计算用户组中功能数量
+        /// </summary>
+        /// <param name="dal"></param>
+        /// <param name="groupCode"></param>
+        /// <returns></returns>
+        public static int CountGroupFun(IDal dal, string groupCode)
+        {
+            int i;
+            var dt = dal.Select("select count(1) as Fun from tFunction a left join tUserGroupFun b on a.FunCode =b.FunCode where a.Enabled=1 and b.Queriable=1 and b.GroupCode=@GroupCode", out i,
+                dal.CreateParameter("@GroupCode", groupCode));
+            return Convert.ToInt16(dt.Rows[0]["Fun"]);
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -65,7 +71,7 @@ namespace CRM.Bll
         public static bool Create(IDal dal, CUserGroupFun userGroupFun,string user)
         {
             int i;
-            dal.Execute("INSERT INTO tUserGroupFun( GroupCode ,FunCode ,Queriable ,Creatable ,Changable ,Deletable ,Checkable,BuildUser,EditUser) VALUES  ( @GroupCode , @FunCode ,@Queriable ,@Creatable ,@Changable ,@Deletable @Checkable,@BuildUser,@EditUser )", out i,
+            dal.Execute("INSERT INTO tUserGroupFun( GroupCode ,FunCode ,Queriable ,Creatable ,Changable ,Deletable ,Checkable , BuildUser,EditUser) VALUES  ( @GroupCode , @FunCode ,@Queriable ,@Creatable ,@Changable ,@Deletable ,@Checkable,@BuildUser,@EditUser )", out i,
                 dal.CreateParameter("@GroupCode",userGroupFun.GroupCode),
                 dal.CreateParameter("@FunCode",userGroupFun.FunCode),
                 dal.CreateParameter("@Queriable",userGroupFun.Queriable),
@@ -105,18 +111,5 @@ namespace CRM.Bll
             return i != 0 || Create(dal, userGroupFun, user);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dal"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static bool Delete(IDal dal, int id)
-        {
-            int i;
-            dal.Execute("DELETE FROM tUserGroupFun WHERE Id=@Id",out i,
-                dal.CreateParameter("@Id",id));
-            return i==1;
-        }
     }
 }

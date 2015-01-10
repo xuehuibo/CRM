@@ -21,7 +21,6 @@ namespace CRM.Bll
             {
                 return null;
             }
-            var userGroupFun = UserGroupFunBll.List(dal);
             return (from DataRow row in dt.Rows
                 select new CUserGroup
                 {
@@ -29,24 +28,11 @@ namespace CRM.Bll
                     GroupCode = Convert.ToString(row["GroupCode"]).Trim(),
                     GroupName = Convert.ToString(row["GroupName"]).Trim(),
                     GroupType = (GroupType)Convert.ToInt16(row["GroupType"]),
-                    People = CountPeople(dal,Convert.ToString(row["GroupCode"]).Trim()),
-                    UserGroupFun = userGroupFun.Where(f => f.GroupCode == Convert.ToString(row["GroupCode"]).Trim()).ToArray()
+                    People = UserBll.CountPeople(dal,Convert.ToString(row["GroupCode"]).Trim()),
+                    Fun = UserGroupFunBll.CountGroupFun(dal, Convert.ToString(row["GroupCode"]).Trim())
                 }).ToArray();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dal"></param>
-        /// <param name="groupCode"></param>
-        /// <returns></returns>
-        private static int CountPeople(IDal dal, string groupCode)
-        {
-            int i;
-            var c = dal.Select("SELECT COUNT(1) AS People FROM tUser WHERE GroupCode=@GroupCode", out i,
-                dal.CreateParameter("@GroupCode", groupCode));
-            return Convert.IsDBNull(c.Rows[0]["People"]) ? 0 : Convert.ToInt16(c.Rows[0]["People"]);
-        }
         /// <summary>
         /// 获取指定用户组
         /// </summary>
@@ -66,7 +52,8 @@ namespace CRM.Bll
                     GroupCode = Convert.ToString(row["GroupCode"]).Trim(),
                     GroupName = Convert.ToString(row["GroupName"]).Trim(),
                     GroupType = (GroupType)Convert.ToInt16(row["GroupType"]),
-                    UserGroupFun = UserGroupFunBll.List(dal, Convert.ToString(row["GroupCode"]).Trim())
+                    People = UserBll.CountPeople(dal, Convert.ToString(row["GroupCode"]).Trim()),
+                    Fun = UserGroupFunBll.CountGroupFun(dal, Convert.ToString(row["GroupCode"]).Trim())
                 }).First();
         }
 
@@ -82,24 +69,29 @@ namespace CRM.Bll
             int i;
             dal.BeginTran();
             dal.Execute(
-                "INSERT INTO tUserGroup( GroupCode ,GroupName ,BuildUser ,EditUser) VALUES  ( @GroupCode , @GroupName,@BuildUser,@EditUser)",
+                "INSERT INTO tUserGroup( GroupCode ,GroupName ,BuildUser ,EditUser,GroupType) VALUES  ( @GroupCode , @GroupName,@BuildUser,@EditUser,@GroupType)",
                 out i,
                 dal.CreateParameter("@GroupCode", userGroup.GroupCode),
                 dal.CreateParameter("@GroupName", userGroup.GroupName),
-                //dal.CreateParameter("@GroupType", (short) (userGroup.GroupType)),
+                dal.CreateParameter("@GroupType", (short) (userGroup.GroupType)),
                 dal.CreateParameter("@BuildUser", user),
                 dal.CreateParameter("@EditUser", user)
                 );
+
             if (i == 0)return false;
             var dt = dal.Select("SELECT Id FROM tUserGroup WHERE GroupCode =@GroupCode", out i,
                 dal.CreateParameter("@GroupCode", userGroup.GroupCode));
             if (i == 0) return false;
             userGroup.Id = Convert.ToInt16(dt.Rows[0]["Id"]);
-            foreach (var fun in userGroup.UserGroupFun)
+
+            foreach (var fun in userGroup.GroupFun)
             {
+                fun.GroupCode = userGroup.GroupCode;
                 UserGroupFunBll.Create(dal, fun, user);
             }
             dal.CommitTran();
+            userGroup.Fun = UserGroupFunBll.CountGroupFun(dal, userGroup.GroupCode);
+            userGroup.People = UserBll.CountPeople(dal, userGroup.GroupCode);
             return true;
         }
 
@@ -114,16 +106,20 @@ namespace CRM.Bll
         {
             int i;
             dal.BeginTran();
-            dal.Execute("UPDATE tUserGroup SET GroupName=@GroupName,EditUser=@EditUser,EditDate=GETDATE() WHERE Id=@Id", out i,
+            dal.Execute("UPDATE tUserGroup SET GroupName=@GroupName,EditUser=@EditUser,EditDate=GETDATE(),GroupType=@GroupType WHERE Id=@Id", out i,
                 dal.CreateParameter("@GroupName",userGroup.GroupName),
                 dal.CreateParameter("@EditUser",user),
-                dal.CreateParameter("@Id",userGroup.Id));
+                dal.CreateParameter("@Id",userGroup.Id),
+                dal.CreateParameter("@GroupType",userGroup.GroupType));
             if (i == 0) return false;
-            foreach (var fun in userGroup.UserGroupFun)
+
+            foreach (var fun in userGroup.GroupFun)
             {
                 UserGroupFunBll.Update(dal, fun, user);
             }
             dal.CommitTran();
+            userGroup.Fun = UserGroupFunBll.CountGroupFun(dal, userGroup.GroupCode);
+            userGroup.People = UserBll.CountPeople(dal, userGroup.GroupCode);
             return true;
         }
 

@@ -31,7 +31,7 @@ namespace CRM.Controllers
                 }
                 catch(Exception ex)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -51,7 +51,7 @@ namespace CRM.Controllers
         // GET api/usergroupapi/5
         public CUserGroup Get(int id)
         {
-            var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["SignUser"]];
+            var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["AuthSaveKey"]];
             if (user == null)
             {
                 throw new HttpResponseException(new SiginFailureMessage());
@@ -70,7 +70,7 @@ namespace CRM.Controllers
                 }
                 catch(Exception ex)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -90,7 +90,7 @@ namespace CRM.Controllers
         // POST api/usergroupapi
         public CUserGroup Post(CUserGroup value)
         {
-            var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["SignUser"]];
+            var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["AuthSaveKey"]];
             if (user == null)
             {
                 throw new HttpResponseException(new SiginFailureMessage());
@@ -105,7 +105,7 @@ namespace CRM.Controllers
                 }
                 catch(Exception ex)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -116,7 +116,7 @@ namespace CRM.Controllers
                 }
                 if (!ok)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -125,7 +125,7 @@ namespace CRM.Controllers
                     });
                     throw new HttpResponseException(new DealFailureMessage());
                 }
-                LogBll.Write(new CLog
+                LogBll.Write(dal,new CLog
                 {
                     LogDate = DateTime.Now,
                     LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -140,7 +140,7 @@ namespace CRM.Controllers
         // PUT api/usergroupapi/5
         public CUserGroup Put(int id, CUserGroup value)
         {
-            var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["SignUser"]];
+            var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["AuthSaveKey"]];
             if (user == null)
             {
                 throw new HttpResponseException(new SiginFailureMessage());
@@ -155,7 +155,7 @@ namespace CRM.Controllers
                 }
                 catch(Exception ex)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -166,7 +166,7 @@ namespace CRM.Controllers
                 }
                 if (!ok)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -175,7 +175,7 @@ namespace CRM.Controllers
                     });
                     throw new HttpResponseException(new DealFailureMessage());
                 }
-                LogBll.Write(new CLog
+                LogBll.Write(dal,new CLog
                 {
                     LogDate = DateTime.Now,
                     LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -206,7 +206,7 @@ namespace CRM.Controllers
                 }
                 catch(Exception ex)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -219,7 +219,7 @@ namespace CRM.Controllers
                 {
                     if (hisUserGroup != null)
                     {
-                        LogBll.Write(new CLog
+                        LogBll.Write(dal,new CLog
                         {
                             LogDate = DateTime.Now,
                             LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -229,7 +229,7 @@ namespace CRM.Controllers
                     }
                     throw new HttpResponseException(new DealFailureMessage());
                 }
-                LogBll.Write(new CLog
+                LogBll.Write(dal,new CLog
                 {
                     LogDate = DateTime.Now,
                     LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),

@@ -180,7 +180,7 @@ create table tCustomer (
    EditDate             datetime             not null default getdate(),
    EditUser             nvarchar(50)         not null,
    constraint PK_TCUSTOMER primary key (Id),
-   constraint AK_KEY_2_TCUSTOME unique (CustomerCode)
+   constraint AK_CUSTOMERCODE_TCUSTOMER unique (CustomerCode)
 )
 go
 
@@ -197,7 +197,7 @@ create table tDept (
    EditDate             datetime             not null default getdate(),
    EditUser             nvarchar(50)         not null,
    constraint PK_TDEPT primary key (Id),
-   constraint AK_KEY_TDEPT unique (DeptCode)
+   constraint AK_DEPTCODE_TDEPT unique (DeptCode)
 )
 go
 
@@ -224,9 +224,10 @@ create table tFunction (
    SerialNo             numeric              not null,
    ParentCode           varchar(20)          null,
    FunType              numeric(1)           not null,
+   GroupType            numeric(1)           not null default 1,
    constraint PK_TFUNCTION primary key (Id),
-   constraint AK_KEY_3_TFUNCTIO unique (SerialNo, ParentCode),
-   constraint AK_KEY_2_TFUNCTIO unique (FunCode)
+   constraint AK_SERIALNO_PARENTCOD_TFUNCTION unique (SerialNo, ParentCode),
+   constraint AK_FUNCODE_TFUNCTION unique (FunCode)
 )
 go
 
@@ -279,7 +280,7 @@ create table tProject (
    EditDate             datetime             not null,
    EditUser             nvarchar(50)         not null,
    constraint PK_TPROJECT primary key (Id),
-   constraint AK_KEY_TPROJECT unique (ProjectCode)
+   constraint AK_PROJECTCODE_TPROJECT unique (ProjectCode)
 )
 go
 
@@ -301,7 +302,7 @@ create table tProjectEvent (
    EditDate             datetime             not null default getdate(),
    EditUser             nvarchar(50)         not null,
    constraint PK_TPROJECTEVENT primary key (Id),
-   constraint AK_KEY_TPROJECTEVENT unique (ProjectCode, SerialNo)
+   constraint AK_SERIALNO_PROJECTCO_TPROJECT unique (ProjectCode, SerialNo)
 )
 go
 
@@ -322,7 +323,7 @@ create table tUser (
    EditUser             nvarchar(50)         not null,
    Token                binary(16)           null,
    constraint PK_TUSER primary key (Id),
-   constraint AK_KEY_2_TUSER unique (UserCode)
+   constraint AK_USERCODE_TUSER unique (UserCode)
 )
 go
 
@@ -339,7 +340,7 @@ create table tUserGroup (
    EditDate             datetime             not null default getdate(),
    EditUser             nvarchar(50)         not null,
    constraint PK_TUSERGROUP primary key (Id),
-   constraint AK_KEY_TUSERGROUP unique (GroupCode)
+   constraint AK_GROUPCODE_TUSERGROUP unique (GroupCode)
 )
 go
 
@@ -355,8 +356,12 @@ create table tUserGroupFun (
    Changable            bit                  not null default 0,
    Deletable            bit                  not null default 0,
    Checkable            bit                  not null default 0,
+   BuildDate            datetime             not null default getdate(),
+   BuildUser            nvarchar(50)         not null,
+   EditDate             datetime             not null default getdate(),
+   EditUser             nvarchar(50)         not null,
    constraint PK_TUSERGROUPFUN primary key (Id),
-   constraint AK_KEY_TUSERGROUPFUN unique (GroupCode, FunCode)
+   constraint AK_GROUPCODE_FUNCODE_TUSERGROUP unique (GroupCode, FunCode)
 )
 go
 

@@ -31,6 +31,20 @@ namespace CRM.Bll
                 }).ToArray();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dal"></param>
+        /// <param name="groupCode"></param>
+        /// <returns></returns>
+        public static int CountPeople(IDal dal, string groupCode)
+        {
+            int i;
+            var c = dal.Select("SELECT COUNT(1) AS People FROM tUser WHERE GroupCode=@GroupCode", out i,
+                dal.CreateParameter("@GroupCode", groupCode));
+            return Convert.IsDBNull(c.Rows[0]["People"]) ? 0 : Convert.ToInt16(c.Rows[0]["People"]);
+        }
+
         public static CUser Get(IDal dal, int id)
         {
             int i;

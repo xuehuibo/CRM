@@ -39,15 +39,6 @@ E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\zh-Hans\System.Web.WebPages.Ra
 E:\Documents\我的项目\CRM\Project\CRM\CRM\obj\Release\CRM.csprojResolveAssemblyReference.cache
 E:\Documents\我的项目\CRM\Project\CRM\CRM\obj\Release\CRM.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\obj\Release\CRM.pdb
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Net.Http.Formatting.dll
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Web.Http.dll
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Web.Http.WebHost.dll
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Net.Http.Formatting.xml
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Web.Http.xml
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Web.Http.WebHost.xml
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\zh-Hans\System.Net.Http.Formatting.resources.dll
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\zh-Hans\System.Web.Http.resources.dll
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\zh-Hans\System.Web.Http.WebHost.resources.dll
 C:\Users\xuehuibo\Desktop\CRM\Project\CRM\CRM\bin\CRM.dll.config
 C:\Users\xuehuibo\Desktop\CRM\Project\CRM\CRM\bin\CRM.dll
 C:\Users\xuehuibo\Desktop\CRM\Project\CRM\CRM\bin\CRM.pdb

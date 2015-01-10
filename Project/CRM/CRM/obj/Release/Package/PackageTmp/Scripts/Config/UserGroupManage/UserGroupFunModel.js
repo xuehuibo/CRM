@@ -9,6 +9,7 @@
             'Changable': null,
             'Deletable': null,
             'Checkable':null
-        }
+        },
+        urlRoot:'/api/UserGroupFunApi'
     });
 });

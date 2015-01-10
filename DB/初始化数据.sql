@@ -1,24 +1,24 @@
 USE [CRMDB]
 GO
 /****建立菜单*****/
-INSERT INTO [tFunction]([FunCode],[FunName],[Enabled],[FunCmd],[SerialNo],[ParentCode],[FunType])
-select '00','系统设置',1 ,'',0,null,0
+INSERT INTO [tFunction]([FunCode],[FunName],[Enabled],[FunCmd],[SerialNo],[ParentCode],[FunType],[GroupType])
+select '00','系统设置',1 ,'',0,null,0,0
 union all 
-select '01','客户管理',1 ,'',1,null,0
+select '01','客户管理',1 ,'',1,null,0,1
 union all 
-select '02','项目管理',1 ,'',2,null,0
+select '02','项目管理',1 ,'',2,null,0,1
 union all 
-select '03','运维管理',1 ,'',3,null,0
+select '03','运维管理',1 ,'',3,null,0,1
 go
 
-INSERT INTO [tFunction]([FunCode],[FunName],[Enabled],[FunCmd],[SerialNo],[ParentCode],[FunType])
-select '0001','部门设置',1 ,'/Config/DeptManage',0,'00',1
+INSERT INTO [tFunction]([FunCode],[FunName],[Enabled],[FunCmd],[SerialNo],[ParentCode],[FunType],[GroupType])
+select '0001','部门设置',1 ,'/Config/DeptManage',0,'00',1,0
 union all 
-select '0002','人事管理',1 ,'',1,'00',1
+select '0002','用户组',1 ,'/Config/UserGroupManage',1,'00',1,0
 union all 
-select '0003','权限管理',1 ,'',2,'00',1
+select '0003','用户管理',1 ,'/Config/UserManage',2,'00',1,0
 union all 
-select '0004','系统日志',1 ,'',3,'00',1
+select '0004','系统日志',1 ,'',3,'00',1,0
 go
 
 INSERT INTO [tFunction]([FunCode],[FunName],[Enabled],[FunCmd],[SerialNo],[ParentCode],[FunType])
@@ -34,9 +34,11 @@ select '0201','建立项目',1 ,'',0,'02',1
 union all 
 select '0202','项目跟踪',1 ,'',1,'02',1
 union all 
-select '0203','客户拜访',1 ,'',2,'02',1
+select '0203','项目跟踪',1 ,'',2,'02',1
 union all 
-select '0204','项目签约',1 ,'',3,'02',1
+select '0204','客户拜访',1 ,'',3,'02',1
+union all 
+select '0205','项目签约',1 ,'',4,'02',1
 go
 
 INSERT INTO [tFunction]([FunCode],[FunName],[Enabled],[FunCmd],[SerialNo],[ParentCode],[FunType])
@@ -56,17 +58,6 @@ go
 INSERT INTO [tDept]([DeptCode],[DeptName],[ParentCode],[BuildUser],[EditUser])
  select 'root' ,'公司',null,'',''
  GO    
- 
- insert into tDept(DeptCode,DeptName,ParentCode,BuildUser,EditUser)
-select '0101','0101','01','',''
-union all
-select '0102','0102','01','',''
-union all
-select '0201','0201','02','',''
-union all
-select '020101','020101','0201','',''
-
-go
 
  INSERT INTO [tDept]([DeptCode],[DeptName],[ParentCode],[BuildUser],[EditUser])
  select '01' ,'测试部门','root','',''
@@ -83,15 +74,6 @@ select 'admin','管理员',0xC0E024D9200B5705BC4804722636378A,null,'root','admin',1
 GO
 
  /****建立用户菜单*****/
-INSERT INTO [dbo].[tUserGroupFun]([GroupCode],[FunCode])
-select 'admin','00'
-union all
-select 'admin','0001'
-union all
-select 'admin','0002'
-union all
-select 'admin','0003'
-union all
-select 'admin','0004'
-GO
+INSERT INTO [dbo].[tUserGroupFun]([GroupCode],[FunCode],[BuildUser],[EditUser])
+select a.GroupCode,b.FunCode,'','' from tUserGroup a,tFunction b 
 

@@ -31,7 +31,7 @@ namespace CRM.Controllers
                 }
                 catch(Exception ex)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -64,7 +64,7 @@ namespace CRM.Controllers
                 }
                 catch(Exception ex)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -98,7 +98,7 @@ namespace CRM.Controllers
                 }
                 catch(Exception ex)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -109,7 +109,7 @@ namespace CRM.Controllers
                 }
                 if (!ok)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -118,7 +118,7 @@ namespace CRM.Controllers
                     });
                     throw new HttpResponseException(new DealFailureMessage());
                 }
-                LogBll.Write(new CLog
+                LogBll.Write(dal,new CLog
                 {
                     LogDate = DateTime.Now,
                     LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -149,7 +149,7 @@ namespace CRM.Controllers
                 }
                 catch(Exception ex)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -160,7 +160,7 @@ namespace CRM.Controllers
                 }
                 if (!ok)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -169,7 +169,7 @@ namespace CRM.Controllers
                     });
                     throw new HttpResponseException(new DealFailureMessage());
                 }
-                LogBll.Write(new CLog
+                LogBll.Write(dal,new CLog
                 {
                     LogDate = DateTime.Now,
                     LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -200,7 +200,7 @@ namespace CRM.Controllers
                 }
                 catch(Exception ex)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -213,7 +213,7 @@ namespace CRM.Controllers
                 {
                     if (hisUser != null)
                     {
-                        LogBll.Write(new CLog
+                        LogBll.Write(dal,new CLog
                         {
                             LogDate = DateTime.Now,
                             LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -223,7 +223,7 @@ namespace CRM.Controllers
                     }
                     throw new HttpResponseException(new DealFailureMessage());
                 }
-                LogBll.Write(new CLog
+                LogBll.Write(dal,new CLog
                 {
                     LogDate = DateTime.Now,
                     LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),

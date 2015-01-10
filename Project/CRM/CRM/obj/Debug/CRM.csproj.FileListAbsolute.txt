@@ -108,10 +108,7 @@ E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\Microsoft.Web.Infrastructure.d
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\Newtonsoft.Json.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Net.Http.dll
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Net.Http.Formatting.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Net.Http.WebRequest.dll
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Web.Http.dll
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Web.Http.WebHost.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Web.Mvc.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Web.Optimization.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Web.Providers.dll
@@ -123,10 +120,7 @@ E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\WebGrease.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\EntityFramework.xml
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\Newtonsoft.Json.xml
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Net.Http.xml
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Net.Http.Formatting.xml
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Net.Http.WebRequest.xml
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Web.Http.xml
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Web.Http.WebHost.xml
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Web.Mvc.xml
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Web.Razor.xml
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Web.WebPages.xml
@@ -134,10 +128,7 @@ E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Web.WebPages.Deployment
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\System.Web.WebPages.Razor.xml
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\zh-Hans\EntityFramework.resources.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\zh-Hans\System.Net.Http.resources.dll
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\zh-Hans\System.Net.Http.Formatting.resources.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\zh-Hans\System.Net.Http.WebRequest.resources.dll
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\zh-Hans\System.Web.Http.resources.dll
-E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\zh-Hans\System.Web.Http.WebHost.resources.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\zh-Hans\System.Web.Mvc.resources.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\zh-Hans\System.Web.Optimization.resources.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\zh-Hans\System.Web.Providers.resources.dll
@@ -147,3 +138,4 @@ E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\zh-Hans\System.Web.WebPages.De
 E:\Documents\我的项目\CRM\Project\CRM\CRM\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\obj\Debug\CRM.dll
 E:\Documents\我的项目\CRM\Project\CRM\CRM\obj\Debug\CRM.pdb
+E:\Documents\我的项目\CRM\Project\CRM\CRM\obj\Debug\CRM.csprojResolveAssemblyReference.cache

@@ -151,6 +151,7 @@
     <Compile Include="Controllers\SignController.cs" />
     <Compile Include="Controllers\UserApiController.cs" />
     <Compile Include="Controllers\UserGroupApiController.cs" />
+    <Compile Include="Controllers\UserGroupFunApiController.cs" />
     <Compile Include="Extend\HttpResponseMessages\DataNotFoundMessage.cs" />
     <Compile Include="Extend\HttpResponseMessages\DealFailureMessage.cs" />
     <Compile Include="Extend\HttpResponseMessages\NoAuthorityMessage.cs" />
@@ -191,6 +192,7 @@
     <Content Include="Scripts\Config\DeptManage\DeptModel.js" />
     <Content Include="Scripts\Config\DeptManage\DeptView.js" />
     <Content Include="Scripts\Config\UserGroupManage\UserGroupCollection.js" />
+    <Content Include="Scripts\Config\UserGroupManage\UserGroupFunCollection.js" />
     <Content Include="Scripts\Config\UserGroupManage\UserGroupFunModel.js" />
     <Content Include="Scripts\Config\UserGroupManage\UserGroupFunView.js" />
     <Content Include="Scripts\Config\UserGroupManage\UserGroupManageView.js" />
@@ -254,6 +256,7 @@
     <Content Include="Views\Sign\NoAuthority.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="build.bat" />
     <None Include="Properties\PublishProfiles\CRM.pubxml" />
     <Content Include="Views\Shared\_Item_Layout.cshtml" />
     <Content Include="Views\Config\DeptManage.cshtml" />

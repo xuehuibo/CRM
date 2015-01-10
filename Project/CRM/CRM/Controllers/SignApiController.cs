@@ -22,7 +22,7 @@ namespace CRM.Controllers
                 }
                 catch(Exception ex)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}",value.UserCode,value.UserName),
@@ -46,7 +46,7 @@ namespace CRM.Controllers
                 {
                     throw new HttpResponseException(new DataNotFoundMessage());
                 }
-                HttpContext.Current.Session["SignUser"] = value;
+                HttpContext.Current.Session[ConfigurationManager.AppSettings["AuthSaveKey"]] = value;
                 //生成Token
                 var token = Guid.NewGuid().ToString();
                 SignBll.UpdateToken(dal,token,value.UserCode);

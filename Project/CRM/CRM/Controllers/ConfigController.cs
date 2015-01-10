@@ -28,7 +28,7 @@ namespace CRM.Controllers
         public PartialViewResult UserManage()
         {
             ViewBag.MenuCategory = "参数设置";
-            ViewBag.Menu = "人员管理";
+            ViewBag.Menu = "用户管理";
             return PartialView();
         }
     }

@@ -15,13 +15,20 @@ namespace CRM.Bll
         {
             try
             {
-                int i;
-                dal.Execute(
-                    "INSERT INTO dbo.tXtLog( LogDate, LogContent, LogType,LogUser )VALUES  ( GETDATE(),@LogContent,@LogType,@LogUser)",
-                    out i,
-                    dal.CreateParameter("@LogContent", log.LogContent),
-                    dal.CreateParameter("@LogType", log.LogType),
-                    dal.CreateParameter("@LogUser",log.LogUser));
+                if (dal.IsOpen)
+                {
+                    int i;
+                    dal.Execute(
+                        "INSERT INTO dbo.tXtLog( LogDate, LogContent, LogType,LogUser )VALUES  ( GETDATE(),@LogContent,@LogType,@LogUser)",
+                        out i,
+                        dal.CreateParameter("@LogContent", log.LogContent),
+                        dal.CreateParameter("@LogType", log.LogType),
+                        dal.CreateParameter("@LogUser", log.LogUser));
+                }
+                else
+                {
+                    Write(log);
+                }
             }
             catch
             {
@@ -33,7 +40,7 @@ namespace CRM.Bll
         /// 数据库无法写日志，写本地文件
         /// </summary>
         /// <param name="log"></param>
-        public static void Write(CLog log)
+        private static void Write(CLog log)
         {
             var filename =string.Format("{0}/Logs/log{1}.txt", HttpContext.Current.Server.MapPath("/"), DateTime.Now.ToString("yyMMdd"));
             if (!Directory.Exists(string.Format("{0}/Logs", HttpContext.Current.Server.MapPath("/"))))

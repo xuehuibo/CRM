@@ -15,22 +15,14 @@ namespace CRM.Bll
         /// 读取菜单
         /// </summary>
         /// <returns></returns>
-        public static CMenuCategory[] LoadMenu(IDal dal ,string groupCode)
+        public static CMenuCategory[] LoadMenu(IDal dal, string groupCode)
         {
-            DataTable dt;
             int i;
-            if (groupCode.Equals("*"))
-            {
-                //用户组编码为*，从tfunction表取所有菜单
-                dt = dal.Select("select * from tFunction where Enabled=1 order by ParentCode ,SerialNo", out i);
-            }
-            else
-            {
-                //用户组编码不为*，从tUserGroupFun取该用户菜单
-                dt = dal.Select("select a.Id,a.FunCode,a.FunName,a.FunCmd,a.ParentCode,a.FunType,a.SerialNo from tFunction a,tUserGroupFun b where a.FunCode=b.FunCode and GroupCode=@GroupCode",
+            var dt =
+                dal.Select(
+                    "select a.Id,a.FunCode,a.FunName,a.FunCmd,a.ParentCode,a.FunType,a.SerialNo from tFunction a,tUserGroupFun b where a.FunCode=b.FunCode and b.Queriable=1 and GroupCode=@GroupCode",
                     out i,
                     dal.CreateParameter("@GroupCode", groupCode));
-            }
             return (from DataRow category in dt.Rows
                 where category["FunType"].ToString() == "0"
                 select new CMenuCategory
@@ -40,14 +32,19 @@ namespace CRM.Bll
                     CategoryName = Convert.ToString(category["FunName"]).Trim(),
                     SerialNo = Convert.ToInt16(category["SerialNo"]),
                     Menus = (from DataRow menu in dt.Rows
-                             where menu["FunType"].ToString() == "1" && Convert.ToString(menu["ParentCode"])==Convert.ToString(category["FunCode"])
+                        where
+                            menu["FunType"].ToString() == "1" &&
+                            Convert.ToString(menu["ParentCode"]) == Convert.ToString(category["FunCode"])
                         select new CMenu
                         {
                             Id = Convert.ToInt16(menu["Id"]),
                             MenuCode = Convert.ToString(menu["FunCode"]).Trim(),
                             MenuName = Convert.ToString(menu["FunName"]).Trim(),
-                            MenuCmd = Convert.IsDBNull(menu["FunCmd"])?null:Convert.ToString(menu["FunCmd"]).Trim(),
-                            ParentCode = Convert.IsDBNull(menu["ParentCode"])?null:Convert.ToString(menu["ParentCode"]).Trim(),
+                            MenuCmd = Convert.IsDBNull(menu["FunCmd"]) ? null : Convert.ToString(menu["FunCmd"]).Trim(),
+                            ParentCode =
+                                Convert.IsDBNull(menu["ParentCode"])
+                                    ? null
+                                    : Convert.ToString(menu["ParentCode"]).Trim(),
                             SerialNo = Convert.ToInt16(menu["SerialNo"])
                         }).ToArray()
                 }).ToArray();

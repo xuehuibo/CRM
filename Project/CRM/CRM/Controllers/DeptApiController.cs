@@ -31,7 +31,7 @@ namespace CRM.Controllers
                 }
                 catch(Exception ex)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -68,7 +68,7 @@ namespace CRM.Controllers
                 }
                 catch(Exception ex)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -104,7 +104,7 @@ namespace CRM.Controllers
                 }
                 catch(Exception ex)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -154,7 +154,7 @@ namespace CRM.Controllers
                 }
                 catch(Exception ex)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
@@ -205,7 +205,7 @@ namespace CRM.Controllers
                 }
                 catch(Exception ex)
                 {
-                    LogBll.Write(new CLog
+                    LogBll.Write(dal,new CLog
                     {
                         LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),

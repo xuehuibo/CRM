@@ -126,7 +126,7 @@ namespace CRM.Attribute
 
                     if (SignBll.Signin(dal, httpCookie.Value, authorityModel))
                     {
-                        filterContext.HttpContext.Session.Add("SignUser", authorityModel);
+                        filterContext.HttpContext.Session.Add(ConfigurationManager.AppSettings["AuthSaveKey"], authorityModel);
                         //更新Token
                         UpdateToken(filterContext, dal, authorityModel);
                     }

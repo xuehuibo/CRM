@@ -8,21 +8,27 @@
     ,baseUrl: './Scripts'
 
     // 指定输出目录，若值未指定，则相对 build 文件所在目录
-    , dir: '../wwwroot_build'
+    , dir: 'E:/wwwroot/CRMRoot'
     ,paths:{
         'tpl': '../Tpls'
     }
     ,modules: [
         {
-            name: 'Home/SigninView',
+            name: 'Sign/SigninView',
         },
         {
             name: 'Home/MainAppView'
+        },
+        {
+            name: 'Config/DeptManage/DeptTreeView'
+        },
+        {
+            name:'Config/UserGroupManage/UserGroupManageView'
         }
     ]
 
     // 不优化某些文件
-    ,fileExclusionRegExp: /^(r|build|Tool)\.js$/
+    ,fileExclusionRegExp: /^(r|build)\.js$/
 
     // CSS 优化方式，目前支持以下几种：
     // none: 不压缩，仅合并
