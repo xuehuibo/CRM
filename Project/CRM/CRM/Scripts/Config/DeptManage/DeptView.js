@@ -6,10 +6,11 @@
     function (tpl, HttpStatusHandle, DeptModel) {
         var DeptView= Backbone.View.extend({
             tagName: "li",
-            initialize: function(model) {
+            initialize: function(model,depts ) {
                 this.model = model;
+                this.depts = depts;
                 this.listenTo(this.model, 'destroy', this.remove);
-                this.listenTo(this.model, 'change', this.render);
+                //this.listenTo(this.model, 'change', this.render);
             },
             template: _.template(tpl),
             render: function () {
@@ -34,7 +35,7 @@
             },
             ClickAdd: function () {
                 //点击增加
-                var deptView =new DeptView(new DeptModel({'ParentCode':this.model.get('DeptCode')}));
+                var deptView = new DeptView(new DeptModel({ 'ParentCode': this.model.get('DeptCode') }), this.depts);
                 this.AddChild(deptView);
                 deptView.BeginEdit();
             },
@@ -86,8 +87,10 @@
                     'DeptName': this.$('.deptName:first').val()
                 }, {
                     success: function (model, rst) {
-                        me.$('.editSave:first').button('reset');
+/*                        me.$('.editSave:first').button('reset');
                         me.$('.editCancel:first').button('reset');
+                        me.EndEdit();*/
+                        me.depts.fetch({ reset: true });
                     },
                     error: function (model, rst) {
                         me.$('.editSave:first').button('reset');

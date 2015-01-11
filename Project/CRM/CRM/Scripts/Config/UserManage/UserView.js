@@ -10,6 +10,17 @@
         render:function() {
             this.$el.html(this.template(this.model.toJSON()));
             return this.el;
+        },
+        BeginEdit:function() {
+            this.$('[data-toggleedit=true]').toggleClass('hide');
+        },
+        EndEdit:function() {
+            
+        },
+        events: {
+            'click .edit': 'BeginEdit',
+            'click .del': 'Del',
+            'click .status':'SetStatus'
         }
     });
 });
