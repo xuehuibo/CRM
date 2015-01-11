@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using CRM.Models;
 using DAL.Interface;
 
@@ -75,18 +77,38 @@ namespace CRM.Bll
         public static bool Create(IDal dal, CUser user)
         {
             int i;
-            dal.Execute("INSERT INTO tUser( UserCode ,UserName  ,DeptCode ,GroupCode ,Enabled  ,BuildUser ,EditUser) VALUES  ( @UserCode ,@UserName, @DeptCode , @GroupCode, @Enabled , @BuildUser,@EditUser)",out i,
+            var pwd = MD5.Create().ComputeHash(Encoding.Default.GetBytes(user.UserCode+ user.Md5));
+            var deptCode = dal.CreateParameter("@DeptCode", DbType.String);
+            if (string.IsNullOrEmpty(user.DeptCode))
+            {
+                deptCode.Value = DBNull.Value;
+            }
+            else
+            {
+                deptCode.Value = user.DeptCode;
+            }
+            var groupCode = dal.CreateParameter("@GroupCode", DbType.String);
+            if (string.IsNullOrEmpty(user.GroupCode))
+            {
+                groupCode.Value = DBNull.Value;
+            }
+            else
+            {
+                groupCode.Value = user.GroupCode;
+            }
+            dal.Execute("INSERT INTO tUser( UserCode ,UserName ,UPassword ,DeptCode ,GroupCode ,Enabled  ,BuildUser ,EditUser) VALUES  ( @UserCode ,@UserName,@UPassword, @DeptCode , @GroupCode, @Enabled , @BuildUser,@EditUser)", out i,
                 dal.CreateParameter("@UserCode",user.UserCode),
                 dal.CreateParameter("@UserName",user.UserName),
-                dal.CreateParameter("@DeptCode",user.DeptCode),
-                dal.CreateParameter("@GroupCode",user.GroupCode),
+                dal.CreateParameter("@UPassword",pwd),
+                deptCode,
+                groupCode,
                 dal.CreateParameter("@Enabled",user.Enabled),
                 dal.CreateParameter("@BuildUser",user.BuildUser),
                 dal.CreateParameter("@EditUser",user.EditUser));
             if (i == 0) return false;
             var dt =
                 dal.Select(
-                    "SELECT a.Id,b.DeptName,c.GroupName FROM tUser a Left JOIN tDept b ON a.DeptCode=b.DeptCode Left JOIN tUserGroup c ON a.GroupCode=c.GroupCode where a.UserCode=@UserCode",
+                    "SELECT a.Id,b.DeptName,c.GroupName,a.BuildUser,a.BuildDate,a.EditUser,a.EditDate,b.DeptName,c.GroupName FROM tUser a Left JOIN tDept b ON a.DeptCode=b.DeptCode Left JOIN tUserGroup c ON a.GroupCode=c.GroupCode where a.UserCode=@UserCode",
                     out i,
                     dal.CreateParameter("@UserCode", user.UserCode));
             if (i == 0) return false;
@@ -99,6 +121,8 @@ namespace CRM.Bll
             user.GroupName = Convert.IsDBNull(dt.Rows[0]["GroupName"])
                 ? null
                 : Convert.ToString(dt.Rows[0]["GroupName"]).Trim();
+            user.BuildUser = Convert.ToString(dt.Rows[0]["BuildUser"]).Trim();
+            user.EditUser = Convert.ToString(dt.Rows[0]["EditUser"]).Trim();
             return true;
         }
 

@@ -24,6 +24,16 @@
         AddAll: function () {
             this.$('tbody').empty();
             this.userCollection.each(this.AddOne, this);
+        },
+        events: {
+            'click .add':'AddUser'
+        },
+        AddUser:function() {
+            var user = new UserModel();
+            this.userCollection.add(user, { silent: true });
+            var userView = new UserView(user);
+            this.$('tbody').prepend(userView.render());
+            userView.BeginEdit();
         }
     });
 });

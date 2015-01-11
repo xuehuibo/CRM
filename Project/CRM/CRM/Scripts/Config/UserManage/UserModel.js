@@ -12,7 +12,8 @@
             'BuildDate': null,
             'BuildUser': null,
             'EditDate': null,
-            'EditUser': null
+            'EditUser': null,
+            'Md5':null
         },
         idAttribute: 'Id',
         urlRoot: '/api/UserApi'
