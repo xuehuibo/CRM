@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace CRM.Models
+﻿namespace CRM.Models
 {
     public class CLog
     {
         public int Id { get; set; }
 
-        public DateTime LogDate { get; set; }
+        public string LogDate { get; set; }
 
         public string LogContent { get; set; }
 

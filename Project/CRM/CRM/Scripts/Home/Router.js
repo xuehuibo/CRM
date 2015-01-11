@@ -11,7 +11,7 @@
             }
         },
         Index: function() {
-
+            $('#mainPanel').load('/Home/HomePage');
         },
         Goto: function (controller,action) {
             $('#mainPanel').load(controller + '/' + action);

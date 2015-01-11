@@ -198,6 +198,10 @@
     <Content Include="Scripts\Config\UserGroupManage\UserGroupManageView.js" />
     <Content Include="Scripts\Config\UserGroupManage\UserGroupModel.js" />
     <Content Include="Scripts\Config\UserGroupManage\UserGroupView.js" />
+    <Content Include="Scripts\Config\UserManage\UserCollection.js" />
+    <Content Include="Scripts\Config\UserManage\UserManageView.js" />
+    <Content Include="Scripts\Config\UserManage\UserModel.js" />
+    <Content Include="Scripts\Config\UserManage\UserView.js" />
     <Content Include="Scripts\css.js" />
     <Content Include="Scripts\domReady.js" />
     <Content Include="Scripts\Sign\AuthModel.js" />
@@ -218,6 +222,8 @@
     <Content Include="Tpls\Config\DeptManage\DeptTpl.html" />
     <Content Include="Tpls\Config\UserGroupManage\UserGroupFunTpl.html" />
     <Content Include="Tpls\Config\UserGroupManage\UserGroupTpl.html" />
+    <Content Include="Tpls\Config\UserManage\UserTpl.html" />
+    <Content Include="Tpls\Config\UserManage\UserTableTpl.html" />
     <Content Include="Tpls\Home\MenuCategoryTpl.html" />
     <Content Include="Tpls\Home\NavMenuCategoryTpl.html" />
     <Content Include="Web.config" />
@@ -235,8 +241,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
-    <Folder Include="Scripts\Config\UserManage\" />
-    <Folder Include="Tpls\Config\UserManage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -262,6 +266,7 @@
     <Content Include="Views\Config\DeptManage.cshtml" />
     <Content Include="Views\Config\UserGroupManage.cshtml" />
     <Content Include="Views\Config\UserManage.cshtml" />
+    <Content Include="Views\Home\HomePage.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

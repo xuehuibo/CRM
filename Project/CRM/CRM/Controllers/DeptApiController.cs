@@ -33,7 +33,6 @@ namespace CRM.Controllers
                 {
                     LogBll.Write(dal,new CLog
                     {
-                        LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
                         LogContent = ex.Message,
                         LogType = LogType.系统异常
@@ -70,7 +69,6 @@ namespace CRM.Controllers
                 {
                     LogBll.Write(dal,new CLog
                     {
-                        LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
                         LogContent = ex.Message,
                         LogType = LogType.系统异常
@@ -106,7 +104,6 @@ namespace CRM.Controllers
                 {
                     LogBll.Write(dal,new CLog
                     {
-                        LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
                         LogContent = ex.Message,
                         LogType = LogType.系统异常
@@ -118,7 +115,6 @@ namespace CRM.Controllers
                     LogBll.Write(dal, new CLog
                     {
                         LogContent = string.Format("新建部门{0}-{1}", value.DeptCode, value.DeptName),
-                        LogDate = DateTime.Now,
                         LogType = LogType.操作失败,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName)
                     });
@@ -127,7 +123,6 @@ namespace CRM.Controllers
                 LogBll.Write(dal,new CLog
                 {
                     LogContent = string.Format("新建部门{0}-{1}",value.DeptCode,value.DeptName),
-                    LogDate = DateTime.Now,
                     LogType = LogType.操作成功 ,
                     LogUser = string.Format("{0}-{1}",user.UserCode,user.UserName)
                 });
@@ -156,7 +151,6 @@ namespace CRM.Controllers
                 {
                     LogBll.Write(dal,new CLog
                     {
-                        LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
                         LogContent = ex.Message,
                         LogType = LogType.系统异常
@@ -168,8 +162,6 @@ namespace CRM.Controllers
                     LogBll.Write(dal, new CLog
                     {
                         LogContent = string.Format("修改部门{0}-{1}", value.DeptCode, value.DeptName),
-                        LogDate = DateTime.Now,
-                        LogType = LogType.操作失败,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName)
                     });
                     throw new HttpResponseException(new DataNotFoundMessage());
@@ -177,7 +169,6 @@ namespace CRM.Controllers
                 LogBll.Write(dal, new CLog
                 {
                     LogContent = string.Format("修改部门{0}-{1}", value.DeptCode, value.DeptName),
-                    LogDate = DateTime.Now,
                     LogType = LogType.操作成功,
                     LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName)
                 });
@@ -207,7 +198,6 @@ namespace CRM.Controllers
                 {
                     LogBll.Write(dal,new CLog
                     {
-                        LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
                         LogContent = ex.Message,
                         LogType = LogType.系统异常
@@ -221,7 +211,6 @@ namespace CRM.Controllers
                         LogBll.Write(dal, new CLog
                         {
                             LogContent = string.Format("删除部门{0}-{1}", hisDept.DeptCode, hisDept.DeptName),
-                            LogDate = DateTime.Now,
                             LogType = LogType.操作失败,
                             LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName)
                         });
@@ -231,7 +220,6 @@ namespace CRM.Controllers
                 LogBll.Write(dal, new CLog
                 {
                     LogContent = string.Format("删除部门{0}-{1}", hisDept.DeptCode, hisDept.DeptName),
-                    LogDate = DateTime.Now,
                     LogType = LogType.操作成功 ,
                     LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName)
                 });

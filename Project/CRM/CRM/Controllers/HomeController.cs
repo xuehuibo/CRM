@@ -1,5 +1,4 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Web.Mvc;
 using CRM.Attribute;
 
@@ -17,5 +16,9 @@ namespace CRM.Controllers
             return View();
         }
 
+        public PartialViewResult HomePage()
+        {
+            return PartialView();
+        }
     }
 }

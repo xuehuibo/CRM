@@ -28,7 +28,7 @@
                 });
                 var view = new UserGroupView(userGroup);
                 this.$('#userGrpPanel').prepend(view.render());
-                view.Edit();
+                view.BeginEdit();
             }
         });
     });

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CRM.Models
+﻿namespace CRM.Models
 {
     public class CDept
     {

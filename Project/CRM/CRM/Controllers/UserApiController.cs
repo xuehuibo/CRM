@@ -33,7 +33,6 @@ namespace CRM.Controllers
                 {
                     LogBll.Write(dal,new CLog
                     {
-                        LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
                         LogContent = ex.Message,
                         LogType = LogType.系统异常
@@ -66,7 +65,6 @@ namespace CRM.Controllers
                 {
                     LogBll.Write(dal,new CLog
                     {
-                        LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
                         LogContent = ex.Message,
                         LogType = LogType.系统异常
@@ -100,7 +98,6 @@ namespace CRM.Controllers
                 {
                     LogBll.Write(dal,new CLog
                     {
-                        LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
                         LogContent =ex.Message,
                         LogType = LogType.系统异常
@@ -111,7 +108,6 @@ namespace CRM.Controllers
                 {
                     LogBll.Write(dal,new CLog
                     {
-                        LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
                         LogContent = string.Format("新建用户{0}-{1}",value.UserCode,value.UserName),
                         LogType = LogType.操作失败
@@ -120,8 +116,6 @@ namespace CRM.Controllers
                 }
                 LogBll.Write(dal,new CLog
                 {
-                    LogDate = DateTime.Now,
-                    LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
                     LogContent = string.Format("新建用户{0}-{1}", value.UserCode, value.UserName),
                     LogType = LogType.操作成功
                 });
@@ -151,7 +145,6 @@ namespace CRM.Controllers
                 {
                     LogBll.Write(dal,new CLog
                     {
-                        LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
                         LogContent = ex.Message,
                         LogType = LogType.系统异常
@@ -162,7 +155,6 @@ namespace CRM.Controllers
                 {
                     LogBll.Write(dal,new CLog
                     {
-                        LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
                         LogContent = string.Format("修改用户{0}-{1}", value.UserCode, value.UserName),
                         LogType = LogType.操作失败
@@ -171,7 +163,6 @@ namespace CRM.Controllers
                 }
                 LogBll.Write(dal,new CLog
                 {
-                    LogDate = DateTime.Now,
                     LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
                     LogContent = string.Format("修改用户{0}-{1}", value.UserCode, value.UserName),
                     LogType = LogType.操作成功
@@ -202,7 +193,6 @@ namespace CRM.Controllers
                 {
                     LogBll.Write(dal,new CLog
                     {
-                        LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
                         LogContent = ex.Message,
                         LogType = LogType.系统异常
@@ -215,7 +205,6 @@ namespace CRM.Controllers
                     {
                         LogBll.Write(dal,new CLog
                         {
-                            LogDate = DateTime.Now,
                             LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
                             LogContent = string.Format("删除用户{0}-{1}", hisUser.UserCode, hisUser.UserName),
                             LogType = LogType.操作失败
@@ -225,7 +214,6 @@ namespace CRM.Controllers
                 }
                 LogBll.Write(dal,new CLog
                 {
-                    LogDate = DateTime.Now,
                     LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
                     LogContent = string.Format("删除用户{0}-{1}", hisUser.UserCode, hisUser.UserName),
                     LogType = LogType.操作成功

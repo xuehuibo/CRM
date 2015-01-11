@@ -1,0 +1,15 @@
+﻿<td><h4 data-toggleedit="true"><%=UserCode%></h4><input <%=Id==null? '':'disabled'%> class="form-control hide" data-toggleedit="true"  placeholder="用户编码" value="<%=UserCode%>"/></td>
+<td><h4><%=UserName%></h4><input class="form-control hide" data-toggleedit="true" placeholder="用户编码" value="<%=UserName%>" /></td>
+<td><h4><%=DeptName%></h4><input class="form-control hide" data-toggleedit="true" placeholder="用户编码" value="<%=DeptName%>" /></td>
+<td><h4><%=GroupName%></h4><input class="form-control hide" data-toggleedit="true" placeholder="用户编码" value="<%=GroupName%>" /></td>
+<td><h4><%=Enabled?'可用':'不可用'%></h4></td>
+<td class="hidden-xs hidden-sm"><h4><%=BuildDate%></h4></td>
+<td class="hidden-xs hidden-sm"><h4><%=BuildUser%></h4></td>
+<td class="hidden-xs hidden-sm"><h4><%=EditDate%></h4></td>
+<td class="hidden-xs hidden-sm"><h4><%=EditUser%></h4></td>
+<td style="width: 120px">
+    <%if(UserCode!='admin'){%>
+    <h4 class="text-center"><a class="btn-link">删除</a>&nbsp;<a class="btn-link">修改</a>&nbsp;<a class="btn-link"><%=Enabled?'禁用':'启用'%></a></h4>
+    <%}%>
+    <div class="btn-group btn-group-sm hide"><button class="btn btn-primary">保存</button><button class="btn btn-danger">取消</button></div>
+</td>

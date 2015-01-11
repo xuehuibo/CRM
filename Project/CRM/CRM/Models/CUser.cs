@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CRM.Models
+﻿namespace CRM.Models
 {
     public class CUser
     {
@@ -20,11 +18,11 @@ namespace CRM.Models
 
         public bool Enabled { get; set; }
 
-        public DateTime BuildDate { get; set; }
+        public string BuildDate { get; set; }
 
         public string BuildUser { get; set; }
 
-        public DateTime EditDate { get; set; }
+        public string EditDate { get; set; }
 
         public string EditUser { get; set; }
     }

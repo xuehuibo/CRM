@@ -49,9 +49,9 @@ namespace CRM.Bll
             }
             var fs = !File.Exists(filename) ? new FileStream(filename, FileMode.CreateNew) : new FileStream(filename,FileMode.Append);
             var logText = Encoding.Default.GetBytes(string.Format("时间：{0}#操作人：{1}#结果：{2}#内容：{3}#\r\n",
-               log.LogDate.ToString("yyyy-MM-dd HH:mm:ss.fff"),
+               DateTime.Now.ToString("yyyy-MM-dd HH:m:s.fff"),
                 log.LogUser,
-                log.LogType.ToString(),
+                log.LogType,
                 log.LogContent)
             );
             fs.Write(logText,0,logText.Length);
@@ -76,7 +76,7 @@ namespace CRM.Bll
                 {
                     Id = Convert.ToInt32(row["Id"]),
                     LogContent = Convert.ToString(row["LogContent"]).Trim(),
-                    LogDate = Convert.ToDateTime(row["LogDate"]),
+                    LogDate = Convert.ToDateTime(row["LogDate"]).ToString("yyyy年M月d日H时m分s秒"),
                     LogType = (LogType)Convert.ToInt16(row["LogType"]),
                     LogUser = Convert.ToString(row["LogUser"]).Trim()
                 }).ToArray();

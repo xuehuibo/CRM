@@ -24,7 +24,6 @@ namespace CRM.Controllers
                 {
                     LogBll.Write(dal,new CLog
                     {
-                        LogDate = DateTime.Now,
                         LogUser = string.Format("{0}-{1}",value.UserCode,value.UserName),
                         LogContent =ex.Message,
                         LogType = LogType.系统异常

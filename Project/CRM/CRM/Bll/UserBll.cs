@@ -19,9 +19,9 @@ namespace CRM.Bll
                     Id = Convert.ToInt16(row["Id"]),
                     UserCode = Convert.ToString(row["UserCode"]).Trim(),
                     UserName = Convert.ToString(row["UserName"]).Trim(),
-                    BuildDate = Convert.ToDateTime(row["BuildDate"]),
+                    BuildDate = Convert.ToDateTime(row["BuildDate"]).ToString("yyyy年M月d日H时m分s秒"),
                     BuildUser = Convert.ToString(row["BuildUser"]).Trim(),
-                    EditDate = Convert.ToDateTime(row["EditDate"]),
+                    EditDate = Convert.ToDateTime(row["EditDate"]).ToString("yyyy年M月d日H时m分s秒"),
                     EditUser = Convert.ToString(row["EditUser"]).Trim(),
                     DeptCode = Convert.IsDBNull(row["DeptCode"]) ? null : Convert.ToString(row["DeptCode"]).Trim(),
                     DeptName = Convert.IsDBNull(row["DeptName"]) ? null : Convert.ToString(row["DeptName"]).Trim(),
@@ -60,9 +60,9 @@ namespace CRM.Bll
                     Id = Convert.ToInt16(row["Id"]),
                     UserCode = Convert.ToString(row["UserCode"]),
                     UserName = Convert.ToString(row["UserName"]),
-                    BuildDate = Convert.ToDateTime(row["BuildDate"]),
+                    BuildDate = Convert.ToDateTime(row["BuildDate"]).ToString("yyyy年M月d日H时m分s秒"),
                     BuildUser = Convert.ToString(row["BuildUser"]),
-                    EditDate = Convert.ToDateTime(row["EditDate"]),
+                    EditDate = Convert.ToDateTime(row["EditDate"]).ToString("yyyy年M月d日H时m分s秒"),
                     EditUser = Convert.ToString(row["EditUser"]),
                     DeptCode = Convert.IsDBNull(row["DeptCode"]) ? null : Convert.ToString(row["DeptCode"]).Trim(),
                     DeptName = Convert.IsDBNull(row["DeptName"]) ? null :Convert.ToString(row["DeptName"]).Trim(),
@@ -91,8 +91,8 @@ namespace CRM.Bll
                     dal.CreateParameter("@UserCode", user.UserCode));
             if (i == 0) return false;
             user.Id = Convert.ToInt16(dt.Rows[0]["Id"]);
-            user.BuildDate = Convert.ToDateTime(dt.Rows[0]["BuildDate"]);
-            user.EditDate = Convert.ToDateTime(dt.Rows[0]["EditDate"]);
+            user.BuildDate = Convert.ToDateTime(dt.Rows[0]["BuildDate"]).ToString("yyyy年M月d日H时m分s秒");
+            user.EditDate = Convert.ToDateTime(dt.Rows[0]["EditDate"]).ToString("yyyy年M月d日H时m分s秒");
             user.DeptName = Convert.IsDBNull(dt.Rows[0]["DeptName"])
                 ? null
                 : Convert.ToString(dt.Rows[0]["DeptName"]).Trim();

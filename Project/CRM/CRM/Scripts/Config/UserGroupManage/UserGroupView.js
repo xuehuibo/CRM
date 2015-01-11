@@ -22,7 +22,7 @@
             return this.el;
         },
         events: {
-            'click .edit': 'Edit',
+            'click .edit': 'BeginEdit',
             'click .cancel': 'Cencel',
             'click .remove': 'Remove',
             'click .save':'Save'
@@ -44,9 +44,7 @@
                 'GroupFun': this.funCollection.toJSON()
             }, {
                 success: function () {
-                    $('.userGroupPanel').removeClass('hide');
-                    me.$el.addClass('col-sm-6 col-md-6 col-lg-6');
-                    //me.$('[data-toggleedit="true"]').toggleClass('hide');
+                    me.EndEdit(true);
                     me.$('.save').button('reset');
                 },
                 error: function (model, rst) {
@@ -56,7 +54,7 @@
                 wait:true
             });
         },
-        Edit: function () {
+        BeginEdit: function () {
             $('.userGroupPanel').addClass('hide');
             this.$el.removeClass('col-sm-6 col-md-6 col-lg-6 hide');
             this.$('[data-toggleedit="true"]').toggleClass('hide');
@@ -73,16 +71,18 @@
                 reset:true
             });
         },
-        Cencel: function () {
+        EndEdit: function (save) {
             $('.userGroupPanel').removeClass('hide');
             this.$el.addClass('col-sm-6 col-md-6 col-lg-6');
-            if (this.model.get('Id') == null) {
-                this.model.destroy();
-            } else {
-                //取消编辑
+            if (!save) {
                 this.$('[data-toggleedit="true"]').toggleClass('hide');
             }
-
+        },
+        Cencel: function () {
+            this.EndEdit(false);
+            if (this.model.get('Id') == null) {
+                this.model.destroy();
+            }
         },
         AddOneFun: function (fun) {
             this.$('.list-group').append(new UserGroupFunView(fun).render());
