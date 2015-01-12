@@ -74,6 +74,6 @@ select 'admin','管理员',0xC0E024D9200B5705BC4804722636378A,null,'root','admin',1
 GO
 
  /****建立用户菜单*****/
-INSERT INTO [dbo].[tUserGroupFun]([GroupCode],[FunCode],[BuildUser],[EditUser])
-select a.GroupCode,b.FunCode,'','' from tUserGroup a,tFunction b 
+INSERT INTO [dbo].[tUserGroupFun]([GroupCode],[FunCode],[BuildUser],[EditUser],[Queriable])
+select a.GroupCode,b.FunCode,'','',1 from tUserGroup a,tFunction b 
 

@@ -34,7 +34,7 @@ namespace CRM.Controllers
                     LogBll.Write(dal,new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent = ex.Message,
+                        LogContent = string.Format("{0}#{1}", "User.List", ex.Message),
                         LogType = LogType.系统异常
                     });
                     throw new HttpResponseException(new SystemExceptionMessage());
@@ -66,7 +66,7 @@ namespace CRM.Controllers
                     LogBll.Write(dal,new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent = ex.Message,
+                        LogContent = string.Format("{0}#{1}", "User.Get", ex.Message),
                         LogType = LogType.系统异常
                     });
                     throw new HttpResponseException(new SystemExceptionMessage());
@@ -90,16 +90,14 @@ namespace CRM.Controllers
                 try
                 {
                     dal.Open();
-                    value.BuildUser = string.Format("{0}-{1}", user.UserCode, user.UserName);
-                    value.EditUser = string.Format("{0}-{1}", user.UserCode, user.UserName);
-                    ok = UserBll.Create(dal, value);
+                    ok = UserBll.Create(dal, value, string.Format("{0}-{1}", user.UserCode, user.UserName));
                 }
                 catch(Exception ex)
                 {
                     LogBll.Write(dal,new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent =ex.Message,
+                        LogContent = string.Format("{0}#{1}", "User.Post", ex.Message),
                         LogType = LogType.系统异常
                     });
                     throw new HttpResponseException(new SystemExceptionMessage());
@@ -116,6 +114,7 @@ namespace CRM.Controllers
                 }
                 LogBll.Write(dal,new CLog
                 {
+                    LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
                     LogContent = string.Format("新建用户{0}-{1}", value.UserCode, value.UserName),
                     LogType = LogType.操作成功
                 });
@@ -138,15 +137,14 @@ namespace CRM.Controllers
                 try
                 {
                     dal.Open();
-                    value.EditUser = string.Format("{0}-{1}", user.UserCode, user.UserName);
-                    ok = UserBll.Update(dal, value);
+                    ok = UserBll.Update(dal, value,string.Format("{0}-{1}", user.UserCode, user.UserName));
                 }
                 catch(Exception ex)
                 {
                     LogBll.Write(dal,new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent = ex.Message,
+                        LogContent = string.Format("{0}#{1}", "User.Put", ex.Message),
                         LogType = LogType.系统异常
                     });
                     throw new HttpResponseException(new SystemExceptionMessage());
@@ -194,7 +192,7 @@ namespace CRM.Controllers
                     LogBll.Write(dal,new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent = ex.Message,
+                        LogContent = string.Format("{0}#{1}", "User.Delete", ex.Message),
                         LogType = LogType.系统异常
                     });
                     throw new HttpResponseException(new SystemExceptionMessage());

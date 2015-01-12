@@ -22,14 +22,14 @@ namespace CRM.Bll
             }
             var people = CountPeople(dal);
             return (from DataRow row in dt.Rows
-                where Convert.ToString(row["DeptCode"]).Trim() == "root"
+                where Convert.ToString(row["DeptCode"]) == "root"
                 select new CDept
                 {
                     Id = Convert.ToInt16(row["Id"]),
-                    DeptCode =Convert.ToString(row["DeptCode"]).Trim(),
-                    DeptName = Convert.ToString(row["DeptName"]).Trim(),
-                    ParentCode = Convert.IsDBNull(row["ParentCode"]) ? null : Convert.ToString(row["ParentCode"]).Trim(),
-                    Childs = GetChilds(Convert.ToString(row["DeptCode"]).Trim(), dt,people),
+                    DeptCode =Convert.ToString(row["DeptCode"]),
+                    DeptName = Convert.ToString(row["DeptName"]),
+                    ParentCode =Convert.ToString(row["ParentCode"]),
+                    Childs = GetChilds(Convert.ToString(row["DeptCode"]), dt,people),
                     People = people.Any(p => p.Id == Convert.ToInt16(row["Id"]))?people.First(p=>p.Id==Convert.ToInt16(row["Id"])).People:0
                 }).ToArray();
         }
@@ -37,7 +37,7 @@ namespace CRM.Bll
         private static CDept[] CountPeople(IDal dal)
         {
             int i;
-            var dt = dal.Select("select a.Id,count(1) as People from tDept a , tUser b where a.DeptCode=b.DeptCode group by a.Id order by Id", out i);
+            var dt = dal.Select("select a.Id,count(1) as People from tDept a , tUser b where a.DeptCode=b.DeptCode group by a.Id order by a.Id", out i);
             return (from DataRow row in dt.Rows
                 select new CDept
                 {
@@ -54,14 +54,14 @@ namespace CRM.Bll
         {
             if (parentCode == null) return null;
             return (from DataRow row in dt.Rows
-                where Convert.ToString(row["ParentCode"]).Trim() == parentCode
+                where Convert.ToString(row["ParentCode"]) == parentCode
                 select new CDept
                 {
                     Id = Convert.ToInt16(row["Id"]),
-                    DeptCode =Convert.ToString(row["DeptCode"]).Trim(),
-                    DeptName =Convert.ToString(row["DeptName"]).Trim(),
-                    ParentCode = Convert.IsDBNull(row["ParentCode"]) ? null : Convert.ToString(row["ParentCode"]),
-                    Childs = GetChilds(Convert.ToString(row["DeptCode"]).Trim(), dt,people),
+                    DeptCode =Convert.ToString(row["DeptCode"]),
+                    DeptName =Convert.ToString(row["DeptName"]),
+                    ParentCode =Convert.ToString(row["ParentCode"]),
+                    Childs = GetChilds(Convert.ToString(row["DeptCode"]), dt,people),
                     People = people.Any(p => p.Id == Convert.ToInt16(row["Id"])) ? people.First(p => p.Id == Convert.ToInt16(row["Id"])).People : 0
                 }
                 ).ToArray();
@@ -83,9 +83,9 @@ namespace CRM.Bll
                 select new CDept
                 {
                     Id = Convert.ToInt16(row["Id"]),
-                    DeptCode = Convert.ToString(row["DeptCode"]).Trim(),
-                    DeptName = Convert.ToString(row["DeptName"]).Trim(),
-                    ParentCode = Convert.IsDBNull(row["ParentCode"])?null:Convert.ToString(row["ParentCode"])
+                    DeptCode = Convert.ToString(row["DeptCode"]),
+                    DeptName = Convert.ToString(row["DeptName"]),
+                    ParentCode = Convert.ToString(row["ParentCode"])
                 }).First();
         }
 
@@ -94,17 +94,17 @@ namespace CRM.Bll
         /// </summary>
         /// <param name="dal"></param>
         /// <param name="dept"></param>
-        /// <param name="user"></param>
+        /// <param name="editUser"></param>
         /// <returns></returns>
-        public static bool Create(IDal dal, CDept dept,string user)
+        public static bool Create(IDal dal, CDept dept,string editUser)
         {
             int i;
             dal.Execute("INSERT INTO tDept( DeptCode ,DeptName ,ParentCode ,BuildUser ,EditUser) VALUES  ( @DeptCode ,@DeptName ,@ParentCode ,@BuildUser ,@EditUser )",out i,
-                dal.CreateParameter("@DeptCode",dept.DeptCode),
-                dal.CreateParameter("@DeptName",dept.DeptName),
-                dal.CreateParameter("@ParentCode",dept.ParentCode),
-                dal.CreateParameter("@BuildUser",user),
-                dal.CreateParameter("@EditUser",user));
+                dal.CreateParameter("@DeptCode",dept.DeptCode.Trim()),
+                dal.CreateParameter("@DeptName",dept.DeptName.Trim()),
+                dal.CreateParameter("@ParentCode",dept.ParentCode.Trim()),
+                dal.CreateParameter("@BuildUser", editUser),
+                dal.CreateParameter("@EditUser", editUser));
             if (i == 0) return false;
             var dt = dal.Select("SELECT Id FROM dbo.tDept WHERE DeptCode=@DeptCode",out i,
                 dal.CreateParameter("@DeptCode",dept.DeptCode));
@@ -118,13 +118,14 @@ namespace CRM.Bll
         /// </summary>
         /// <param name="dal"></param>
         /// <param name="dept"></param>
+        /// <param name="editUser"></param>
         /// <returns></returns>
-        public static bool Update(IDal dal, CDept dept,string user)
+        public static bool Update(IDal dal, CDept dept, string editUser)
         {
             int i;
             dal.Execute("UPDATE tDept SET DeptName=@DeptName ,EditDate=GETDATE(),EditUser=@EditUser WHERE Id=@Id", out i,
-                dal.CreateParameter("@DeptName",dept.DeptName),
-                dal.CreateParameter("@EditUser",user),
+                dal.CreateParameter("@DeptName",dept.DeptName.Trim()),
+                dal.CreateParameter("@EditUser", editUser),
                 dal.CreateParameter("@Id",dept.Id));
             return i == 1;
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -21,9 +22,9 @@ namespace CRM.Bll
                     dal.Execute(
                         "INSERT INTO dbo.tXtLog( LogDate, LogContent, LogType,LogUser )VALUES  ( GETDATE(),@LogContent,@LogType,@LogUser)",
                         out i,
-                        dal.CreateParameter("@LogContent", log.LogContent),
+                        dal.CreateParameter("@LogContent", log.LogContent.Trim()),
                         dal.CreateParameter("@LogType", log.LogType),
-                        dal.CreateParameter("@LogUser", log.LogUser));
+                        dal.CreateParameter("@LogUser", log.LogUser.Trim()));
                 }
                 else
                 {
@@ -50,9 +51,9 @@ namespace CRM.Bll
             var fs = !File.Exists(filename) ? new FileStream(filename, FileMode.CreateNew) : new FileStream(filename,FileMode.Append);
             var logText = Encoding.Default.GetBytes(string.Format("时间：{0}#操作人：{1}#结果：{2}#内容：{3}#\r\n",
                DateTime.Now.ToString("yyyy-MM-dd HH:m:s.fff"),
-                log.LogUser,
+                log.LogUser.Trim(),
                 log.LogType,
-                log.LogContent)
+                log.LogContent.Trim())
             );
             fs.Write(logText,0,logText.Length);
             fs.Close();
@@ -75,10 +76,10 @@ namespace CRM.Bll
                 select new CLog
                 {
                     Id = Convert.ToInt32(row["Id"]),
-                    LogContent = Convert.ToString(row["LogContent"]).Trim(),
-                    LogDate = Convert.ToDateTime(row["LogDate"]).ToString("yyyy年M月d日H时m分s秒"),
+                    LogContent = Convert.ToString(row["LogContent"]),
+                    LogDate = Convert.ToDateTime(row["LogDate"]).ToString(ConfigurationManager.AppSettings["DateFormate"]),
                     LogType = (LogType)Convert.ToInt16(row["LogType"]),
-                    LogUser = Convert.ToString(row["LogUser"]).Trim()
+                    LogUser = Convert.ToString(row["LogUser"])
                 }).ToArray();
         }
     }

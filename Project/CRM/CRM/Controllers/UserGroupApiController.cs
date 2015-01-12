@@ -34,7 +34,7 @@ namespace CRM.Controllers
                     LogBll.Write(dal,new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent = ex.Message,
+                        LogContent = string.Format("{0}#{1}", "UserGroup.List", ex.Message),
                         LogType = LogType.系统异常
                     });
                     throw new HttpResponseException(new SystemExceptionMessage());
@@ -72,7 +72,7 @@ namespace CRM.Controllers
                     LogBll.Write(dal,new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent = ex.Message,
+                        LogContent = string.Format("{0}#{1}","UserGroup.List",ex.Message),
                         LogType = LogType.系统异常
                     });
                     throw new HttpResponseException(new SystemExceptionMessage());
@@ -106,7 +106,7 @@ namespace CRM.Controllers
                     LogBll.Write(dal,new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent = ex.Message,
+                        LogContent = string.Format("{0}#{1}", "UserGroup.Post", ex.Message),
                         LogType = LogType.系统异常
                     });
                     throw new HttpResponseException(new SystemExceptionMessage());
@@ -153,7 +153,7 @@ namespace CRM.Controllers
                     LogBll.Write(dal,new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent =ex.Message,
+                        LogContent = string.Format("{0}#{1}", "UserGroup.Put", ex.Message),
                         LogType = LogType.系统异常
                     });
                     throw new HttpResponseException(new SystemExceptionMessage());
@@ -201,7 +201,7 @@ namespace CRM.Controllers
                     LogBll.Write(dal,new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent = ex.Message,
+                        LogContent = string.Format("{0}#{1}", "UserGroup.Delete", ex.Message),
                         LogType = LogType.系统异常
                     });
                     throw new HttpResponseException(new SystemExceptionMessage());

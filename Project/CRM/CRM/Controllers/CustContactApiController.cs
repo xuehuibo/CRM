@@ -10,10 +10,10 @@ using DAL;
 
 namespace CRM.Controllers
 {
-    public class DeptApiController : ApiController
+    public class CustContactApiController : ApiController
     {
-        // GET api/deptapi
-        public IEnumerable<CDept> Get()
+        // GET api/contactapi
+        public IEnumerable<CCustContact> Get(string customerCode,int page)
         {
             var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["AuthSaveKey"]];
             if (user == null)
@@ -22,70 +22,68 @@ namespace CRM.Controllers
             }
             using (var dal = DalBuilder.CreateDal(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, 0))
             {
-                CDept[] depts;
+                CCustContact[] custContacts;
                 try
                 {
                     dal.Open();
-                    depts = DeptBll.List(dal);
+                    custContacts = CustContactBll.List(dal, customerCode, page);
                     dal.Close();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    LogBll.Write(dal,new CLog
+                    LogBll.Write(dal, new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent = string.Format("{0}#{1}", "Dept.List", ex.Message),
+                        LogContent =string.Format("{0}#{1}","CustContact.List",ex.Message),
                         LogType = LogType.系统异常
                     });
                     throw new HttpResponseException(new SystemExceptionMessage());
                 }
-                
-                if (depts == null)
+                if (custContacts == null)
                 {
                     throw new HttpResponseException(new DataNotFoundMessage());
                 }
-                return depts;
+                return custContacts;
             }
         }
 
-        // GET api/deptapi/5
-        public CDept Get(int id)
+        // GET api/contactapi/5
+        public CCustContact Get(int id)
         {
             var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["AuthSaveKey"]];
             if (user == null)
             {
                 throw new HttpResponseException(new SiginFailureMessage());
             }
-            using (var dal = DalBuilder.CreateDal(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString,0))
+            using (var dal = DalBuilder.CreateDal(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, 0))
             {
-                CDept dept;
+                CCustContact custContact;
                 try
                 {
                     dal.Open();
-                    dept = DeptBll.Get(dal, id);
+                    custContact = CustContactBll.Get(dal, id);
                     dal.Close();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    LogBll.Write(dal,new CLog
+                    LogBll.Write(dal, new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent = string.Format("{0}#{1}", "Dept.Get", ex.Message),
+                        LogContent = string.Format("{0}#{1}", "CustContact.Get", ex.Message),
                         LogType = LogType.系统异常
                     });
                     throw new HttpResponseException(new SystemExceptionMessage());
                 }
-
-                if (dept == null)
+                if (custContact == null)
                 {
                     throw new HttpResponseException(new DataNotFoundMessage());
                 }
-                return dept;
+                return custContact;
             }
         }
 
-        // POST api/deptapi
-        public CDept Post(CDept value)
+        // POST api/contactapi
+        public CCustContact Post(CCustContact value)
         {
             var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["AuthSaveKey"]];
             if (user == null)
@@ -98,14 +96,14 @@ namespace CRM.Controllers
                 try
                 {
                     dal.Open();
-                    ok = DeptBll.Create(dal, value,string.Format("{0}-{1}", user.UserCode, user.UserName));
+                    ok = CustContactBll.Create(dal, value, string.Format("{0}-{1}", user.UserCode, user.UserName));
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    LogBll.Write(dal,new CLog
+                    LogBll.Write(dal, new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent = string.Format("{0}#{1}", "Dept.Post", ex.Message),
+                        LogContent = string.Format("{0}#{1}", "CustContact.Post", ex.Message),
                         LogType = LogType.系统异常
                     });
                     throw new HttpResponseException(new SystemExceptionMessage());
@@ -114,61 +112,15 @@ namespace CRM.Controllers
                 {
                     LogBll.Write(dal, new CLog
                     {
-                        LogContent = string.Format("新建部门{0}-{1}", value.DeptCode, value.DeptName),
+                        LogContent = string.Format("新建客户{0}-{1}", value.ContactCode, value.ContactName),
                         LogType = LogType.操作失败,
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName)
                     });
                     throw new HttpResponseException(new DealFailureMessage());
                 }
-                LogBll.Write(dal,new CLog
-                {
-                    LogContent = string.Format("新建部门{0}-{1}",value.DeptCode,value.DeptName),
-                    LogType = LogType.操作成功 ,
-                    LogUser = string.Format("{0}-{1}",user.UserCode,user.UserName)
-                });
-                dal.Close();
-                return value;
-            }
-        }
-
-        // PUT api/deptapi/5
-        public CDept Put(int id, CDept value)
-        {
-            var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["AuthSaveKey"]];
-            if (user == null)
-            {
-                throw new HttpResponseException(new SiginFailureMessage());
-            }
-            using (var dal = DalBuilder.CreateDal(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, 0))
-            {
-                bool ok;
-                try
-                {
-                    dal.Open();
-                    ok = DeptBll.Update(dal, value,string.Format("{0}-{1}", user.UserCode, user.UserName));
-                }
-                catch(Exception ex)
-                {
-                    LogBll.Write(dal,new CLog
-                    {
-                        LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent = string.Format("{0}#{1}", "Dept.Put", ex.Message),
-                        LogType = LogType.系统异常
-                    });
-                    throw new HttpResponseException(new SystemExceptionMessage());
-                }
-                if (!ok)
-                {
-                    LogBll.Write(dal, new CLog
-                    {
-                        LogContent = string.Format("修改部门{0}-{1}", value.DeptCode, value.DeptName),
-                        LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName)
-                    });
-                    throw new HttpResponseException(new DataNotFoundMessage());
-                }
                 LogBll.Write(dal, new CLog
                 {
-                    LogContent = string.Format("修改部门{0}-{1}", value.DeptCode, value.DeptName),
+                    LogContent = string.Format("新建客户{0}-{1}", value.ContactCode, value.ContactName),
                     LogType = LogType.操作成功,
                     LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName)
                 });
@@ -177,8 +129,8 @@ namespace CRM.Controllers
             }
         }
 
-        // DELETE api/deptapi/5
-        public void Delete(int id)
+        // PUT api/contactapi/5
+        public CCustContact Put(int id, CCustContact value)
         {
             var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["AuthSaveKey"]];
             if (user == null)
@@ -188,42 +140,38 @@ namespace CRM.Controllers
             using (var dal = DalBuilder.CreateDal(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, 0))
             {
                 bool ok;
-                CDept hisDept;
                 try
                 {
                     dal.Open();
-                    ok = DeptBll.Delete(dal, id,out hisDept);
+                    ok = CustContactBll.Update(dal, value, string.Format("{0}-{1}", user.UserCode, user.UserName));
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    LogBll.Write(dal,new CLog
+                    LogBll.Write(dal, new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent = string.Format("{0}#{1}", "Dept.Delete", ex.Message),
+                        LogContent = string.Format("{0}#{1}", "CustContact.Put", ex.Message),
                         LogType = LogType.系统异常
                     });
                     throw new HttpResponseException(new SystemExceptionMessage());
                 }
                 if (!ok)
                 {
-                    if (hisDept != null)
+                    LogBll.Write(dal, new CLog
                     {
-                        LogBll.Write(dal, new CLog
-                        {
-                            LogContent = string.Format("删除部门{0}-{1}", hisDept.DeptCode, hisDept.DeptName),
-                            LogType = LogType.操作失败,
-                            LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName)
-                        });
-                    }
+                        LogContent = string.Format("修改客户{0}-{1}", value.ContactCode, value.ContactName),
+                        LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName)
+                    });
                     throw new HttpResponseException(new DataNotFoundMessage());
                 }
                 LogBll.Write(dal, new CLog
                 {
-                    LogContent = string.Format("删除部门{0}-{1}", hisDept.DeptCode, hisDept.DeptName),
-                    LogType = LogType.操作成功 ,
+                    LogContent = string.Format("修改客户{0}-{1}", value.ContactCode, value.ContactName),
+                    LogType = LogType.操作成功,
                     LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName)
                 });
                 dal.Close();
+                return value;
             }
         }
     }

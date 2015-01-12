@@ -35,9 +35,9 @@ namespace CRM.Bll
                     select new CUserGroupFun
                     {
                         Id = Convert.ToInt16(row["Id"]),
-                        GroupCode = Convert.ToString(row["GroupCode"]).Trim(),
-                        FunCode = Convert.ToString(row["FunCode"]).Trim(),
-                        FunName = Convert.ToString(row["FunName"]).Trim(),
+                        GroupCode = Convert.ToString(row["GroupCode"]),
+                        FunCode = Convert.ToString(row["FunCode"]),
+                        FunName = Convert.ToString(row["FunName"]),
                         GroupType = (GroupType)Convert.ToInt16(row["GroupType"]),
                         Queriable = Convert.ToBoolean(row["Queriable"]),
                         Changable = Convert.ToBoolean(row["Changable"]),
@@ -72,8 +72,8 @@ namespace CRM.Bll
         {
             int i;
             dal.Execute("INSERT INTO tUserGroupFun( GroupCode ,FunCode ,Queriable ,Creatable ,Changable ,Deletable ,Checkable , BuildUser,EditUser) VALUES  ( @GroupCode , @FunCode ,@Queriable ,@Creatable ,@Changable ,@Deletable ,@Checkable,@BuildUser,@EditUser )", out i,
-                dal.CreateParameter("@GroupCode",userGroupFun.GroupCode),
-                dal.CreateParameter("@FunCode",userGroupFun.FunCode),
+                dal.CreateParameter("@GroupCode",userGroupFun.GroupCode.Trim()),
+                dal.CreateParameter("@FunCode",userGroupFun.FunCode.Trim()),
                 dal.CreateParameter("@Queriable",userGroupFun.Queriable),
                 dal.CreateParameter("@Creatable",userGroupFun.Creatable),
                 dal.CreateParameter("@Changable",userGroupFun.Changable),

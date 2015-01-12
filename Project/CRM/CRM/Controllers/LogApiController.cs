@@ -34,7 +34,7 @@ namespace CRM.Controllers
                     LogBll.Write(dal,new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent = ex.Message,
+                        LogContent = string.Format("{0}#{1}", "Log.List", ex.Message),
                         LogType = LogType.系统异常
                     });
                     throw new HttpResponseException(new SystemExceptionMessage());

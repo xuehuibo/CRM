@@ -28,8 +28,8 @@ namespace CRM.Bll
                 select new CMenuCategory
                 {
                     Id = Convert.ToInt16(category["Id"]),
-                    CategoryCode = Convert.ToString(category["FunCode"]).Trim(),
-                    CategoryName = Convert.ToString(category["FunName"]).Trim(),
+                    CategoryCode = Convert.ToString(category["FunCode"]),
+                    CategoryName = Convert.ToString(category["FunName"]),
                     SerialNo = Convert.ToInt16(category["SerialNo"]),
                     Menus = (from DataRow menu in dt.Rows
                         where
@@ -38,13 +38,10 @@ namespace CRM.Bll
                         select new CMenu
                         {
                             Id = Convert.ToInt16(menu["Id"]),
-                            MenuCode = Convert.ToString(menu["FunCode"]).Trim(),
-                            MenuName = Convert.ToString(menu["FunName"]).Trim(),
-                            MenuCmd = Convert.IsDBNull(menu["FunCmd"]) ? null : Convert.ToString(menu["FunCmd"]).Trim(),
-                            ParentCode =
-                                Convert.IsDBNull(menu["ParentCode"])
-                                    ? null
-                                    : Convert.ToString(menu["ParentCode"]).Trim(),
+                            MenuCode = Convert.ToString(menu["FunCode"]),
+                            MenuName = Convert.ToString(menu["FunName"]),
+                            MenuCmd =Convert.ToString(menu["FunCmd"]),
+                            ParentCode =Convert.ToString(menu["ParentCode"]),
                             SerialNo = Convert.ToInt16(menu["SerialNo"])
                         }).ToArray()
                 }).ToArray();

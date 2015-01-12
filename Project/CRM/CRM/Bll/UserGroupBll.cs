@@ -25,11 +25,11 @@ namespace CRM.Bll
                 select new CUserGroup
                 {
                     Id = Convert.ToInt16(row["Id"]),
-                    GroupCode = Convert.ToString(row["GroupCode"]).Trim(),
-                    GroupName = Convert.ToString(row["GroupName"]).Trim(),
+                    GroupCode = Convert.ToString(row["GroupCode"]),
+                    GroupName = Convert.ToString(row["GroupName"]),
                     GroupType = (GroupType)Convert.ToInt16(row["GroupType"]),
-                    People = UserBll.CountPeople(dal,Convert.ToString(row["GroupCode"]).Trim()),
-                    Fun = UserGroupFunBll.CountGroupFun(dal, Convert.ToString(row["GroupCode"]).Trim())
+                    People = UserBll.CountPeople(dal,Convert.ToString(row["GroupCode"])),
+                    Fun = UserGroupFunBll.CountGroupFun(dal, Convert.ToString(row["GroupCode"]))
                 }).ToArray();
         }
 
@@ -49,11 +49,11 @@ namespace CRM.Bll
                 select new CUserGroup
                 {
                     Id = Convert.ToInt16(row["Id"]),
-                    GroupCode = Convert.ToString(row["GroupCode"]).Trim(),
-                    GroupName = Convert.ToString(row["GroupName"]).Trim(),
+                    GroupCode = Convert.ToString(row["GroupCode"]),
+                    GroupName = Convert.ToString(row["GroupName"]),
                     GroupType = (GroupType)Convert.ToInt16(row["GroupType"]),
-                    People = UserBll.CountPeople(dal, Convert.ToString(row["GroupCode"]).Trim()),
-                    Fun = UserGroupFunBll.CountGroupFun(dal, Convert.ToString(row["GroupCode"]).Trim())
+                    People = UserBll.CountPeople(dal, Convert.ToString(row["GroupCode"])),
+                    Fun = UserGroupFunBll.CountGroupFun(dal, Convert.ToString(row["GroupCode"]))
                 }).First();
         }
 
@@ -71,8 +71,8 @@ namespace CRM.Bll
             dal.Execute(
                 "INSERT INTO tUserGroup( GroupCode ,GroupName ,BuildUser ,EditUser,GroupType) VALUES  ( @GroupCode , @GroupName,@BuildUser,@EditUser,@GroupType)",
                 out i,
-                dal.CreateParameter("@GroupCode", userGroup.GroupCode),
-                dal.CreateParameter("@GroupName", userGroup.GroupName),
+                dal.CreateParameter("@GroupCode", userGroup.GroupCode.Trim()),
+                dal.CreateParameter("@GroupName", userGroup.GroupName.Trim()),
                 dal.CreateParameter("@GroupType", (short) (userGroup.GroupType)),
                 dal.CreateParameter("@BuildUser", user),
                 dal.CreateParameter("@EditUser", user)
@@ -107,7 +107,7 @@ namespace CRM.Bll
             int i;
             dal.BeginTran();
             dal.Execute("UPDATE tUserGroup SET GroupName=@GroupName,EditUser=@EditUser,EditDate=GETDATE(),GroupType=@GroupType WHERE Id=@Id", out i,
-                dal.CreateParameter("@GroupName",userGroup.GroupName),
+                dal.CreateParameter("@GroupName",userGroup.GroupName.Trim()),
                 dal.CreateParameter("@EditUser",user),
                 dal.CreateParameter("@Id",userGroup.Id),
                 dal.CreateParameter("@GroupType",userGroup.GroupType));

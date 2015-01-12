@@ -135,6 +135,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Attribute\AuthorizationAttribute.cs" />
+    <Compile Include="Bll\CustContactBll.cs" />
+    <Compile Include="Bll\CustomerBll.cs" />
     <Compile Include="Bll\DeptBll.cs" />
     <Compile Include="Bll\LogBll.cs" />
     <Compile Include="Bll\SignBll.cs" />
@@ -143,6 +145,9 @@
     <Compile Include="Bll\UserGroupBll.cs" />
     <Compile Include="Bll\UserGroupFunBll.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
+    <Compile Include="Controllers\CustContactApiController.cs" />
+    <Compile Include="Controllers\CustomerApiController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DeptApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogApiController.cs" />
@@ -161,6 +166,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CCustContact.cs" />
+    <Compile Include="Models\CCustomer.cs" />
     <Compile Include="Models\CDept.cs" />
     <Compile Include="Models\CLog.cs" />
     <Compile Include="Models\CSign.cs" />
@@ -203,6 +210,12 @@
     <Content Include="Scripts\Config\UserManage\UserModel.js" />
     <Content Include="Scripts\Config\UserManage\UserView.js" />
     <Content Include="Scripts\css.js" />
+    <Content Include="Scripts\Customer\CustContactCollection.js" />
+    <Content Include="Scripts\Customer\CustContactModel.js" />
+    <Content Include="Scripts\Customer\CustomerCollection.js" />
+    <Content Include="Scripts\Customer\CustomerModel.js" />
+    <Content Include="Scripts\Customer\CustomerTableView.js" />
+    <Content Include="Scripts\Customer\CustomerView.js" />
     <Content Include="Scripts\domReady.js" />
     <Content Include="Scripts\Shared\DeptSelecter\DeptSelecterItemView.js" />
     <Content Include="Scripts\Shared\DeptSelecter\DeptSelecterView.js" />
@@ -227,7 +240,6 @@
     <Content Include="Tpls\Config\UserGroupManage\UserGroupFunTpl.html" />
     <Content Include="Tpls\Config\UserGroupManage\UserGroupTpl.html" />
     <Content Include="Tpls\Config\UserManage\UserTpl.html" />
-    <Content Include="Tpls\Config\UserManage\UserTableTpl.html" />
     <Content Include="Tpls\Home\MenuCategoryTpl.html" />
     <Content Include="Tpls\Home\NavMenuCategoryTpl.html" />
     <Content Include="Tpls\Shared\DeptSelecter\DeptSelecterItemTpl.html" />
@@ -249,6 +261,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
+    <Folder Include="Tpls\Customer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -275,6 +288,7 @@
     <Content Include="Views\Config\UserGroupManage.cshtml" />
     <Content Include="Views\Config\UserManage.cshtml" />
     <Content Include="Views\Home\HomePage.cshtml" />
+    <Content Include="Views\Customer\Register.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

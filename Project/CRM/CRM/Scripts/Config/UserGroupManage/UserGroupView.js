@@ -38,6 +38,7 @@
                 return;
             }
             this.$('.save').button('loading');
+            this.$('.cancel').addClass('disabled');
             this.model.save({
                 'GroupCode': this.$('[name="GroupCode"]').val(),
                 'GroupName': this.$('[name="GroupName"]').val(),
@@ -46,9 +47,11 @@
                 success: function () {
                     me.EndEdit(true);
                     me.$('.save').button('reset');
+                    me.$('.cancel').removeClass('disabled');
                 },
                 error: function (model, rst) {
                     me.$('.save').button('reset');
+                    me.$('.cancel').removeClass('disabled');
                     HttpStatusHandle(rst, "保存用户组");
                 },
                 wait:true
@@ -102,13 +105,12 @@
             }
             //删除
             this.$('.remove').button('loading');
+            this.$('.edit').addClass('disabled');
             this.model.destroy(
             {
-                success:function() {
-                    this.$('.remove').button('reset');
-                },
                 error: function (model, rst) {
                     this.$('.remove').button('reset');
+                    this.$('.edit').removeClass('disabled');
                     HttpStatusHandle(rst, '删除用户组');
                 },
                 wait:true

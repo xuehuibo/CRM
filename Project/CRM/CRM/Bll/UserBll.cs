@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
@@ -19,17 +20,17 @@ namespace CRM.Bll
                 select new CUser
                 {
                     Id = Convert.ToInt16(row["Id"]),
-                    UserCode = Convert.ToString(row["UserCode"]).Trim(),
-                    UserName = Convert.ToString(row["UserName"]).Trim(),
-                    BuildDate = Convert.ToDateTime(row["BuildDate"]).ToString("yyyy年M月d日H时m分s秒"),
-                    BuildUser = Convert.ToString(row["BuildUser"]).Trim(),
-                    EditDate = Convert.ToDateTime(row["EditDate"]).ToString("yyyy年M月d日H时m分s秒"),
-                    EditUser = Convert.ToString(row["EditUser"]).Trim(),
-                    DeptCode = Convert.IsDBNull(row["DeptCode"]) ? null : Convert.ToString(row["DeptCode"]).Trim(),
-                    DeptName = Convert.IsDBNull(row["DeptName"]) ? null : Convert.ToString(row["DeptName"]).Trim(),
+                    UserCode = Convert.ToString(row["UserCode"]),
+                    UserName = Convert.ToString(row["UserName"]),
+                    BuildDate = Convert.ToDateTime(row["BuildDate"]).ToString(ConfigurationManager.AppSettings["DateFormate"]),
+                    BuildUser = Convert.ToString(row["BuildUser"]),
+                    EditDate = Convert.ToDateTime(row["EditDate"]).ToString(ConfigurationManager.AppSettings["DateFormate"]),
+                    EditUser = Convert.ToString(row["EditUser"]),
+                    DeptCode = Convert.ToString(row["DeptCode"]),
+                    DeptName = Convert.ToString(row["DeptName"]),
                     Enabled = Convert.ToBoolean(row["Enabled"]),
-                    GroupCode = Convert.IsDBNull(row["GroupCode"]) ? null : Convert.ToString(row["GroupCode"]).Trim(),
-                    GroupName = Convert.IsDBNull(row["GroupName"]) ? null : Convert.ToString(row["GroupName"]).Trim()
+                    GroupCode = Convert.ToString(row["GroupCode"]),
+                    GroupName =Convert.ToString(row["GroupName"])
                 }).ToArray();
         }
 
@@ -62,19 +63,19 @@ namespace CRM.Bll
                     Id = Convert.ToInt16(row["Id"]),
                     UserCode = Convert.ToString(row["UserCode"]),
                     UserName = Convert.ToString(row["UserName"]),
-                    BuildDate = Convert.ToDateTime(row["BuildDate"]).ToString("yyyy年M月d日H时m分s秒"),
+                    BuildDate = Convert.ToDateTime(row["BuildDate"]).ToString(ConfigurationManager.AppSettings["DateFormate"]),
                     BuildUser = Convert.ToString(row["BuildUser"]),
-                    EditDate = Convert.ToDateTime(row["EditDate"]).ToString("yyyy年M月d日H时m分s秒"),
+                    EditDate = Convert.ToDateTime(row["EditDate"]).ToString(ConfigurationManager.AppSettings["DateFormate"]),
                     EditUser = Convert.ToString(row["EditUser"]),
-                    DeptCode = Convert.IsDBNull(row["DeptCode"]) ? null : Convert.ToString(row["DeptCode"]).Trim(),
-                    DeptName = Convert.IsDBNull(row["DeptName"]) ? null :Convert.ToString(row["DeptName"]).Trim(),
+                    DeptCode = Convert.ToString(row["DeptCode"]),
+                    DeptName = Convert.ToString(row["DeptName"]),
                     Enabled = Convert.ToBoolean(row["Enabled"]),
-                    GroupCode = Convert.IsDBNull(row["GroupCode"]) ? null : Convert.ToString(row["GroupCode"]).Trim(),
-                    GroupName = Convert.IsDBNull(row["GroupName"]) ? null : Convert.ToString(row["GroupName"]).Trim()
+                    GroupCode = Convert.ToString(row["GroupCode"]),
+                    GroupName =Convert.ToString(row["GroupName"])
                 }).First();
         }
 
-        public static bool Create(IDal dal, CUser user)
+        public static bool Create(IDal dal, CUser user,string editUser)
         {
             int i;
             var pwd = MD5.Create().ComputeHash(Encoding.Default.GetBytes(user.UserCode+ user.Md5));
@@ -85,7 +86,7 @@ namespace CRM.Bll
             }
             else
             {
-                deptCode.Value = user.DeptCode;
+                deptCode.Value = user.DeptCode.Trim();
             }
             var groupCode = dal.CreateParameter("@GroupCode", DbType.String);
             if (string.IsNullOrEmpty(user.GroupCode))
@@ -94,17 +95,17 @@ namespace CRM.Bll
             }
             else
             {
-                groupCode.Value = user.GroupCode;
+                groupCode.Value = user.GroupCode.Trim();
             }
             dal.Execute("INSERT INTO tUser( UserCode ,UserName ,UPassword ,DeptCode ,GroupCode ,Enabled  ,BuildUser ,EditUser) VALUES  ( @UserCode ,@UserName,@UPassword, @DeptCode , @GroupCode, @Enabled , @BuildUser,@EditUser)", out i,
-                dal.CreateParameter("@UserCode",user.UserCode),
-                dal.CreateParameter("@UserName",user.UserName),
+                dal.CreateParameter("@UserCode",user.UserCode.Trim()),
+                dal.CreateParameter("@UserName",user.UserName.Trim()),
                 dal.CreateParameter("@UPassword",pwd),
                 deptCode,
                 groupCode,
                 dal.CreateParameter("@Enabled",user.Enabled),
-                dal.CreateParameter("@BuildUser",user.BuildUser),
-                dal.CreateParameter("@EditUser",user.EditUser));
+                dal.CreateParameter("@BuildUser", editUser),
+                dal.CreateParameter("@EditUser", editUser));
             if (i == 0) return false;
             var dt =
                 dal.Select(
@@ -113,29 +114,51 @@ namespace CRM.Bll
                     dal.CreateParameter("@UserCode", user.UserCode));
             if (i == 0) return false;
             user.Id = Convert.ToInt16(dt.Rows[0]["Id"]);
-            user.BuildDate = Convert.ToDateTime(dt.Rows[0]["BuildDate"]).ToString("yyyy年M月d日H时m分s秒");
-            user.EditDate = Convert.ToDateTime(dt.Rows[0]["EditDate"]).ToString("yyyy年M月d日H时m分s秒");
-            user.DeptName = Convert.IsDBNull(dt.Rows[0]["DeptName"])
-                ? null
-                : Convert.ToString(dt.Rows[0]["DeptName"]).Trim();
-            user.GroupName = Convert.IsDBNull(dt.Rows[0]["GroupName"])
-                ? null
-                : Convert.ToString(dt.Rows[0]["GroupName"]).Trim();
-            user.BuildUser = Convert.ToString(dt.Rows[0]["BuildUser"]).Trim();
-            user.EditUser = Convert.ToString(dt.Rows[0]["EditUser"]).Trim();
+            user.BuildDate = Convert.ToDateTime(dt.Rows[0]["BuildDate"]).ToString(ConfigurationManager.AppSettings["DateFormate"]);
+            user.EditDate = Convert.ToDateTime(dt.Rows[0]["EditDate"]).ToString(ConfigurationManager.AppSettings["DateFormate"]);
+            user.DeptName =Convert.ToString(dt.Rows[0]["DeptName"]);
+            user.GroupName =Convert.ToString(dt.Rows[0]["GroupName"]);
+            user.BuildUser = Convert.ToString(dt.Rows[0]["BuildUser"]);
+            user.EditUser = Convert.ToString(dt.Rows[0]["EditUser"]);
             return true;
         }
 
-        public static bool Update(IDal dal, CUser user)
+        public static bool Update(IDal dal, CUser user,string editUser)
         {
             int i;
-            dal.Execute("UPDATE tUser SET UserName=@UserName,DeptCode=@DeptCode,GroupCode=@GroupCode ,EditDate=GETDATE(),EditUser=@EditUser WHERE Id=@Id",out i,
-                dal.CreateParameter("@UserName",user.UserName),
-                dal.CreateParameter("@DeptCode",user.DeptCode),
-                dal.CreateParameter("@GroupCode",user.GroupCode),
-                dal.CreateParameter("@EditUser",user.EditUser),
+            var deptCode = dal.CreateParameter("@DeptCode", DbType.String);
+            if (string.IsNullOrEmpty(user.DeptCode))
+            {
+                deptCode.Value = DBNull.Value;
+            }
+            else
+            {
+                deptCode.Value = user.DeptCode.Trim();
+            }
+            var groupCode = dal.CreateParameter("@GroupCode", DbType.String);
+            if (string.IsNullOrEmpty(user.GroupCode))
+            {
+                groupCode.Value = DBNull.Value;
+            }
+            else
+            {
+                groupCode.Value = user.GroupCode.Trim();
+            }
+            dal.Execute(
+                "UPDATE tUser SET UserName=@UserName,DeptCode=@DeptCode,GroupCode=@GroupCode ,EditDate=GETDATE(),EditUser=@EditUser WHERE Id=@Id",
+                out i,
+                dal.CreateParameter("@UserName", user.UserName.Trim()),
+                deptCode,
+                groupCode,
+                dal.CreateParameter("@EditUser", editUser),
+                dal.CreateParameter("@Id", user.Id));
+            if (i == 0) return false;
+            var dt=dal.Select("SELECT Id,EditUser,EditDate FROM tUser WHERE Id=@Id", out i,
                 dal.CreateParameter("@Id",user.Id));
-            return i == 1;
+            if (i == 0) return false;
+            user.EditUser = Convert.ToString(dt.Rows[0]["EditUser"]);
+            user.EditDate = Convert.ToDateTime(dt.Rows[0]["EditDate"]).ToString(ConfigurationManager.AppSettings["DateFormate"]);
+            return true;
         }
 
         public static bool Delete(IDal dal, int id,out CUser hisUser)

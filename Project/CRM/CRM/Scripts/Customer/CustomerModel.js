@@ -2,20 +2,18 @@
     return Backbone.Model.extend({
         defaults: {
             'Id': null,
-            'UserCode': null,
-            'UserName': null,
-            'DeptCode': null,
-            'DeptName': null,
-            'GroupCode': null,
-            'GroupName': null,
-            'Enabled': false,
+            'CustomerCode': null,
+            'CustomerName': null,
+            'Status': null,
+            'Remark': null,
             'BuildDate': null,
             'BuildUser': null,
             'EditDate': null,
             'EditUser': null,
-            'Md5':null
+            'Owner': null,
+            'Enabled':false
         },
         idAttribute: 'Id',
-        urlRoot: '/api/UserApi'
+        urlRoot:'/api/CustomerApi'
     });
-});
+})

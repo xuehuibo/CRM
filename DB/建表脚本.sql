@@ -1,8 +1,22 @@
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('tCustContacts') and o.name = 'FK_TCUSTCON_REFERENCE_TCUSTOME')
-alter table tCustContacts
+   where r.fkeyid = object_id('tCustContact') and o.name = 'FK_TCUSTCON_REFERENCE_TCUSTOME')
+alter table tCustContact
    drop constraint FK_TCUSTCON_REFERENCE_TCUSTOME
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('tCustomer') and o.name = 'FK_TCUSTOME_REFERENCE_TUSER')
+alter table tCustomer
+   drop constraint FK_TCUSTOME_REFERENCE_TUSER
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('tMessageRecv') and o.name = 'FK_TMESSAGE_REFERENCE_TMESSAGE')
+alter table tMessageRecv
+   drop constraint FK_TMESSAGE_REFERENCE_TMESSAGE
 go
 
 if exists (select 1
@@ -49,9 +63,9 @@ go
 
 if exists (select 1
             from  sysobjects
-           where  id = object_id('tCustContacts')
+           where  id = object_id('tCustContact')
             and   type = 'U')
-   drop table tCustContacts
+   drop table tCustContact
 go
 
 if exists (select 1
@@ -70,13 +84,6 @@ go
 
 if exists (select 1
             from  sysobjects
-           where  id = object_id('tDirection')
-            and   type = 'U')
-   drop table tDirection
-go
-
-if exists (select 1
-            from  sysobjects
            where  id = object_id('tFunction')
             and   type = 'U')
    drop table tFunction
@@ -87,6 +94,13 @@ if exists (select 1
            where  id = object_id('tMessage')
             and   type = 'U')
    drop table tMessage
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('tMessageRecv')
+            and   type = 'U')
+   drop table tMessageRecv
 go
 
 if exists (select 1
@@ -148,12 +162,13 @@ execute sp_grantdbaccess dbo
 go
 
 /*==============================================================*/
-/* Table: tCustContacts                                         */
+/* Table: tCustContact                                          */
 /*==============================================================*/
-create table tCustContacts (
-   Id                   numeric              not null,
-   CustomerCode         nvarchar(20)         not null,
-   Name                 nvarchar(20)         not null,
+create table tCustContact (
+   Id                   numeric              identity,
+   ContactCode          varchar(20)          not null,
+   ContactName          nvarchar(20)         not null,
+   CustomerCode         varchar(20)          not null,
    Phone1               varchar(20)          null,
    Phone2               varchar(20)          null,
    Email                varchar(50)          null,
@@ -162,7 +177,9 @@ create table tCustContacts (
    BuildUser            nvarchar(50)         not null,
    EditDate             datetime             not null default getdate(),
    EditUser             nvarchar(50)         not null,
-   constraint PK_TCUSTCONTACTS primary key (Id)
+   Enabled              bit                  not null default 1,
+   constraint PK_TCUSTCONTACT primary key (Id),
+   constraint AK_CONTACTCODE_TCUSTCON unique (ContactCode)
 )
 go
 
@@ -171,7 +188,7 @@ go
 /*==============================================================*/
 create table tCustomer (
    Id                   numeric              identity,
-   CustomerCode         nvarchar(20)         not null,
+   CustomerCode         varchar(20)          not null,
    CustomerName         nvarchar(100)        not null,
    Status               numeric(1)           not null,
    Remark               nvarchar(500)        null,
@@ -179,6 +196,8 @@ create table tCustomer (
    BuildUser            nvarchar(50)         not null,
    EditDate             datetime             not null default getdate(),
    EditUser             nvarchar(50)         not null,
+   Owner                varchar(20)          null,
+   Enabled              bit                  not null default 1,
    constraint PK_TCUSTOMER primary key (Id),
    constraint AK_CUSTOMERCODE_TCUSTOMER unique (CustomerCode)
 )
@@ -198,17 +217,6 @@ create table tDept (
    EditUser             nvarchar(50)         not null,
    constraint PK_TDEPT primary key (Id),
    constraint AK_DEPTCODE_TDEPT unique (DeptCode)
-)
-go
-
-/*==============================================================*/
-/* Table: tDirection                                            */
-/*==============================================================*/
-create table tDirection (
-   Module               varchar(10)          null,
-   Value                numeric(2)           null,
-   Display              nvarchar(100)        null,
-   constraint AK_KEY_1_TDIRECTI unique (Module, Value)
 )
 go
 
@@ -236,15 +244,29 @@ go
 /*==============================================================*/
 create table tMessage (
    Id                   numeric              identity,
-   MessageTitle         nvarchar(100)        not null,
+   MsgCode              varchar(15)          not null,
+   MsgTitle             nvarchar(100)        not null,
    Content              nvarchar(1000)       not null,
    Status               numeric(1)           not null default 0,
-   SendTo               nvarchar(200)        not null,
    CreateUser           nvarchar(50)         not null,
    CreateDate           datetime             not null default getdate(),
    EditDate             datetime             not null default getdate(),
    SendDate             datetime             null,
-   constraint PK_TMESSAGE primary key (Id)
+   constraint PK_TMESSAGE primary key (Id),
+   constraint AK_MSGCODE_TMESSAGE unique (MsgCode)
+)
+go
+
+/*==============================================================*/
+/* Table: tMessageRecv                                          */
+/*==============================================================*/
+create table tMessageRecv (
+   Id                   numeric              identity,
+   MsgCode              varchar(15)          not null,
+   RecvUserCode         varchar(20)          not null,
+   Status               numeric(1)           not null default 0,
+   constraint PK_TMESSAGERECV primary key (Id),
+   constraint AK_MSGCODE_RECVUSERCO_TMESSAGE unique (MsgCode, RecvUserCode)
 )
 go
 
@@ -271,7 +293,7 @@ go
 create table tProject (
    Id                   numeric              not null,
    ProjectCode          varchar(20)          not null,
-   CustomerCode         nvarchar(20)         not null,
+   CustomerCode         varchar(20)          not null,
    ProjectName          nvarchar(100)        not null,
    Step                 numeric(2)           not null default 0,
    Completion           numeric(3)           not null default 0,
@@ -378,9 +400,19 @@ create table tXtLog (
 )
 go
 
-alter table tCustContacts
+alter table tCustContact
    add constraint FK_TCUSTCON_REFERENCE_TCUSTOME foreign key (CustomerCode)
       references tCustomer (CustomerCode)
+go
+
+alter table tCustomer
+   add constraint FK_TCUSTOME_REFERENCE_TUSER foreign key (Owner)
+      references tUser (UserCode)
+go
+
+alter table tMessageRecv
+   add constraint FK_TMESSAGE_REFERENCE_TMESSAGE foreign key (MsgCode)
+      references tMessage (MsgCode)
 go
 
 alter table tProject
