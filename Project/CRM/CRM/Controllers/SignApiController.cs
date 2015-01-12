@@ -30,11 +30,11 @@ namespace CRM.Controllers
                     });
                     throw new HttpResponseException(new SystemExceptionMessage());
                 }
-                var httpCookie = HttpContext.Current.Request.Cookies["Token"];
-                if (value.Remain && httpCookie != null && string.IsNullOrEmpty(value.UserCode) && string.IsNullOrEmpty(value.UPwd))
+                var tokenCookie = HttpContext.Current.Request.Cookies["Token"];
+                if (value.Remain && tokenCookie != null && string.IsNullOrEmpty(value.UserCode) && string.IsNullOrEmpty(value.UPwd))
                 {
                     //Token不为空 用户名和密码为空，则使用token登录
-                    ok=SignBll.Signin(dal, httpCookie.Value, value);
+                    ok = SignBll.Signin(dal, tokenCookie.Values["User"],tokenCookie.Values["Value"], value);
                 }
                 else
                 {
@@ -49,7 +49,9 @@ namespace CRM.Controllers
                 //生成Token
                 var token = Guid.NewGuid().ToString();
                 SignBll.UpdateToken(dal,token,value.UserCode);
-                HttpContext.Current.Response.Cookies["Token"].Value =token;
+                HttpContext.Current.Response.Cookies["Token"].Values["User"] = value.UserCode;
+                HttpContext.Current.Response.Cookies["Token"].Values["Value"] =token;
+
                 HttpContext.Current.Response.Cookies["Token"].Expires = DateTime.Now.AddDays(30);
                 if (value.Remain) return value;
                 HttpContext.Current.Response.Cookies["Token"].Expires = DateTime.Now.AddDays(-1);

@@ -210,12 +210,15 @@
     <Content Include="Scripts\Config\UserManage\UserModel.js" />
     <Content Include="Scripts\Config\UserManage\UserView.js" />
     <Content Include="Scripts\css.js" />
+    <Content Include="Scripts\Customer\ContactRegisterView.js" />
+    <Content Include="Scripts\Customer\ContactView.js" />
     <Content Include="Scripts\Customer\CustContactCollection.js" />
     <Content Include="Scripts\Customer\CustContactModel.js" />
     <Content Include="Scripts\Customer\CustomerCollection.js" />
+    <Content Include="Scripts\Customer\CustomerManageView.js" />
     <Content Include="Scripts\Customer\CustomerModel.js" />
-    <Content Include="Scripts\Customer\CustomerTableView.js" />
-    <Content Include="Scripts\Customer\CustomerView.js" />
+    <Content Include="Scripts\Customer\CustomerRegisterView.js" />
+    <Content Include="Scripts\Customer\CustomerRowView.js" />
     <Content Include="Scripts\domReady.js" />
     <Content Include="Scripts\Shared\DeptSelecter\DeptSelecterItemView.js" />
     <Content Include="Scripts\Shared\DeptSelecter\DeptSelecterView.js" />

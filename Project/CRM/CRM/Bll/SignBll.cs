@@ -21,7 +21,8 @@ namespace CRM.Bll
         {
             int i;
             var pwd = MD5.Create().ComputeHash(Encoding.Default.GetBytes(authorityModel.UserCode + authorityModel.UPwd));
-            var dt = dal.Select("select * from tUser where UPassword=@UPassword", out i,
+            var dt = dal.Select("select * from tUser where UserCode=@UserCode And UPassword=@UPassword And Enabled=1", out i,
+                dal.CreateParameter("@UserCode",authorityModel.UserCode),
                 dal.CreateParameter("@UPassword", pwd));
             if (i == 0)
             {
@@ -39,13 +40,15 @@ namespace CRM.Bll
         /// </summary>
         /// <param name="dal"></param>
         /// <param name="token"></param>
+        /// <param name="user"></param>
         /// <param name="authorityModel"></param>
         /// <returns></returns>
-        public static bool Signin(IDal dal,string token,CSign authorityModel)
+        public static bool Signin(IDal dal, string user, string token, CSign authorityModel)
         {
             int i;
             var tk = MD5.Create().ComputeHash(Encoding.Default.GetBytes(token));
-            var dt = dal.Select(" select * from tUser where Token=@Token ", out i,
+            var dt = dal.Select(" select * from tUser where UserCode=@UserCode And Token=@Token ", out i,
+                dal.CreateParameter("@UserCode",user),
                 dal.CreateParameter("@Token", tk));
             if (i == 0)
             {

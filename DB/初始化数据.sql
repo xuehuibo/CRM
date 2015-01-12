@@ -22,7 +22,7 @@ select '0004','系统日志',1 ,'',3,'00',1,0
 go
 
 INSERT INTO [tFunction]([FunCode],[FunName],[Enabled],[FunCmd],[SerialNo],[ParentCode],[FunType])
-select '0101','客户登记',1 ,'',0,'01',1
+select '0101','客户登记',1 ,'/Customer/Register',0,'01',1
 union all 
 select '0102','公共客户',1 ,'',1,'01',1
 union all 

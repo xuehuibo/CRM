@@ -124,7 +124,7 @@ namespace CRM.Attribute
                     //存在Token，进行Token登录
                     var authorityModel = new CSign();
 
-                    if (SignBll.Signin(dal, httpCookie.Value, authorityModel))
+                    if (SignBll.Signin(dal, httpCookie.Values["User"],httpCookie.Values["Value"], authorityModel))
                     {
                         filterContext.HttpContext.Session.Add(ConfigurationManager.AppSettings["AuthSaveKey"], authorityModel);
                         //更新Token
