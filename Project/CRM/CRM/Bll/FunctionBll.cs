@@ -20,7 +20,7 @@ namespace CRM.Bll
             int i;
             var dt =
                 dal.Select(
-                    "select a.Id,a.FunCode,a.FunName,a.FunCmd,a.ParentCode,a.FunType,a.SerialNo from tFunction a,tUserGroupFun b where a.FunCode=b.FunCode and b.Queriable=1 and GroupCode=@GroupCode",
+                    "select a.Id,a.FunCode,a.FunName,a.FunCmd,a.ParentCode,a.FunType,a.SerialNo from tFunction a,tUserGroupFun b where a.FunCode=b.FunCode and b.Queriable=1 and a.Enabled=1 and GroupCode=@GroupCode",
                     out i,
                     dal.CreateParameter("@GroupCode", groupCode));
             return (from DataRow category in dt.Rows

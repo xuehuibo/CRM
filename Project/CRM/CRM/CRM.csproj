@@ -264,6 +264,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
+    <Folder Include="Scripts\Shared\UserSelecter\" />
     <Folder Include="Tpls\Customer\" />
   </ItemGroup>
   <ItemGroup>
@@ -291,7 +292,10 @@
     <Content Include="Views\Config\UserGroupManage.cshtml" />
     <Content Include="Views\Config\UserManage.cshtml" />
     <Content Include="Views\Home\HomePage.cshtml" />
-    <Content Include="Views\Customer\Register.cshtml" />
+    <Content Include="Views\Customer\CustomerRegister.cshtml" />
+    <Content Include="Views\Customer\ContactRegister.cshtml" />
+    <Content Include="Views\Customer\PublicCustomer.cshtml" />
+    <Content Include="Views\Customer\PrivateCustomer.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

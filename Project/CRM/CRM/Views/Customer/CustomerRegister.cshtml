@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Views/Shared/_Item_Layout.cshtml";
+}
+<div id="customerRegisterView" class="panelDiv">
+    <form role="form">
+        <div class="form-group">
+            <label for="customerCode">客户编码</label>
+            <input id="customerCode" type="text" class="form-control" placeholder="请输入客户编码" />
+        </div>
+        <div class="form-group">
+            <label for="customerName">客户名称</label>
+            <input id="customerName" type="text" class="form-control" placeholder="请输入客户名称" />
+        </div>
+        <div class="form-group">
+            <label for="remark">备注</label>
+            <textarea id="remark" type="text" class="form-control" placeholder="请输入备注"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="owner">责任人</label><a class="btn btn-link">分配给我</a>
+            <input id="owner" type="text" class="form-control" placeholder="请输入责任人，不填写则登记为公共客户" />
+        </div>
+        <div class="btn-group btn-group-justified">
+            <a class="btn btn-success">保存</a><a class="btn btn-danger">取消</a>
+        </div>
+    </form>
+</div>
+
+
+

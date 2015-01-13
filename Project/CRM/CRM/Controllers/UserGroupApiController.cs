@@ -85,6 +85,45 @@ namespace CRM.Controllers
             }
         }
 
+        /// <summary>
+        /// 过滤列表
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        public IEnumerable<CUserGroup> Get(string condition)
+        {
+            var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["AuthSaveKey"]];
+            if (user == null)
+            {
+                throw new HttpResponseException(new SiginFailureMessage());
+            }
+            using (var dal = DalBuilder.CreateDal(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, 0))
+            {
+                CUserGroup[] userGroups;
+                try
+                {
+                    dal.Open();
+                    userGroups = UserGroupBll.Filter(dal,condition);
+                    dal.Close();
+                }
+                catch (Exception ex)
+                {
+                    LogBll.Write(dal, new CLog
+                    {
+                        LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
+                        LogContent = string.Format("{0}#{1}", "UserGroup.Filter", ex.Message),
+                        LogType = LogType.系统异常
+                    });
+                    throw new HttpResponseException(new SystemExceptionMessage());
+                }
+                if (userGroups == null)
+                {
+                    throw new HttpResponseException(new DataNotFoundMessage());
+                }
+                return userGroups;
+            }
+        }
+
         // POST api/usergroupapi
         public CUserGroup Post(CUserGroup value)
         {

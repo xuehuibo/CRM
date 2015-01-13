@@ -15,15 +15,17 @@ namespace CRM.Bll
         /// 页长
         /// </summary>
         private const int PageLength = 20;
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="dal"></param>
         /// <param name="customerCode"></param>
         /// <param name="customerName"></param>
+        /// <param name="owner"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        public static CCustomer[] List(IDal dal,string customerCode,string customerName,int page)
+        public static CCustomer[] List(IDal dal,string customerCode,string customerName,string owner,int page)
         {
             var ps = new List<IDbDataParameter>();
             var sql = new StringBuilder(100);
@@ -37,6 +39,16 @@ namespace CRM.Bll
             {
                 sql.Append(" AND CustomerName=@CustomerName ");
                 ps.Add(dal.CreateParameter("@CustomerName",customerName));
+            }
+
+            if (!string.IsNullOrEmpty(owner))
+            {
+                sql.Append(" AND Owner=@Owner ");
+                ps.Add(dal.CreateParameter("@Owner", owner));
+            }
+            else
+            {
+                sql.Append(" AND Owner IS NULL ");
             }
             int i;
             var dt = dal.Select(sql.ToString(), (page - 1)*PageLength + 1, PageLength, out i, ps.ToArray());

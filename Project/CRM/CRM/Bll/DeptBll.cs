@@ -90,6 +90,28 @@ namespace CRM.Bll
         }
 
         /// <summary>
+        /// 筛选的部门
+        /// </summary>
+        /// <param name="dal"></param>
+        /// <param name="condition">条件，Code或者Name</param>
+        /// <returns></returns>
+        public static CDept[] Filter(IDal dal, string condition)
+        {
+            int i;
+            var dt = dal.Select(" SELECT * FROM tDept WHERE DeptCode LIKE @Condition+'%' OR DeptName LIKE '%'+@Condition +'%' ", out i,
+                dal.CreateParameter("@Condition", condition));
+            if (i == 0) return null;
+            return (from DataRow row in dt.Rows
+                select new CDept
+                {
+                    Id = Convert.ToInt16(row["Id"]),
+                    DeptCode = Convert.ToString(row["DeptCode"]),
+                    DeptName = Convert.ToString(row["DeptName"]),
+                    ParentCode = Convert.ToString(row["ParentCode"])
+                }).ToArray();
+        }
+
+        /// <summary>
         /// 新建部门
         /// </summary>
         /// <param name="dal"></param>

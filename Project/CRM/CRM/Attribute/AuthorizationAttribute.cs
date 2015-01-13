@@ -153,7 +153,8 @@ namespace CRM.Attribute
         public void UpdateToken(AuthorizationContext filterContext, IDal dal, CSign authorityModel)
         {
             var token = Guid.NewGuid().ToString();
-            filterContext.HttpContext.Response.Cookies["Token"].Value = token;
+            filterContext.HttpContext.Response.Cookies["Token"].Values["User"] = authorityModel.UserCode;
+            filterContext.HttpContext.Response.Cookies["Token"].Values["Value"] =token;
             filterContext.HttpContext.Response.Cookies["Token"].Expires = DateTime.Now.AddDays(30);
             SignBll.UpdateToken(dal, token, authorityModel.UserCode);
         }
