@@ -35,6 +35,26 @@ namespace CRM.Bll
         }
 
         /// <summary>
+        /// 获取用户选项
+        /// </summary>
+        /// <param name="dal"></param>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        public static CLenovoInputOption[] GetLenovoInputOption(IDal dal, string condition)
+        {
+            int i;
+            var dt = dal.Select("SELECT Id,UserCode,UserName FROM tUser WHERE UserCode LIKE @Condition+'%' OR UserName LIKE '%'+@Condition +'%' ", out i,
+                dal.CreateParameter("@Condition", condition));
+            if (i == 0) return null;
+            return (from DataRow row in dt.Rows
+                select new CLenovoInputOption
+                {
+                    Value = Convert.ToString(row["UserCode"]),
+                    Display = string.Format("{0}-{1}", Convert.ToString(row["UserCode"]), Convert.ToString(row["UserName"]))
+                }).ToArray();
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="dal"></param>

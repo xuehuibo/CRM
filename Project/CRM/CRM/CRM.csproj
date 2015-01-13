@@ -157,6 +157,8 @@
     <Compile Include="Controllers\UserApiController.cs" />
     <Compile Include="Controllers\UserGroupApiController.cs" />
     <Compile Include="Controllers\UserGroupFunApiController.cs" />
+    <Compile Include="Controllers\UserOptionApiController.cs" />
+    <Compile Include="Extend\HanZiToPinYin.cs" />
     <Compile Include="Extend\HttpResponseMessages\DataNotFoundMessage.cs" />
     <Compile Include="Extend\HttpResponseMessages\DealFailureMessage.cs" />
     <Compile Include="Extend\HttpResponseMessages\NoAuthorityMessage.cs" />
@@ -176,6 +178,7 @@
     <Compile Include="Models\CUser.cs" />
     <Compile Include="Models\CUserGroup.cs" />
     <Compile Include="Models\CUserGroupFun.cs" />
+    <Compile Include="Models\CLenovoInputOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +227,10 @@
     <Content Include="Scripts\Shared\DeptSelecter\DeptSelecterView.js" />
     <Content Include="Scripts\Shared\UserGroupSelecter\UserGroupSelecterItemView.js" />
     <Content Include="Scripts\Shared\UserGroupSelecter\UserGroupSelecterView.js" />
+    <Content Include="Scripts\Shared\LenovoInputer\OptionView.js" />
+    <Content Include="Scripts\Shared\LenovoInputer\LenovoInputerView.js" />
+    <Content Include="Scripts\Shared\LenovoInputer\OptionCollection.js" />
+    <Content Include="Scripts\Shared\LenovoInputer\OptionModel.js" />
     <Content Include="Scripts\Sign\AuthModel.js" />
     <Content Include="Scripts\Home\MainAppView.js" />
     <Content Include="Scripts\Home\MenuCategoryCollection.js" />
@@ -249,6 +256,8 @@
     <Content Include="Tpls\Shared\DeptSelecter\DeptSelecterTpl.html" />
     <Content Include="Tpls\Shared\UserGroupSelecter\UserGroupSelecterItemTpl.html" />
     <Content Include="Tpls\Shared\UserGroupSelecter\UserGroupSelecterTpl.html" />
+    <Content Include="Tpls\Shared\LenovoInputer\OptionTpl.html" />
+    <Content Include="Tpls\Shared\LenovoInputer\LenovoInputerTpl.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -264,7 +273,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
-    <Folder Include="Scripts\Shared\UserSelecter\" />
     <Folder Include="Tpls\Customer\" />
   </ItemGroup>
   <ItemGroup>

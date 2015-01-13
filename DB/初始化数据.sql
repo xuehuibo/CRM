@@ -24,11 +24,9 @@ go
 INSERT INTO [tFunction]([FunCode],[FunName],[Enabled],[FunCmd],[SerialNo],[ParentCode],[FunType])
 select '0101','客户登记',1 ,'/Customer/CustomerRegister',0,'01',1
 union all 
-select '0102','联系人登记',1 ,'/Customer/ContactRegister',1,'01',1
+select '0102','公共客户',1 ,'/Customer/PublicCustomer',1,'01',1
 union all 
-select '0103','公共客户',1 ,'',2,'01',1
-union all 
-select '0104','私有客户',1 ,'',3,'01',1
+select '0103','私有客户',1 ,'/Customer/PrivateCustomer',2,'01',1
 go
 
 INSERT INTO [tFunction]([FunCode],[FunName],[Enabled],[FunCmd],[SerialNo],[ParentCode],[FunType])

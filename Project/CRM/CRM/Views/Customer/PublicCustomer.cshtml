@@ -1,5 +1,13 @@
 ﻿@{
     Layout = "~/Views/Shared/_Item_Layout.cshtml";
 }
-
-<h2>CustomerList</h2>
+<div id="input"></div>
+<script>
+    require(['Shared/LenovoInputer/LenovoInputerView', 'Shared/LenovoInputer/OptionModel'], function (LenovoInputerView, OptionModel) {
+        var model = new OptionModel();
+        $('#input').append(new LenovoInputerView(new OptionModel(), '/api/UserOptionApi').render());
+        model.on('change', function() {
+            $('#input').val(model.get('Display'));
+        });
+    })
+</script>
