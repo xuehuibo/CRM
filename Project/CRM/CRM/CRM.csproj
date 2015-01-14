@@ -157,11 +157,12 @@
     <Compile Include="Controllers\UserApiController.cs" />
     <Compile Include="Controllers\UserGroupApiController.cs" />
     <Compile Include="Controllers\UserGroupFunApiController.cs" />
-    <Compile Include="Controllers\UserOptionApiController.cs" />
+    <Compile Include="Controllers\LenovoInputerApiController.cs" />
     <Compile Include="Extend\HanZiToPinYin.cs" />
     <Compile Include="Extend\HttpResponseMessages\DataNotFoundMessage.cs" />
     <Compile Include="Extend\HttpResponseMessages\DealFailureMessage.cs" />
     <Compile Include="Extend\HttpResponseMessages\NoAuthorityMessage.cs" />
+    <Compile Include="Extend\HttpResponseMessages\PrimaryRepeatedMessge.cs" />
     <Compile Include="Extend\HttpResponseMessages\SiginFailureMessage.cs" />
     <Compile Include="Extend\HttpResponseMessages\SystemExceptionMessage.cs" />
     <Compile Include="Filter\ActionFilter.cs" />
@@ -223,8 +224,6 @@
     <Content Include="Scripts\Customer\CustomerRegisterView.js" />
     <Content Include="Scripts\Customer\CustomerRowView.js" />
     <Content Include="Scripts\domReady.js" />
-    <Content Include="Scripts\Shared\DeptSelecter\DeptSelecterItemView.js" />
-    <Content Include="Scripts\Shared\DeptSelecter\DeptSelecterView.js" />
     <Content Include="Scripts\Shared\UserGroupSelecter\UserGroupSelecterItemView.js" />
     <Content Include="Scripts\Shared\UserGroupSelecter\UserGroupSelecterView.js" />
     <Content Include="Scripts\Shared\LenovoInputer\OptionView.js" />

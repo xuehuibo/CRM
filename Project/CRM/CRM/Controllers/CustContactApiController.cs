@@ -100,6 +100,10 @@ namespace CRM.Controllers
                 }
                 catch (Exception ex)
                 {
+                    if (ex.Message.StartsWith("违反了 UNIQUE KEY 约束"))
+                    {
+                        throw new HttpResponseException(new PrimaryRepeatedMessge());
+                    }
                     LogBll.Write(dal, new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),

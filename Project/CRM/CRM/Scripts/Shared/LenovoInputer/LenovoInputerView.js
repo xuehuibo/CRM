@@ -3,9 +3,10 @@
         tagName: 'div',
         className: 'dropdown',
         //初始化函数，输入OptionModel,此model会作为最终结果输出，输入远程url
-        initialize: function (model, url) {
+        initialize: function (model,placeHolder,dataSource) {
             this.model = model;
-            this.url = url;
+            this.dataSource = dataSource;
+            this.placeHolder = placeHolder;
             this.collection = new OptionCollection();
             this.listenTo(this.model, 'change', this.render);
             this.listenTo(this.collection, 'add', this.AddOne);
@@ -13,7 +14,11 @@
         },
         template: _.template(tpl),
         render:function() {
-            this.$el.html(this.template(this.model.toJSON()));
+            this.$el.html(this.template({
+                    'Option': this.model.toJSON(),
+                    'PlaceHolder': this.placeHolder
+                })
+            );
             return this.el;
         },
         AddOne:function(option) {
@@ -41,15 +46,18 @@
                     'Value': null,
                     'Stamp': new Date().getTime()
                 });
-                console.info(this.model.toJSON());
                 this.collection.reset();
+                return;
+            }
+            if (this.$('input').val().length < 2) {
+                alert('至少输入两个字符才能查询信息！');
                 return;
             }
             var self = this;
             this.collection.fetch({
-                url:this.url,
                 data: {
-                    condition: this.$('input').val()
+                    'dataSource':this.dataSource,
+                    'condition': this.$('input').val()
                 },
                 success: function (model, rst) {
                     self.ShowOptions();

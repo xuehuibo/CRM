@@ -63,21 +63,17 @@ namespace CRM.Bll
         /// <param name="dal"></param>
         /// <param name="condition"></param>
         /// <returns></returns>
-        public static CUserGroup[] Filter(IDal dal, string condition)
+        public static CLenovoInputOption[] GetLenovoInputOption(IDal dal, string condition)
         {
             int i;
             var dt = dal.Select(" SELECT * FROM tUserGroup WHERE GroupCode LIKE @Condition+'%' OR GroupName LIKE '%'+@Condition +'%' ", out i,
                 dal.CreateParameter("@Condition", condition));
             if (i == 0) return null;
             return (from DataRow row in dt.Rows
-                select new CUserGroup
+                    select new CLenovoInputOption
                 {
-                    Id = Convert.ToInt16(row["Id"]),
-                    GroupCode = Convert.ToString(row["GroupCode"]),
-                    GroupName = Convert.ToString(row["GroupName"]),
-                    GroupType = (GroupType) Convert.ToInt16(row["GroupType"]),
-                    People = UserBll.CountPeople(dal, Convert.ToString(row["GroupCode"])),
-                    Fun = UserGroupFunBll.CountGroupFun(dal, Convert.ToString(row["GroupCode"]))
+                    Display = string.Format("{0}-{1}", Convert.ToString(row["GroupCode"]), Convert.ToString(row["GroupName"])),
+                    Value = Convert.ToString(row["GroupCode"])
                 }).ToArray();
         }
 

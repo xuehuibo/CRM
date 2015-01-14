@@ -48,41 +48,6 @@ namespace CRM.Controllers
             }
         }
 
-        public IEnumerable<CDept> Get(string condition)
-        {
-            var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["AuthSaveKey"]];
-            if (user == null)
-            {
-                throw new HttpResponseException(new SiginFailureMessage());
-            }
-            using (var dal = DalBuilder.CreateDal(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, 0))
-            {
-                CDept[] depts;
-                try
-                {
-                    dal.Open();
-                    depts = DeptBll.Filter(dal,condition);
-                    dal.Close();
-                }
-                catch (Exception ex)
-                {
-                    LogBll.Write(dal, new CLog
-                    {
-                        LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent = string.Format("{0}#{1}", "Dept.Filter", ex.Message),
-                        LogType = LogType.系统异常
-                    });
-                    throw new HttpResponseException(new SystemExceptionMessage());
-                }
-
-                if (depts == null)
-                {
-                    throw new HttpResponseException(new DataNotFoundMessage());
-                }
-                return depts;
-            }
-        } 
-
         // GET api/deptapi/5
         public CDept Get(int id)
         {
@@ -137,6 +102,10 @@ namespace CRM.Controllers
                 }
                 catch(Exception ex)
                 {
+                    if (ex.Message.StartsWith("违反了 UNIQUE KEY 约束"))
+                    {
+                        throw new HttpResponseException(new PrimaryRepeatedMessge());
+                    }
                     LogBll.Write(dal,new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),

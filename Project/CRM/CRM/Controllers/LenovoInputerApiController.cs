@@ -10,10 +10,10 @@ using DAL;
 
 namespace CRM.Controllers
 {
-    public class UserOptionApiController : ApiController
+    public class LenovoInputerApiController : ApiController
     {
         // GET api/userselecterapi
-        public IEnumerable<CLenovoInputOption> Get(string condition)
+        public IEnumerable<CLenovoInputOption> Get(string dataSource,string condition)
         {
             var user = (CSign)HttpContext.Current.Session[ConfigurationManager.AppSettings["AuthSaveKey"]];
             if (user == null)
@@ -22,11 +22,25 @@ namespace CRM.Controllers
             }
             using (var dal = DalBuilder.CreateDal(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, 0))
             {
-                CLenovoInputOption[] userSelecterItems;
+                CLenovoInputOption[] options;
                 try
                 {
                     dal.Open();
-                    userSelecterItems = UserBll.GetLenovoInputOption(dal,condition);
+                    switch (dataSource)
+                    {
+                        case "User":
+                            options = UserBll.GetLenovoInputOption(dal, condition);
+                            break;
+                        case "Dept":
+                            options = DeptBll.GetLenovoInputOption(dal, condition);
+                            break;
+                        case "UserGroup":
+                            options = UserGroupBll.GetLenovoInputOption(dal, condition);
+                            break;
+                        default:
+                            throw new HttpResponseException(new SystemExceptionMessage());
+                    }
+                    
                     dal.Close();
                 }
                 catch (Exception ex)
@@ -34,16 +48,16 @@ namespace CRM.Controllers
                     LogBll.Write(dal, new CLog
                     {
                         LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
-                        LogContent = string.Format("{0}#{1}", "Dept.List", ex.Message),
+                        LogContent = string.Format("{0}#{1}", "LenovoInputer.List", ex.Message),
                         LogType = LogType.系统异常
                     });
                     throw new HttpResponseException(new SystemExceptionMessage());
                 }
-                if (userSelecterItems == null)
+                if (options == null)
                 {
                     throw new HttpResponseException(new DataNotFoundMessage());
                 }
-                return userSelecterItems;
+                return options;
             }
         }
     }

@@ -95,19 +95,17 @@ namespace CRM.Bll
         /// <param name="dal"></param>
         /// <param name="condition">条件，Code或者Name</param>
         /// <returns></returns>
-        public static CDept[] Filter(IDal dal, string condition)
+        public static CLenovoInputOption[] GetLenovoInputOption(IDal dal, string condition)
         {
             int i;
             var dt = dal.Select(" SELECT * FROM tDept WHERE DeptCode LIKE @Condition+'%' OR DeptName LIKE '%'+@Condition +'%' ", out i,
                 dal.CreateParameter("@Condition", condition));
             if (i == 0) return null;
             return (from DataRow row in dt.Rows
-                select new CDept
+                    select new CLenovoInputOption
                 {
-                    Id = Convert.ToInt16(row["Id"]),
-                    DeptCode = Convert.ToString(row["DeptCode"]),
-                    DeptName = Convert.ToString(row["DeptName"]),
-                    ParentCode = Convert.ToString(row["ParentCode"])
+                    Display = string.Format("{0}-{1}", Convert.ToString(row["DeptCode"]), Convert.ToString(row["DeptName"])),
+                    Value = Convert.ToString(row["DeptCode"])
                 }).ToArray();
         }
 
