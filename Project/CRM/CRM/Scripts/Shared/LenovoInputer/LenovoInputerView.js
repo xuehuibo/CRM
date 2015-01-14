@@ -13,7 +13,7 @@
             this.listenTo(this.collection, 'reset', this.Clear);
         },
         template: _.template(tpl),
-        render:function() {
+        render: function () {
             this.$el.html(this.template({
                     'Option': this.model.toJSON(),
                     'PlaceHolder': this.placeHolder

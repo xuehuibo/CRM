@@ -102,6 +102,9 @@ namespace CRM.Bll
         public static bool Create(IDal dal, CCustomer customer,string editUser)
         {
             int i;
+            var owner = string.IsNullOrEmpty(customer.Owner) ? 
+                dal.CreateParameter("@Owner", DBNull.Value) 
+                : dal.CreateParameter("@Owner", customer.Owner.Trim());
             dal.Execute(
                 "INSERT INTO tCustomer ( CustomerCode ,CustomerName ,Status ,Remark ,BuildDate ,BuildUser ,EditDate ,EditUser ,Owner,Enabled) VALUES  ( @CustomerCode ,@CustomerName ,@Status ,@Remark ,GETDATE(),@BuildUser ,GETDATE(),@EditUser ,@Owner,@Enabled)",
                 out i,
@@ -111,7 +114,7 @@ namespace CRM.Bll
                 dal.CreateParameter("@Remark", customer.Remark.Trim()),
                 dal.CreateParameter("@BuildUser", editUser),
                 dal.CreateParameter("@EditUser", editUser),
-                dal.CreateParameter("@Owner", customer.Owner.Trim()),
+                owner,
                 dal.CreateParameter("@Enabled", customer.Enabled)
                 );
             if (i == 0) return false;

@@ -9,7 +9,7 @@
         return Backbone.View.extend({
             initialize: function() {
                 this.menuCategorys = new MenuCategoryCollection();
-                var router = new Router();
+                window.AppRouter = new Router();
                 this.listenTo(this.menuCategorys, 'add', this.AddMenu);
                 this.listenTo( this.menuCategorys, 'reset', this.AddAllMenu);
                 this.menuCategorys.fetch({

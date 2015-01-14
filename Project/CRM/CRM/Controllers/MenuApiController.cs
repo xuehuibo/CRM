@@ -64,7 +64,7 @@ namespace CRM.Controllers
                 {
                     LogBll.Write(dal, new CLog
                     {
-                        LogUser = string.Format("{0}-{1}", user.UserCode, user.UserName),
+                        LogUser = string.Format("{0}-{1}", user==null?string.Empty:user.UserCode, user==null?string.Empty:user.UserName),
                         LogContent = string.Format("{0}#{1}", "Menu.List", ex.Message),
                         LogType = LogType.系统异常
                     });

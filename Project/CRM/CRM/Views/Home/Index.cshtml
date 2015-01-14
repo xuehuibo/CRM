@@ -1,6 +1,14 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script>
+    window.signUser = {
+        UserCode: '@ViewBag.SignUser.UserCode',
+        UserName: '@ViewBag.SignUser.UserName',
+        DeptCode: '@ViewBag.SignUser.DeptCode',
+        GroupCode:'@ViewBag.SignUser.GroupCode'
+    };
+</script>
 <div id="mainApp">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
