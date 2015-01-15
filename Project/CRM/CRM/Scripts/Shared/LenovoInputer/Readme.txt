@@ -21,3 +21,4 @@
 		清空控件值
 	Readonly(bool)
 		读取或设置当前控件只读属性
+对应后端：'LenovoInputerApi'

@@ -30,6 +30,9 @@ namespace CRM.Controllers
                         case "User.UserCode":
                             rst= UserBll.CheckUserCodeUnique(dal, value);
                             break;
+                        case "Customer.CustomerCode":
+                            rst = CustomerBll.CheckCustomerCodeUnique(dal, value);
+                            break;
                         default:
                             throw new Exception("UniqueCheckInputer错误，没有找到指定DataSource");
                     }

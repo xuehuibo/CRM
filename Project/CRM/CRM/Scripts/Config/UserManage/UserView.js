@@ -1,9 +1,10 @@
 ﻿define([
     'Shared/LenovoInputer/LenovoInputerView',
+    'Shared/CheckInputer/CheckInputerView',
     'text!Config/UserManage/Tpls/UserTpl.html',
     'md5',
     'HttpStatusHandle'
-], function (LenovoInputerView,tpl, md5, HttpStatusHandle) {
+], function (LenovoInputerView, CheckInputerView,tpl, md5, HttpStatusHandle) {
     return Backbone.View.extend({
         tagName: 'tr',
         initialize: function(model) {
@@ -18,18 +19,24 @@
         },
         BeginEdit: function () {
             this.$('[data-toggleedit=true]').toggleClass('hide');
+            this.userCode = new CheckInputerView({
+                'dataSource': 'User.UserCode',
+                'readOnly': this.model.get('Id') != null
+            }),
+            this.userCode.Value(this.model.get('UserCode'));
             this.dept = new LenovoInputerView({
                 'dataSource': 'Dept',
                 'showValue': true,
                 'placeHolder':'请输入部门编码或名称'
             });
-            this.dept.SetValue(this.model.get('DeptCode'));
+            this.dept.Value(this.model.get('DeptCode'));
             this.userGroup = new LenovoInputerView({
                 'dataSource': 'UserGroup',
                 'showValue': true,
                 'placeHolder': '请输入用户组编码或名称'
             });
-            this.userGroup.SetValue(this.model.get('GroupCode'));
+            this.userGroup.Value(this.model.get('GroupCode'));
+            this.$('.userCode').html(this.userCode.render());
             this.$('.deptSelecter').html(this.dept.render());
             this.$('.userGroupSelecter').html(this.userGroup.render());
         },
@@ -43,7 +50,8 @@
             'click .cancel': 'EditCancel',
             'click .save':'EditSave'
         },
-        EditCancel: function() {
+        EditCancel: function () {
+            this.userCode.remove();
             this.dept.remove();
             this.userGroup.remove();
             if (this.model.get('Id') == null) {
@@ -53,8 +61,7 @@
             }
         },
         EditSave: function () {
-            if (this.$('.userCode').val() == '') {
-                alert('用户编码必须输入！');
+            if (this.userCode.Status() == 0) {
                 return;
             }
             if (this.$('.userName').val() == '') {
@@ -65,7 +72,7 @@
             this.$('.save').button('loading');
             this.$('.cancel').addClass('disabled');
             this.model.save({
-                    'UserCode': this.$('.userCode').val(),
+                    'UserCode': this.userCode.Value(),
                     'UserName': this.$('.userName').val(),
                     'DeptCode': this.dept.Value(),
                     'DeptName': this.dept.Display(),

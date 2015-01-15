@@ -125,6 +125,10 @@
 
         Value: function (value) {
             if (value != undefined) {
+                if (value == '') {
+                    this.Reset();
+                    return this.model.get('Value');
+                }
                 var me = this;
                 this.collection.fetch({
                     data: {

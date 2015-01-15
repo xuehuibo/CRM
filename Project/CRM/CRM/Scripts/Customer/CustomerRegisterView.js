@@ -1,18 +1,24 @@
 ﻿define([
         'Customer/CustomerModel',
+        'Shared/CheckInputer/CheckInputerView',
         'Shared/LenovoInputer/LenovoInputerView',
         'HttpStatusHandle'
     ],
-    function (CustomerModel, LenovoInputerView, HttpStatusHandle) {
+    function (CustomerModel,CheckInputerView, LenovoInputerView, HttpStatusHandle) {
         return Backbone.View.extend({
             initialize: function() {
                 this.model = new CustomerModel();
+                this.custCode = new CheckInputerView({
+                    'dataSource': 'Customer.CustomerCode',
+                    'placeHolder':'请输入供应商编码'
+                });
                 this.owner = new LenovoInputerView({
                     'placeholder': '请输入责任人，不填写则登记为公共客户',
                     'dataSource': 'User'
                 });
             },
-            render: function() {
+            render: function () {
+                this.$('#customerCode').append(this.custCode.render());
                 this.$('#owner').append(this.owner.render());
             },
             events: {
@@ -21,8 +27,7 @@
                 'click #assignToMe': 'AssignToMe'
             },
             Save: function() {
-                if (this.$('#customerCode').val() == '') {
-                    alert('客户编码不能为空！');
+                if (this.custCode.Status() == 0) {
                     return;
                 }
                 if (this.$('#customerName').val() == '') {
@@ -33,7 +38,7 @@
                 this.$('#btnCancel').addClass('disabled');
                 var me = this;
                 this.model.save({
-                    'CustomerCode': this.$('#customerCode').val(),
+                    'CustomerCode': this.custCode.Value(),
                     'CustomerName': this.$('#customerName').val(),
                     'Remark': this.$('#remark').val(),
                     'Owner': this.owner.Value(),
@@ -61,10 +66,8 @@
                 });
             },
             Cancel: function() {
-                this.owner.set({
-                    'Display': null,
-                    'Value': null,
-                });
+                this.owner.Reset();
+                this.custCode.Reset();
                 this.model.set({
                     'Id': null,
                     'CustomerCode': null,
@@ -78,13 +81,12 @@
                     'Owner': null,
                     'Enabled': false
                 });
-                this.$('#customerCode').val('');
                 this.$('#customerName').val('');
                 this.$('#remark').val('');
 
             },
             AssignToMe: function () {
-                this.owner.SetValue(window.signUser.UserCode);
+                this.owner.Value(window.signUser.UserCode);
             }
         });
     });

@@ -31,7 +31,8 @@
         },
         render: function() {
             this.$el.html(this.template({
-                'ReadyOnly':this.setting.readOnly
+                'ReadyOnly': this.setting.readOnly,
+                'Value':this.value
             }));
             return this.el;
         },
@@ -69,15 +70,16 @@
             this.$('span').addClass('hide');
         },
         ValueChanged: function () {
-            if (this.$('input').val() == '') {
+            this.value = this.$('input').val();
+            if (this.value == '') {
                 if (this.setting.allowEmpty) {
                     this.Reset();
                 } else {
                     this.model.set({
-                        'Status': 2,
+                        'Status': 0,
                         'ErrorText': '该项不允许为空'
                     });
-                    this.Warning();
+                    this.Error();
                 }
                 return;
             }
@@ -85,7 +87,7 @@
             this.model.fetch({
                 data: {
                     dataSource:this.setting.dataSource,
-                    value: this.$('input').val()
+                    value: this.value
                 },
                 success: function (model, rst) {
                     switch (rst.Status) {
@@ -108,19 +110,20 @@
         Status: function () {
             if (this.$('input').val() == '' && !this.setting.allowEmpty) {
                 this.model.set({
-                    'Status': 2,
+                    'Status': 0,
                     'ErrorText': '该项不允许为空'
                 });
-                this.Warning();
+                this.Error();
             }
             return this.model.get('Status');
         },
         //以下为属性设置读取器
         Value: function (value) {
             if (value != undefined) {
+                this.value = value;
                 this.$('input').val(value);
             }
-            return this.$('input').val();
+            return this.value;
         },
         Readonly: function (value) {
             if (value != undefined) {
