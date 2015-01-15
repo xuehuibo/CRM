@@ -154,7 +154,7 @@
     <Compile Include="Controllers\SignApiController.cs" />
     <Compile Include="Controllers\MenuApiController.cs" />
     <Compile Include="Controllers\SignController.cs" />
-    <Compile Include="Controllers\UniqueCheckApiController.cs" />
+    <Compile Include="Controllers\CheckInputerApiController.cs" />
     <Compile Include="Controllers\UserApiController.cs" />
     <Compile Include="Controllers\UserGroupApiController.cs" />
     <Compile Include="Controllers\UserGroupFunApiController.cs" />

@@ -6,18 +6,28 @@
     require(['Shared/CheckInputer/CheckInputerView', 'Shared/LenovoInputer/LenovoInputerView'], function (CheckInputerView, LenovoInputerView) {
         var inputer = new CheckInputerView({
             'dataSource': 'User.UserCode',
-            'allowEmpty':false
+            'allowEmpty': false,
+            'readOnly':true
         });
         $('#input').append(inputer.render());
-        inputer.SetValue('admin');
-        inputer.SetReadonly(true);
+/*
+        console.info(inputer.Value('admin'));
+
+        console.info(inputer.Readonly(false));
+
+        console.info(inputer.AllowEmpty(true));
+*/
+        console.info(inputer.Readonly(false));
+
 
         var inputer2=new LenovoInputerView({
             'placeHolder': '请输入责任人，不填写则登记为公共客户',
             'dataSource': 'User',
-			'showValue':true
+            'showValue': true,
+            'readOnly':false
         });
         $('#input').append(inputer2.render());
-        inputer2.SetReadonly(true);
+/*        console.info(inputer2.Value('admin'));
+        console.info(inputer2.Readonly(true));*/
     })
 </script>

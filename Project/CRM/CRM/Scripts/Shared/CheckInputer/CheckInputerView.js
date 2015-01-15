@@ -7,7 +7,10 @@
         tagName: 'div',
         className: 'form-group',
         template: _.template(tpl),
-        //setting 包含 dataSource 、allowEmpty
+        events: {
+            'change input': 'ValueChanged'
+        },
+        //setting 包含 dataSource 、allowEmpty,readOnly
         initialize: function (setting) {
             this.setting = setting;
             if (this.setting == undefined) {
@@ -21,10 +24,15 @@
             if (this.setting.allowEmpty == undefined) {
                 this.setting.allowEmpty = false;
             }
+            if (this.setting.readOnly == undefined) {
+                this.Readonly(false);
+            }
             this.model = new CheckResultModel();
         },
         render: function() {
-            this.$el.html(this.template());
+            this.$el.html(this.template({
+                'ReadyOnly':this.setting.readOnly
+            }));
             return this.el;
         },
         Error: function () {
@@ -59,9 +67,6 @@
             this.$el.addClass('form-group');
             this.$('label').addClass('sr-only');
             this.$('span').addClass('hide');
-        },
-        events: {
-            'change input':'ValueChanged'
         },
         ValueChanged: function () {
             if (this.$('input').val() == '') {
@@ -110,18 +115,29 @@
             }
             return this.model.get('Status');
         },
-        Value:function() {
+        //以下为属性设置读取器
+        Value: function (value) {
+            if (value != undefined) {
+                this.$('input').val(value);
+            }
             return this.$('input').val();
         },
-        SetValue:function(value) {
-            this.$('input').val(value);
-        },
-        SetReadonly: function (status) {
-            if (status) {
-                this.$('input').attr('readonly', "readonly");
-            } else {
-                this.$('input').removeAttr('readonly');
+        Readonly: function (value) {
+            if (value != undefined) {
+                this.setting.readOnly = value;
+                if (value) {
+                    this.$('input').attr('readonly', "readonly");
+                } else {
+                    this.$('input').removeAttr('readonly');
+                }
             }
+            return this.setting.readOnly;
+        },
+        AllowEmpty: function (value) {
+            if (value != undefined) {
+                this.setting.allowEmpty = value;
+            } 
+            return this.setting.allowEmpty;
         }
     });
 });

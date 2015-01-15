@@ -8,8 +8,12 @@
     return Backbone.View.extend({
         tagName: 'div',
         className: 'dropdown',
+        events: {
+            'change input': 'ConditionChanged',
+            'click li': 'ClickOption'
+        },
         //初始化函数，输入OptionModel,此model会作为最终结果输出，输入远程url
-        //setting包含default, showValue, placeHolder, dataSource,readonly
+        //setting包含default, showValue, placeHolder, dataSource
         initialize: function(setting) {
             var me = this;
             this.setting = setting;
@@ -24,35 +28,14 @@
             if (this.setting.showValue == undefined) {
                 this.setting.showValue = false;
             }
+            if (this.setting.readOnly == undefined) {
+                this.Readonly(false);
+            }
             this.model = new OptionModel();
             this.collection = new OptionCollection();
             this.listenTo(this.model, 'change', this.render);
             this.listenTo(this.collection, 'add', this.AddOne);
             this.listenTo(this.collection, 'reset', this.Reset);
-        },
-        SetValue: function (value) {
-            var me = this;
-            this.collection.fetch({
-                data: {
-                    'dataSource': this.setting.dataSource,
-                    'condition': value
-                },
-                success: function (model, rst) {
-                    var m = model.findWhere({ 'Value': value });
-                    if (m == undefined) {
-                        alert('未找到默认值');
-                        return;
-                    }
-                        me.model.set(m.toJSON());
-                },
-                error: function (model, rst) {
-                    HttpStatusHandle(rst, '');
-                },
-                wait: true,
-                add: true,
-                remove: true,
-                merge: true
-            });
         },
         Reset:function() {
             this.model.set({
@@ -67,7 +50,8 @@
             this.$el.html(this.template({
                     'Option': this.model.toJSON(),
                     'PlaceHolder': this.setting.placeHolder,
-                    'ShowValue': this.setting.showValue
+                    'ShowValue': this.setting.showValue,
+                    'ReadOnly':this.setting.readOnly
                 })
             );
             return this.el;
@@ -77,10 +61,6 @@
         },
         Clear: function () {
             this.collection.reset();
-        },
-        events: {
-            'change input': 'ConditionChanged',
-            'click li':'ClickOption'
         },
         ShowOptions:function() {
             this.$el.addClass('open');
@@ -125,18 +105,50 @@
             });
             this.HideOptions();
         },
-        Value:function() {
-            return this.model.get('Value');
-        },
+
+        //以下为属性读写器
         Display:function() {
             return this.model.get('Display');
         },
-        SetReadonly: function (status) {
-            if (status) {
-                this.$('input').attr('readonly', "readonly");
-            } else {
-                this.$('input').removeAttr('readonly');
+
+        Readonly: function (value) {
+            if (value != undefined) {
+                this.setting.readOnly = value;
+                if (value) {
+                    this.$('input').attr('readonly', "readonly");
+                } else {
+                    this.$('input').removeAttr('readonly');
+                }
             }
-        }
+            return this.setting.readOnly;
+        },
+
+        Value: function (value) {
+            if (value != undefined) {
+                var me = this;
+                this.collection.fetch({
+                    data: {
+                        'dataSource': this.setting.dataSource,
+                        'condition': value
+                    },
+                    success: function(model, rst) {
+                        var m = model.findWhere({ 'Value': value });
+                        if (m == undefined) {
+                            alert('未找到默认值');
+                            return;
+                        }
+                        me.model.set(m.toJSON());
+                    },
+                    error: function(model, rst) {
+                        HttpStatusHandle(rst, '');
+                    },
+                    wait: true,
+                    add: true,
+                    remove: true,
+                    merge: true
+                });
+            }
+            return this.model.get('Value');
+        },
     });
 })

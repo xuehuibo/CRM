@@ -9,7 +9,7 @@ using DAL;
 
 namespace CRM.Controllers
 {
-    public class UniqueCheckApiController : ApiController
+    public class CheckInputerApiController : ApiController
     {
         // GET api/uniquecheckapi/5
         public CCheckResultModel Get(string dataSource, string value)
