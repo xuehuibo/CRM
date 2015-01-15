@@ -1,10 +1,23 @@
 ﻿@{
     Layout = "~/Views/Shared/_Item_Layout.cshtml";
 }
-<div id="input"> <input placeholder=""/></div>
+<div id="input"></div>
 <script>
-    require(['Shared/LenovoInputer/LenovoInputerView', 'Shared/LenovoInputer/OptionModel'], function (LenovoInputerView, OptionModel) {
-        var model = new OptionModel();
-        $('#input').append(new LenovoInputerView(new OptionModel(),'请输入部门','Dept').render());
+    require(['Shared/CheckInputer/CheckInputerView', 'Shared/LenovoInputer/LenovoInputerView'], function (CheckInputerView, LenovoInputerView) {
+        var inputer = new CheckInputerView({
+            'dataSource': 'User.UserCode',
+            'allowEmpty':false
+        });
+        $('#input').append(inputer.render());
+        inputer.SetValue('admin');
+        inputer.SetReadonly(true);
+
+        var inputer2=new LenovoInputerView({
+            'placeHolder': '请输入责任人，不填写则登记为公共客户',
+            'dataSource': 'User',
+			'showValue':true
+        });
+        $('#input').append(inputer2.render());
+        inputer2.SetReadonly(true);
     })
 </script>

@@ -8,9 +8,8 @@
             initialize: function() {
                 this.model = new CustomerModel();
                 this.owner = new LenovoInputerView({
-                    'default':'admin',
                     'placeholder': '请输入责任人，不填写则登记为公共客户',
-                    'datasource': 'User'
+                    'dataSource': 'User'
                 });
             },
             render: function() {

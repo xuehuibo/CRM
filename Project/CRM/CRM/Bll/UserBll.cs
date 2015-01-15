@@ -55,6 +55,20 @@ namespace CRM.Bll
         }
 
         /// <summary>
+        /// 检测用户编码唯一性
+        /// </summary>
+        /// <param name="dal"></param>
+        /// <param name="userCode"></param>
+        /// <returns></returns>
+        public static CCheckResultModel CheckUserCodeUnique(IDal dal, string userCode)
+        {
+            int i;
+            dal.Select("SELECT Id FROM tUser WHERE UserCode=@UserCode ", out i,
+                dal.CreateParameter("@UserCode", userCode));
+            return i == 0 ? new CCheckResultModel { Status = UniqueCheckStatus.正确 }
+                : new CCheckResultModel{Status = UniqueCheckStatus.错误,ErrorText = "用户编码重复"};
+        }
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="dal"></param>

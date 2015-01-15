@@ -19,17 +19,17 @@
         BeginEdit: function () {
             this.$('[data-toggleedit=true]').toggleClass('hide');
             this.dept = new LenovoInputerView({
-                'default': this.model.get('DeptCode'),
-                'datasource': 'Dept',
+                'dataSource': 'Dept',
                 'showValue': true,
                 'placeHolder':'请输入部门编码或名称'
             });
+            this.dept.SetValue(this.model.get('DeptCode'));
             this.userGroup = new LenovoInputerView({
-                'default': this.model.get('GroupCode'),
-                'datasource': 'UserGroup',
+                'dataSource': 'UserGroup',
                 'showValue': true,
                 'placeHolder': '请输入用户组编码或名称'
             });
+            this.userGroup.SetValue(this.model.get('GroupCode'));
             this.$('.deptSelecter').html(this.dept.render());
             this.$('.userGroupSelecter').html(this.userGroup.render());
         },

@@ -2,7 +2,7 @@
     <div class="panel-heading">
         <h4 class="text-center panel-title" data-toggleedit="true"><%=GroupCode%>-<%=GroupName%> </h4>
         <div class="form-group form-inline hide" data-toggleedit="true">
-            <input name="GroupCode" class="form-control" <%=Id==null?'':'disabled'%> placeholder="用户组编码" value="<%=GroupCode%>"/>
+            <input name="GroupCode" class="form-control" <%=Id==null?'':'readonly="readonly"'%> placeholder="用户组编码" value="<%=GroupCode%>"/>
             <input name="GroupName" class="form-control" placeholder="用户组名称" value="<%=GroupName%>" />
         </div>
     </div>

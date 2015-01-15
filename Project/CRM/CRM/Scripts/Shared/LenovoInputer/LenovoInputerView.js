@@ -9,7 +9,7 @@
         tagName: 'div',
         className: 'dropdown',
         //初始化函数，输入OptionModel,此model会作为最终结果输出，输入远程url
-        //setting包含default, showValue, placeHolder, dataSource
+        //setting包含default, showValue, placeHolder, dataSource,readonly
         initialize: function(setting) {
             var me = this;
             this.setting = setting;
@@ -17,24 +17,24 @@
                 alert('配置错误,配置信息为undefined');
                 return;
             }
-            if (this.setting.datasource == undefined || setting.datasource == null || setting.datasource == '') {
-                alert('配置错误,datasource必须配置');
+            if (this.setting.dataSource == undefined || setting.dataSource == null || setting.dataSource == '') {
+                alert('配置错误,dataSource必须配置');
                 return;
+            }
+            if (this.setting.showValue == undefined) {
+                this.setting.showValue = false;
             }
             this.model = new OptionModel();
             this.collection = new OptionCollection();
             this.listenTo(this.model, 'change', this.render);
             this.listenTo(this.collection, 'add', this.AddOne);
             this.listenTo(this.collection, 'reset', this.Reset);
-            if (this.setting.default != undefined && this.setting.default!='' && this.setting.default!=null) {
-                this.SetValue(this.setting.default);
-            }
         },
         SetValue: function (value) {
             var me = this;
             this.collection.fetch({
                 data: {
-                    'dataSource': this.setting.datasource,
+                    'dataSource': this.setting.dataSource,
                     'condition': value
                 },
                 success: function (model, rst) {
@@ -66,7 +66,7 @@
         render: function () {
             this.$el.html(this.template({
                     'Option': this.model.toJSON(),
-                    'PlaceHolder': this.setting.placeholder,
+                    'PlaceHolder': this.setting.placeHolder,
                     'ShowValue': this.setting.showValue
                 })
             );
@@ -101,7 +101,7 @@
             var self = this;
             this.collection.fetch({
                 data: {
-                    'dataSource': this.setting.datasource,
+                    'dataSource': this.setting.dataSource,
                     'condition': this.$('input').val()
                 },
                 success: function (model, rst) {
@@ -130,6 +130,13 @@
         },
         Display:function() {
             return this.model.get('Display');
+        },
+        SetReadonly: function (status) {
+            if (status) {
+                this.$('input').attr('readonly', "readonly");
+            } else {
+                this.$('input').removeAttr('readonly');
+            }
         }
     });
 })

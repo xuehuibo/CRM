@@ -154,6 +154,7 @@
     <Compile Include="Controllers\SignApiController.cs" />
     <Compile Include="Controllers\MenuApiController.cs" />
     <Compile Include="Controllers\SignController.cs" />
+    <Compile Include="Controllers\UniqueCheckApiController.cs" />
     <Compile Include="Controllers\UserApiController.cs" />
     <Compile Include="Controllers\UserGroupApiController.cs" />
     <Compile Include="Controllers\UserGroupFunApiController.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Models\CSign.cs" />
     <Compile Include="Models\CMenu.cs" />
     <Compile Include="Models\CMenuCategory.cs" />
+    <Compile Include="Models\CCheckResultModel.cs" />
     <Compile Include="Models\CUser.cs" />
     <Compile Include="Models\CUserGroup.cs" />
     <Compile Include="Models\CUserGroupFun.cs" />
@@ -225,6 +227,10 @@
     <Content Include="Scripts\Customer\CustomerRowView.js" />
     <Content Include="Scripts\domReady.js" />
     <None Include="Scripts\Shared\LenovoInputer\Readme.txt" />
+    <None Include="Scripts\Shared\CheckInputer\Readme.txt" />
+    <Content Include="Scripts\Shared\CheckInputer\Tpls\CheckInputerTpl.html" />
+    <Content Include="Scripts\Shared\CheckInputer\CheckInputerView.js" />
+    <Content Include="Scripts\Shared\CheckInputer\CheckResultModel.js" />
     <Content Include="Scripts\Shared\UserGroupSelecter\UserGroupSelecterItemView.js" />
     <Content Include="Scripts\Shared\UserGroupSelecter\UserGroupSelecterView.js" />
     <Content Include="Scripts\Shared\LenovoInputer\OptionView.js" />
