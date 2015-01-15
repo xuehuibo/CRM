@@ -1,4 +1,4 @@
-﻿define(['text!tpl/Config/UserGroupManage/UserGroupFunTpl.html'], function(tpl) {
+﻿define(['text!Config/UserGroupManage/Tpls/UserGroupFunTpl.html'], function(tpl) {
     return Backbone.View.extend({
         tagName: 'li',
         className: 'list-group-item',

@@ -1,10 +1,9 @@
 ﻿define([
     'Shared/LenovoInputer/LenovoInputerView',
-    'Shared/LenovoInputer/OptionModel',
-    'text!tpl/Config/UserManage/UserTpl.html',
+    'text!Config/UserManage/Tpls/UserTpl.html',
     'md5',
     'HttpStatusHandle'
-], function (LenovoInputerView, OptionModel,tpl, md5, HttpStatusHandle) {
+], function (LenovoInputerView,tpl, md5, HttpStatusHandle) {
     return Backbone.View.extend({
         tagName: 'tr',
         initialize: function(model) {
@@ -19,16 +18,20 @@
         },
         BeginEdit: function () {
             this.$('[data-toggleedit=true]').toggleClass('hide');
-            this.dept = new OptionModel({
-                'Display': this.model.get('DeptCode')==null?'':(this.model.get('DeptCode') + '-' + this.model.get('DeptName')),
-                'Value': this.model.get('DeptCode')
+            this.dept = new LenovoInputerView({
+                'default': this.model.get('DeptCode'),
+                'datasource': 'Dept',
+                'showValue': true,
+                'placeHolder':'请输入部门编码或名称'
             });
-            this.userGroup = new OptionModel({
-                'Value': this.model.get('GroupCode'),
-                'Display': this.model.get('GroupCode')==null?'':(this.model.get('GroupCode') + '-' + this.model.get('GroupName'))
+            this.userGroup = new LenovoInputerView({
+                'default': this.model.get('GroupCode'),
+                'datasource': 'UserGroup',
+                'showValue': true,
+                'placeHolder': '请输入用户组编码或名称'
             });
-            this.$('.deptSelecter').html(new LenovoInputerView(this.dept, '请输入部门编码或名称', 'Dept').render());
-            this.$('.userGroupSelecter').html(new LenovoInputerView(this.userGroup, '请输入用户组编码或名称', 'UserGroup').render());
+            this.$('.deptSelecter').html(this.dept.render());
+            this.$('.userGroupSelecter').html(this.userGroup.render());
         },
         EndEdit: function() {
             this.$('[data-toggleedit=true]').toggleClass('hide');
@@ -41,8 +44,8 @@
             'click .save':'EditSave'
         },
         EditCancel: function() {
-            this.dept.destroy();
-            this.userGroup.destroy();
+            this.dept.remove();
+            this.userGroup.remove();
             if (this.model.get('Id') == null) {
                 this.model.destroy();
             } else {
@@ -64,16 +67,16 @@
             this.model.save({
                     'UserCode': this.$('.userCode').val(),
                     'UserName': this.$('.userName').val(),
-                    'DeptCode': this.dept.get('Value'),
-                    'DeptName': this.dept.get('Display').split('-')[1],
-                    'GroupCode': this.userGroup.get('Value'),
-                    'GroupName': this.userGroup.get('Display').split('-')[1],
+                    'DeptCode': this.dept.Value(),
+                    'DeptName': this.dept.Display(),
+                    'GroupCode': this.userGroup.Value(),
+                    'GroupName': this.userGroup.Display(),
                     'Md5': md5.hexMd5(this.$('.userCode').val())
                 },
                 {
                     success: function() {
-                        me.dept.destroy();
-                        me.userGroup.destroy();
+                        me.dept.remove();
+                        me.userGroup.remove();
                     },
                     error: function(model, rst) {
                         me.$('.save').button('reset');

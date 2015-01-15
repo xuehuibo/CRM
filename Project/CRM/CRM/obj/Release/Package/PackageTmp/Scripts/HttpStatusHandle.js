@@ -20,6 +20,9 @@
             case 'Deal Failure':
                 alert(content + "操作失败");
                 return false;
+            case 'Primary Repeate':
+                alert("关键字重复！");
+                return false;
             default:
                 alert("系统发生未知错误，请联系管理员！");
                 return false;

@@ -50,7 +50,7 @@ namespace CRM.Bll
                 select new CLenovoInputOption
                 {
                     Value = Convert.ToString(row["UserCode"]),
-                    Display = string.Format("{0}-{1}", Convert.ToString(row["UserCode"]), Convert.ToString(row["UserName"]))
+                    Display =  Convert.ToString(row["UserName"])
                 }).ToArray();
         }
 

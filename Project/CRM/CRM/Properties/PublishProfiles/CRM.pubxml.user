@@ -13,7 +13,7 @@
       <publishTime>12/29/2014 22:41:44</publishTime>
     </File>
     <File Include="bin/CRM.dll">
-      <publishTime>01/10/2015 23:23:44</publishTime>
+      <publishTime>01/15/2015 10:10:07</publishTime>
     </File>
     <File Include="bin/DAL.dll">
       <publishTime>01/10/2015 10:44:48</publishTime>
@@ -31,13 +31,13 @@
       <publishTime>12/29/2014 22:41:40</publishTime>
     </File>
     <File Include="bin/System.Net.Http.dll">
-      <publishTime>07/10/2012 12:07:38</publishTime>
+      <publishTime>07/09/2013 11:04:48</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>12/29/2014 22:41:42</publishTime>
     </File>
     <File Include="bin/System.Net.Http.WebRequest.dll">
-      <publishTime>07/10/2012 12:07:38</publishTime>
+      <publishTime>07/09/2013 11:04:48</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
       <publishTime>12/29/2014 22:41:42</publishTime>
@@ -382,19 +382,28 @@
       <publishTime>12/29/2014 22:44:13</publishTime>
     </File>
     <File Include="Scripts/Config/DeptManage/DeptCollection.js">
-      <publishTime>01/07/2015 21:49:38</publishTime>
+      <publishTime>01/14/2015 17:53:05</publishTime>
     </File>
     <File Include="Scripts/Config/DeptManage/DeptModel.js">
-      <publishTime>01/09/2015 19:41:15</publishTime>
+      <publishTime>01/14/2015 17:53:05</publishTime>
     </File>
     <File Include="Scripts/Config/DeptManage/DeptTreeView.js">
-      <publishTime>01/09/2015 09:29:38</publishTime>
+      <publishTime>01/14/2015 17:53:05</publishTime>
     </File>
     <File Include="Scripts/Config/DeptManage/DeptView.js">
-      <publishTime>01/10/2015 23:21:13</publishTime>
+      <publishTime>01/15/2015 09:57:53</publishTime>
+    </File>
+    <File Include="Scripts/Config/DeptManage/Tpls/DeptTpl.html">
+      <publishTime>01/11/2015 13:54:41</publishTime>
+    </File>
+    <File Include="Scripts/Config/UserGroupManage/Tpls/UserGroupFunTpl.html">
+      <publishTime>01/10/2015 14:39:47</publishTime>
+    </File>
+    <File Include="Scripts/Config/UserGroupManage/Tpls/UserGroupTpl.html">
+      <publishTime>01/10/2015 23:05:51</publishTime>
     </File>
     <File Include="Scripts/Config/UserGroupManage/UserGroupCollection.js">
-      <publishTime>01/09/2015 13:50:43</publishTime>
+      <publishTime>01/14/2015 17:53:05</publishTime>
     </File>
     <File Include="Scripts/Config/UserGroupManage/UserGroupFunCollection.js">
       <publishTime>01/10/2015 11:57:44</publishTime>
@@ -403,19 +412,61 @@
       <publishTime>01/10/2015 13:02:41</publishTime>
     </File>
     <File Include="Scripts/Config/UserGroupManage/UserGroupFunView.js">
-      <publishTime>01/10/2015 22:59:03</publishTime>
+      <publishTime>01/15/2015 09:58:17</publishTime>
     </File>
     <File Include="Scripts/Config/UserGroupManage/UserGroupManageView.js">
-      <publishTime>01/10/2015 13:29:29</publishTime>
+      <publishTime>01/14/2015 17:53:05</publishTime>
     </File>
     <File Include="Scripts/Config/UserGroupManage/UserGroupModel.js">
-      <publishTime>01/10/2015 13:29:10</publishTime>
+      <publishTime>01/14/2015 17:53:05</publishTime>
     </File>
     <File Include="Scripts/Config/UserGroupManage/UserGroupView.js">
-      <publishTime>01/10/2015 23:21:58</publishTime>
+      <publishTime>01/15/2015 09:58:37</publishTime>
+    </File>
+    <File Include="Scripts/Config/UserManage/Tpls/UserTpl.html">
+      <publishTime>01/14/2015 10:03:59</publishTime>
+    </File>
+    <File Include="Scripts/Config/UserManage/UserCollection.js">
+      <publishTime>01/11/2015 10:29:56</publishTime>
+    </File>
+    <File Include="Scripts/Config/UserManage/UserManageView.js">
+      <publishTime>01/11/2015 23:02:35</publishTime>
+    </File>
+    <File Include="Scripts/Config/UserManage/UserModel.js">
+      <publishTime>01/12/2015 16:01:55</publishTime>
+    </File>
+    <File Include="Scripts/Config/UserManage/UserView.js">
+      <publishTime>01/15/2015 09:58:56</publishTime>
     </File>
     <File Include="Scripts/css.js">
       <publishTime>01/09/2015 17:36:02</publishTime>
+    </File>
+    <File Include="Scripts/Customer/ContactRegisterView.js">
+      <publishTime>01/14/2015 17:53:05</publishTime>
+    </File>
+    <File Include="Scripts/Customer/ContactView.js">
+      <publishTime>01/14/2015 17:53:05</publishTime>
+    </File>
+    <File Include="Scripts/Customer/CustContactCollection.js">
+      <publishTime>01/14/2015 17:53:05</publishTime>
+    </File>
+    <File Include="Scripts/Customer/CustContactModel.js">
+      <publishTime>01/14/2015 17:53:05</publishTime>
+    </File>
+    <File Include="Scripts/Customer/CustomerCollection.js">
+      <publishTime>01/14/2015 17:53:05</publishTime>
+    </File>
+    <File Include="Scripts/Customer/CustomerManageView.js">
+      <publishTime>01/14/2015 17:53:05</publishTime>
+    </File>
+    <File Include="Scripts/Customer/CustomerModel.js">
+      <publishTime>01/14/2015 16:26:11</publishTime>
+    </File>
+    <File Include="Scripts/Customer/CustomerRegisterView.js">
+      <publishTime>01/15/2015 09:50:32</publishTime>
+    </File>
+    <File Include="Scripts/Customer/CustomerRowView.js">
+      <publishTime>01/14/2015 17:53:05</publishTime>
     </File>
     <File Include="Scripts/domReady.js">
       <publishTime>12/29/2014 22:43:38</publishTime>
@@ -427,7 +478,7 @@
       <publishTime>12/31/2014 22:48:29</publishTime>
     </File>
     <File Include="Scripts/Home/MainAppView.js">
-      <publishTime>01/10/2015 23:15:48</publishTime>
+      <publishTime>01/14/2015 16:42:24</publishTime>
     </File>
     <File Include="Scripts/Home/MenuCategoryCollection.js">
       <publishTime>01/03/2015 22:29:24</publishTime>
@@ -436,34 +487,70 @@
       <publishTime>01/07/2015 21:49:42</publishTime>
     </File>
     <File Include="Scripts/Home/MenuCategoryView.js">
-      <publishTime>01/04/2015 19:08:24</publishTime>
+      <publishTime>01/15/2015 09:59:21</publishTime>
     </File>
     <File Include="Scripts/Home/MenuPanelView.js">
       <publishTime>01/03/2015 23:29:37</publishTime>
     </File>
     <File Include="Scripts/Home/NavMenuCategoryView.js">
-      <publishTime>01/04/2015 19:08:24</publishTime>
+      <publishTime>01/15/2015 09:59:37</publishTime>
     </File>
     <File Include="Scripts/Home/Router.js">
-      <publishTime>01/04/2015 19:08:24</publishTime>
+      <publishTime>01/14/2015 16:52:03</publishTime>
     </File>
     <File Include="Scripts/Home/SigninView.js">
       <publishTime>01/03/2015 22:05:14</publishTime>
     </File>
+    <File Include="Scripts/Home/Tpls/MenuCategoryTpl.html">
+      <publishTime>01/11/2015 11:12:49</publishTime>
+    </File>
+    <File Include="Scripts/Home/Tpls/NavMenuCategoryTpl.html">
+      <publishTime>01/07/2015 09:43:13</publishTime>
+    </File>
     <File Include="Scripts/HttpStatusHandle.js">
-      <publishTime>01/09/2015 22:13:35</publishTime>
+      <publishTime>01/14/2015 14:50:09</publishTime>
     </File>
     <File Include="Scripts/jquery-1.11.2.js">
       <publishTime>12/29/2014 22:42:51</publishTime>
     </File>
     <File Include="Scripts/main.js">
-      <publishTime>01/07/2015 21:59:54</publishTime>
+      <publishTime>01/15/2015 09:56:08</publishTime>
     </File>
     <File Include="Scripts/md5.js">
       <publishTime>01/03/2015 21:53:26</publishTime>
     </File>
     <File Include="Scripts/require.js">
       <publishTime>12/29/2014 22:43:29</publishTime>
+    </File>
+    <File Include="Scripts/Shared/LenovoInputer/LenovoInputerView.js">
+      <publishTime>01/15/2015 09:59:54</publishTime>
+    </File>
+    <File Include="Scripts/Shared/LenovoInputer/OptionCollection.js">
+      <publishTime>01/14/2015 08:56:58</publishTime>
+    </File>
+    <File Include="Scripts/Shared/LenovoInputer/OptionModel.js">
+      <publishTime>01/15/2015 08:46:13</publishTime>
+    </File>
+    <File Include="Scripts/Shared/LenovoInputer/OptionView.js">
+      <publishTime>01/15/2015 10:00:08</publishTime>
+    </File>
+    <File Include="Scripts/Shared/LenovoInputer/Tpls/LenovoInputerTpl.html">
+      <publishTime>01/15/2015 09:33:07</publishTime>
+    </File>
+    <File Include="Scripts/Shared/LenovoInputer/Tpls/OptionTpl.html">
+      <publishTime>01/13/2015 23:19:01</publishTime>
+    </File>
+    <File Include="Scripts/Shared/UserGroupSelecter/Tpls/UserGroupSelecterItemTpl.html">
+      <publishTime>01/11/2015 23:23:28</publishTime>
+    </File>
+    <File Include="Scripts/Shared/UserGroupSelecter/Tpls/UserGroupSelecterTpl.html">
+      <publishTime>01/11/2015 23:48:01</publishTime>
+    </File>
+    <File Include="Scripts/Shared/UserGroupSelecter/UserGroupSelecterItemView.js">
+      <publishTime>01/15/2015 10:00:24</publishTime>
+    </File>
+    <File Include="Scripts/Shared/UserGroupSelecter/UserGroupSelecterView.js">
+      <publishTime>01/15/2015 10:04:58</publishTime>
     </File>
     <File Include="Scripts/Sign/AuthModel.js">
       <publishTime>01/07/2015 09:18:58</publishTime>
@@ -496,7 +583,7 @@
       <publishTime>01/07/2015 09:43:13</publishTime>
     </File>
     <File Include="Views/Config/DeptManage.cshtml">
-      <publishTime>01/09/2015 10:38:01</publishTime>
+      <publishTime>01/11/2015 10:58:46</publishTime>
     </File>
     <File Include="Views/Config/Index.cshtml">
       <publishTime>01/04/2015 19:08:24</publishTime>
@@ -505,10 +592,25 @@
       <publishTime>01/10/2015 12:13:45</publishTime>
     </File>
     <File Include="Views/Config/UserManage.cshtml">
-      <publishTime>01/09/2015 10:34:34</publishTime>
+      <publishTime>01/11/2015 14:18:50</publishTime>
+    </File>
+    <File Include="Views/Customer/ContactRegister.cshtml">
+      <publishTime>01/13/2015 16:28:09</publishTime>
+    </File>
+    <File Include="Views/Customer/CustomerRegister.cshtml">
+      <publishTime>01/14/2015 17:53:05</publishTime>
+    </File>
+    <File Include="Views/Customer/PrivateCustomer.cshtml">
+      <publishTime>01/13/2015 16:28:48</publishTime>
+    </File>
+    <File Include="Views/Customer/PublicCustomer.cshtml">
+      <publishTime>01/14/2015 10:30:21</publishTime>
+    </File>
+    <File Include="Views/Home/HomePage.cshtml">
+      <publishTime>01/11/2015 08:53:13</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>01/10/2015 15:06:41</publishTime>
+      <publishTime>01/14/2015 15:49:55</publishTime>
     </File>
     <File Include="Views/Home/NoAuthority.cshtml">
       <publishTime>12/31/2014 22:44:42</publishTime>
@@ -538,7 +640,7 @@
       <publishTime>12/29/2014 22:41:09</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/10/2015 23:08:27</publishTime>
+      <publishTime>01/15/2015 10:10:08</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "~/Views/Shared/_Item_Layout.cshtml";
+}
+
+<div id="contactRegisterView" class="panelDiv hide">
+    <h4 class="text-success">请填写该客户联系人！已登记<span class="text-danger">3</span>个联系人<a class="btn btn-link">查看</a></h4>
+    <form role="form">
+        <div class="form-group">
+            <label for="contactCode">联系人编码</label>
+            <input id="contactCode" type="text" class="form-control" placeholder="请输入联系人编码" />
+        </div>
+        <div class="form-group">
+            <label for="contactName">联系人姓名</label>
+            <input id="contactName" type="text" class="form-control" placeholder="请输入联系人姓名" />
+        </div>
+        <div class="form-group">
+            <label for="phone1">电话1</label>
+            <input id="phone1" type="tel" class="form-control" placeholder="请输入电话1" />
+        </div>
+        <div class="form-group">
+            <label for="phone2">电话2</label>
+            <input id="phone2" type="tel" class="form-control" placeholder="请输入电话2" />
+        </div>
+        <div class="form-group">
+            <label for="email">邮箱</label>
+            <input id="email" type="email" class="form-control" placeholder="请输入邮箱" />
+        </div>
+        <div class="form-group">
+            <label for="contactRemark">备注</label>
+            <textarea id="contactRemark" type="tel" class="form-control" placeholder="请输入备注"></textarea>
+        </div>
+        <div class="btn-group btn-group-justified">
+            <a class="btn btn-success">添加</a>
+            <a class="btn btn-warning">完成</a>
+        </div>
+    </form>
+</div>
+<div id="contactView" class="panelDiv hide">
+    <a class="btn btn-warning">返回</a>
+    <table class="table table-condensed table-responsive table-hover table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>编码</th>
+                <th>姓名</th>
+                <th>电话1</th>
+                <th>电话2</th>
+                <th>邮箱</th>
+                <th style="min-width: 150px">备注</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a class="btn btn-link btn-sm">修改</a></td>
+                <td>zs</td>
+                <td>张三</td>
+                <td>18661782737</td>
+                <td>83817927</td>
+                <td>xuehuibo@qq.com</td>
+                <td>测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

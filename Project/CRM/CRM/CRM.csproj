@@ -224,6 +224,7 @@
     <Content Include="Scripts\Customer\CustomerRegisterView.js" />
     <Content Include="Scripts\Customer\CustomerRowView.js" />
     <Content Include="Scripts\domReady.js" />
+    <None Include="Scripts\Shared\LenovoInputer\Readme.txt" />
     <Content Include="Scripts\Shared\UserGroupSelecter\UserGroupSelecterItemView.js" />
     <Content Include="Scripts\Shared\UserGroupSelecter\UserGroupSelecterView.js" />
     <Content Include="Scripts\Shared\LenovoInputer\OptionView.js" />
@@ -245,18 +246,16 @@
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\text.js" />
     <Content Include="Scripts\underscore.js" />
-    <Content Include="Tpls\Config\DeptManage\DeptTpl.html" />
-    <Content Include="Tpls\Config\UserGroupManage\UserGroupFunTpl.html" />
-    <Content Include="Tpls\Config\UserGroupManage\UserGroupTpl.html" />
-    <Content Include="Tpls\Config\UserManage\UserTpl.html" />
-    <Content Include="Tpls\Home\MenuCategoryTpl.html" />
-    <Content Include="Tpls\Home\NavMenuCategoryTpl.html" />
-    <Content Include="Tpls\Shared\DeptSelecter\DeptSelecterItemTpl.html" />
-    <Content Include="Tpls\Shared\DeptSelecter\DeptSelecterTpl.html" />
-    <Content Include="Tpls\Shared\UserGroupSelecter\UserGroupSelecterItemTpl.html" />
-    <Content Include="Tpls\Shared\UserGroupSelecter\UserGroupSelecterTpl.html" />
-    <Content Include="Tpls\Shared\LenovoInputer\OptionTpl.html" />
-    <Content Include="Tpls\Shared\LenovoInputer\LenovoInputerTpl.html" />
+    <Content Include="Scripts\Config\DeptManage\Tpls\DeptTpl.html" />
+    <Content Include="Scripts\Config\UserGroupManage\Tpls\UserGroupFunTpl.html" />
+    <Content Include="Scripts\Config\UserGroupManage\Tpls\UserGroupTpl.html" />
+    <Content Include="Scripts\Config\UserManage\Tpls\UserTpl.html" />
+    <Content Include="Scripts\Home\Tpls\MenuCategoryTpl.html" />
+    <Content Include="Scripts\Home\Tpls\NavMenuCategoryTpl.html" />
+    <Content Include="Scripts\Shared\UserGroupSelecter\Tpls\UserGroupSelecterItemTpl.html" />
+    <Content Include="Scripts\Shared\UserGroupSelecter\Tpls\UserGroupSelecterTpl.html" />
+    <Content Include="Scripts\Shared\LenovoInputer\Tpls\OptionTpl.html" />
+    <Content Include="Scripts\Shared\LenovoInputer\Tpls\LenovoInputerTpl.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -272,7 +271,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
-    <Folder Include="Tpls\Customer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

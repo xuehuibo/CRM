@@ -1,7 +1,7 @@
 ﻿define([
     'Config/UserGroupManage/UserGroupFunView',
     'Config/UserGroupManage/UserGroupFunCollection',
-    'text!tpl/Config/UserGroupManage/UserGroupTpl.html',
+    'text!Config/UserGroupManage/Tpls/UserGroupTpl.html',
     'HttpStatusHandle'
 ],
     function (UserGroupFunView,UserGroupFunCollection, tpl, HttpStatusHandle) {

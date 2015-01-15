@@ -1,4 +1,4 @@
-﻿define(['text!tpl/Home/NavMenuCategoryTpl.html'], function(tpl) {
+﻿define(['text!Home/Tpls/NavMenuCategoryTpl.html'], function(tpl) {
     return Backbone.View.extend({
         tagName: 'li',
         className: 'dropdown hidden-lg hidden-md hidden-sm',

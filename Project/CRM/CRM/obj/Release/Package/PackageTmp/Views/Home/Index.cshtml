@@ -1,6 +1,14 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script>
+    window.signUser = {
+        UserCode: '@ViewBag.SignUser.UserCode',
+        UserName: '@ViewBag.SignUser.UserName',
+        DeptCode: '@ViewBag.SignUser.DeptCode',
+        GroupCode:'@ViewBag.SignUser.GroupCode'
+    };
+</script>
 <div id="mainApp">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
@@ -31,8 +39,8 @@
                 <div id="mainMenuPanel" class="panel-group hidden-xs">
                     <div class="panel panel-warning">
                         <div class="panel-heading">
-                            <h4 class="panel-title">
-                                信息面板
+                            <h4 class="panel-title text-center">
+                                消息栏
                             </h4>
                         </div>
                         <div class="panel-body">

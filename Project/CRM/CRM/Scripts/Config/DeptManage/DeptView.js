@@ -1,5 +1,5 @@
 ﻿define([
-        'text!tpl/Config/DeptManage/DeptTpl.html',
+        'text!Config/DeptManage/Tpls/DeptTpl.html',
         'HttpStatusHandle',
         'Config/DeptManage/DeptModel'
     ],

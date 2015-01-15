@@ -1,15 +1,16 @@
 ﻿define([
-        'text!tpl/Config/DeptManage/DeptTpl.html',
+        'text!Config/DeptManage/Tpls/DeptTpl.html',
         'HttpStatusHandle',
         'Config/DeptManage/DeptModel'
     ],
     function (tpl, HttpStatusHandle, DeptModel) {
         var DeptView= Backbone.View.extend({
             tagName: "li",
-            initialize: function(model) {
+            initialize: function(model,depts ) {
                 this.model = model;
+                this.depts = depts;
                 this.listenTo(this.model, 'destroy', this.remove);
-                this.listenTo(this.model, 'change', this.render);
+                //this.listenTo(this.model, 'change', this.render);
             },
             template: _.template(tpl),
             render: function () {
@@ -23,7 +24,7 @@
                 'click b:first': 'ShowBtn',
                 'click .add:first': 'ClickAdd',
                 'click .del:first': 'ClickDel',
-                'click .edit:first': 'ClickEdit',
+                'click .edit:first': 'BeginEdit',
                 'click .editSave:first':'ClickEditSave',
                 'click .editCancel:first': 'ClickEditCancel',
                 'click .btn-group:first': 'ClickBtn'
@@ -34,9 +35,9 @@
             },
             ClickAdd: function () {
                 //点击增加
-                var deptView =new DeptView(new DeptModel({'ParentCode':this.model.get('DeptCode')}));
+                var deptView = new DeptView(new DeptModel({ 'ParentCode': this.model.get('DeptCode') }), this.depts);
                 this.AddChild(deptView);
-                deptView.ClickEdit();
+                deptView.BeginEdit();
             },
             ClickDel: function () {
                 if (this.model.get('DeptCode') == 'root') {
@@ -68,9 +69,14 @@
                     alert('该部门存在子部门，不允许删除！');
                 }
             },
-            ClickEdit: function () {
+            BeginEdit: function () {
                 //点击编辑
                 this.$('form:first').removeClass('hide');
+            },
+            EndEdit:function() {
+                this.$('form:first').addClass('hide');
+                this.$('.deptCode:first').val(this.model.get('DeptCode'));
+                this.$('.deptName:first').val(this.model.get('DeptName'));
             },
             ClickEditSave: function () {
                 var me = this;
@@ -81,13 +87,14 @@
                     'DeptName': this.$('.deptName:first').val()
                 }, {
                     success: function (model, rst) {
-                        me.$('.editSave:first').button('reset');
-                        this.$('.editCancel:first').button('reset');
-                        me.$('form:first').addClass('hide');
+/*                        me.$('.editSave:first').button('reset');
+                        me.$('.editCancel:first').button('reset');
+                        me.EndEdit();*/
+                        me.depts.fetch({ reset: true });
                     },
                     error: function (model, rst) {
                         me.$('.editSave:first').button('reset');
-                        this.$('.editCancel:first').button('reset');
+                        me.$('.editCancel:first').button('reset');
                         HttpStatusHandle(rst, "编辑部门");
                     },
                     wait: true
@@ -98,9 +105,7 @@
                     this.model.destroy();
                     return;
                 }
-                this.$('.deptCode:first').val(this.model.get('DeptCode'));
-                this.$('.deptName:first').val(this.model.get('DeptName'));
-                this.$('form:first').addClass('hide');
+                this.EndEdit();
             },
             ClickBtn: function () {
                 this.$('.btn-group:first').addClass('hide');

@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Views/Shared/_Item_Layout.cshtml";
+}
+    <form id="customerRegisterView" role="form">
+        <div class="form-group">
+            <label for="customerCode">客户编码</label>
+            <input id="customerCode" type="text" class="form-control" placeholder="请输入客户编码" />
+        </div>
+        <div class="form-group">
+            <label for="customerName">客户名称</label>
+            <input id="customerName" type="text" class="form-control" placeholder="请输入客户名称" />
+        </div>
+        <div class="form-group">
+            <label for="remark">备注</label>
+            <textarea id="remark" class="form-control" placeholder="请输入备注"></textarea>
+        </div>
+        <div class="form-group" id="owner">
+            <label>责任人</label><a id="assignToMe" class="btn btn-link">分配给我</a>
+        </div>
+        <div class="btn-group btn-group-justified">
+            <a id="btnSave" class="btn btn-success" data-loading-text="正在保存">保存</a><a id="btnCancel" class="btn btn-danger">取消</a>
+        </div>
+    </form>
+<script>
+    require(['Customer/CustomerRegisterView'], function (CustomerRegisterView) {
+        var customerRegisterView = new CustomerRegisterView({
+            el:'#customerRegisterView'
+        });
+        customerRegisterView.render();
+    })
+</script>
+
+

@@ -72,7 +72,7 @@ namespace CRM.Bll
             return (from DataRow row in dt.Rows
                     select new CLenovoInputOption
                 {
-                    Display = string.Format("{0}-{1}", Convert.ToString(row["GroupCode"]), Convert.ToString(row["GroupName"])),
+                    Display = Convert.ToString(row["GroupName"]),
                     Value = Convert.ToString(row["GroupCode"])
                 }).ToArray();
         }

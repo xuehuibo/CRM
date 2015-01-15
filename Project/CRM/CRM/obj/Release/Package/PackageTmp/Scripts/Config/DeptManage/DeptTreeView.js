@@ -9,9 +9,9 @@
         return Backbone.View.extend(
         {
             initialize: function() {
-                var me = this;
                 this.depts = new DeptCollection();
                 this.listenTo(this.depts, 'add', this.AddOne);
+                this.listenTo(this.depts, 'reset', this.AddAll);
                 this.depts.fetch({
                     success: function (model, rst) {
                     },
@@ -21,7 +21,7 @@
                 });
             },
             AddOne: function (dept) {
-                var deptView = new DeptView(dept);
+                var deptView = new DeptView(dept,this.depts);
                 this.$('#root').append(deptView.render());
                 if (dept.get('Childs').length > 0) {
                     //有子节点
@@ -29,10 +29,13 @@
                 }
 
             },
+            AddAll: function () {
+                this.$('#root').empty();
+                this.depts.each(this.AddOne, this);
+            },
             AddChild: function (parentView, childs) {
-                //递归有问题
                 for (var i = 0; i < childs.length; i++) {
-                    var deptView = new DeptView(new DeptModel(childs[i]));
+                    var deptView = new DeptView(new DeptModel(childs[i]),this.depts);
                     parentView.AddChild(deptView);
                     if (childs[i].Childs.length > 0) {
                         this.AddChild(deptView, childs[i].Childs);

@@ -104,7 +104,7 @@ namespace CRM.Bll
             return (from DataRow row in dt.Rows
                     select new CLenovoInputOption
                 {
-                    Display = string.Format("{0}-{1}", Convert.ToString(row["DeptCode"]), Convert.ToString(row["DeptName"])),
+                    Display = Convert.ToString(row["DeptName"]),
                     Value = Convert.ToString(row["DeptCode"])
                 }).ToArray();
         }
